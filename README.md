@@ -5,7 +5,7 @@ usaremos lo que se explica aqui:
 > https://midu.dev/buenas-practicas-escribir-commits-git/
 
 Ademas seguiremos este patron: 
-<tipo de commit>(<nombre de capa donde se hacen los cambios, puede ser null si es un cambio general>) [<nombre de la rama donde se esta trabajando>] : <detalles de los cambios> 
+<tipo de commit>(<nombre de capa donde se hacen los cambios, puede ser null si es un cambio general>) [<nombre de la rama donde se esta trabajando>] : < detalles de los cambios > 
 
 (igonrar las "<>") 
 
