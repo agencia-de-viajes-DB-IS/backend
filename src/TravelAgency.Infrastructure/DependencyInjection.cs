@@ -18,6 +18,7 @@ public static class DependencyInjection
         // services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         // services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SECTION_NAME));
         services.AddAuth(configuration);
+        services.AddAuthorization();
         services.AddSingleton<IUserRepository, InMemoryUserRepository>();
         return services;
     }
