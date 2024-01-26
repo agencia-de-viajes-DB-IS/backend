@@ -1,0 +1,30 @@
+@host = http://localhost:5000
+
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "doeJohn@ms.net",
+    "password": "doepass"
+}
+
+###
+
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "atkinsNat@ms.net",
+    "password": "natpass"
+}
+
+### With Bearer
+
+POST {{host}}/auth/login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzYzZDIyZC00OTFjLTQ0NTgtOWExNi01ZThlYWFkNDEzMTYiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZXMiOiJDbGllbnQiLCJqdGkiOiJiYTRlNDliMi04ZDk2LTQyMjktYTRkMS04MTBiMTQwNTBiM2UiLCJleHAiOjE3MDYyODY5NTEsImlzcyI6IlRyYXZlbEFnZW5jeSIsImF1ZCI6IlRyYXZlbEFnZW5jeSJ9.P9B16AnN0LHc3Tjh5oxhqFK9ckU-4slRwKOA1SeeCQw
+Content-Type: application/json
+
+{
+    "email": "doeJohn@ms.net",
+    "password": "doepass"
+}
