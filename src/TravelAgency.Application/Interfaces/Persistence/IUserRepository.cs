@@ -1,6 +1,6 @@
 using TravelAgency.Domain.Entities;
 
-namespace FastGallery.Application.Interfaces.Persistence;
+namespace TravelAgency.Application.Interfaces.Persistence;
 
 public interface IUserRepository
 {
