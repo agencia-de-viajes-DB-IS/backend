@@ -30,7 +30,7 @@ jobs:
       run: ls 
 
     - name: Execute
-      run: run --project '.\src\TravelAgency.Api\TravelAgency.Api.csproj' &
+      run: dotnet run --project '.\src\TravelAgency.Api\TravelAgency.Api.csproj' &
       
     - name: Start ngrok
       uses: luisboto/ngrok-tunnel-action@v0.1.7.2
