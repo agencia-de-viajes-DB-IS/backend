@@ -22,10 +22,14 @@ jobs:
         dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore
+      run: |
+        cd ./src
+        dotnet build --no-restore
       
     - name: Execute
-      run:  dotnet run --project .\TravelAgency.Api\ &
+      run: |
+        cd ./src
+        dotnet run --project .\TravelAgency.Api\ &
       
     - name: Start ngrok
       uses: luisboto/ngrok-tunnel-action@v0.1.7.2
