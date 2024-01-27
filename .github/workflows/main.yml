@@ -27,9 +27,7 @@ jobs:
         dotnet build --no-restore
       
     - name: Execute
-      run: |
-        cd ./src
-        dotnet run --project .\TravelAgency.Api\ &
+      run: dotnet run --project .\src\TravelAgency.Api\ &
       
     - name: Start ngrok
       uses: luisboto/ngrok-tunnel-action@v0.1.7.2
