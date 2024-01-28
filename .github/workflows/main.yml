@@ -78,7 +78,7 @@ jobs:
            sleep 1
            current=$(date +%s)
            elapsed=$((current - start))
-           if ((elapsed > 300)); then
+           if ((elapsed > 18000)); then
              break
            fi
          done
