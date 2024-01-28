@@ -30,11 +30,16 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
         await Task.CompletedTask;
 
         // Create result
-        var result = new AuthenticationResult(
+        var result = new AuthenticationData(
             user.Email,
             token
         );
 
-        return result;
+        return new AuthenticationResult(){
+            Data =  result,
+            Error = null,
+            ErrorMessage = null,
+            Success = true  
+        };
     }
 }

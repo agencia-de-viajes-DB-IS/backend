@@ -6,7 +6,7 @@ using MediatR;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 
-public class LoginEndpoint : Endpoint<LoginRequest, AuthenticationResult>
+public class LoginEndpoint : Endpoint<LoginQuery, AuthenticationResult>
 {
     private readonly ISender _mediator;
 
@@ -21,15 +21,9 @@ public class LoginEndpoint : Endpoint<LoginRequest, AuthenticationResult>
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(LoginRequest request, CancellationToken cancellationToken)
+    public override async Task HandleAsync(LoginQuery request, CancellationToken cancellationToken)
     {
-        var query = new LoginQuery(
-            request.Email,
-            request.Password
-        );
-
-        var result = await _mediator.Send(query);
-
+        var result = await _mediator.Send(request);
         await SendAsync(result, statusCode: 200);
     }
 }

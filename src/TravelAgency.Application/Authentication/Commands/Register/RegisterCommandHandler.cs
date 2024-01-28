@@ -41,7 +41,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         var token = _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
-        var result = new AuthenticationResult(
+        var result = new AuthenticationData(
             user.Email,
             token
         );
@@ -49,6 +49,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         // Use this line to avoid warning, in the future the DB store process will be async
         await Task.CompletedTask;
 
-        return result;
+        return new AuthenticationResult(){
+            Data = result,
+            Error = null,
+            ErrorMessage = null,
+            Success = true
+        };
     }
 }

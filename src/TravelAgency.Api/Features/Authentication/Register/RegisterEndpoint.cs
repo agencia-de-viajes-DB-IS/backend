@@ -6,7 +6,7 @@ using MediatR;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 
-public class RegisterEndpoint : Endpoint<RegisterRequest, AuthenticationResult>
+public class RegisterEndpoint : Endpoint<RegisterCommand, AuthenticationResult>
 {
     private readonly ISender _mediator;
 
@@ -21,19 +21,9 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, AuthenticationResult>
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(RegisterRequest request, CancellationToken cancellationToken)
-    {
-        // TODO: Use a mapper to create command
-        // Create command
-        var command = new RegisterCommand(
-            request.FirstName,
-            request.LastName,
-            request.Email,
-            request.Password
-        );
-
-        var result = await _mediator.Send(command);
-        
+    public override async Task HandleAsync(RegisterCommand request, CancellationToken cancellationToken)
+    {   
+        var result = await _mediator.Send(request);
         await SendAsync(result, statusCode: 200);
     }
 }
