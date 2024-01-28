@@ -18,23 +18,38 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
     public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         // Verify user exists
-        var user = _userRepository.GetUserByEmail(query.Email) ?? throw new Exception("Email was not found");
-
+        var user = await _userRepository.GetUserByEmail(query.Email);
+        
+        if(user is null)
+        {
+            return new AuthenticationResult(){
+                ErrorMessage = $"User not found with email {query.Email}.",
+                Success = false  
+            };
+        }
         // Verify password
         if(query.Password != user.Password)
-            throw new Exception("Incorrect password");
+        {
+            return new AuthenticationResult(){
+                ErrorMessage = $"Password did not match, provided password: {query.Password}.",
+                Success = false  
+            };
+        }
 
         // Generate token
         var token = _jwtTokenGenerator.GenerateToken(user);
 
-        await Task.CompletedTask;
-
         // Create result
-        var result = new AuthenticationResult(
+        var result = new AuthenticationData(
             user.Email,
             token
         );
 
-        return result;
+        return new AuthenticationResult(){
+            Data =  result,
+            Error = null,
+            ErrorMessage = null,
+            Success = true  
+        };
     }
 }
