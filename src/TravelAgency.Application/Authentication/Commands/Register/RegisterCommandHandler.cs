@@ -19,7 +19,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
 
     public async Task<AuthenticationResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        if(_userRepository.GetUserByEmail(command.Email) is not null)
+        if(await _userRepository.GetUserByEmail(command.Email) is not null)
         {
             return new AuthenticationResult(){
             Error = null,
