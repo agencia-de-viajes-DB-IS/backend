@@ -20,7 +20,13 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
     public async Task<AuthenticationResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         if(_userRepository.GetUserByEmail(command.Email) is not null)
-            throw new Exception("Email has been already registered");
+        {
+            return new AuthenticationResult(){
+            Error = null,
+            ErrorMessage = "Email has been already registered",
+            Success = false
+            };
+        }
 
         // TODO: Use a mapper to create user
         // Create user
@@ -35,7 +41,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         };
 
         // Store user into DB
-        _userRepository.Add(user);
+        await _userRepository.Add(user);
 
         // Generate token
         var token = _jwtTokenGenerator.GenerateToken(user);
@@ -45,9 +51,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
             user.Email,
             token
         );
-
-        // Use this line to avoid warning, in the future the DB store process will be async
-        await Task.CompletedTask;
 
         return new AuthenticationResult(){
             Data = result,
