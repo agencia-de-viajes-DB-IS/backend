@@ -22,6 +22,6 @@ var app = builder.Build();
 app.UseCors("MyPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseFastEndpoints();
+app.UseFastEndpoints().UseCors("MyPolicy");
 app.UseSwaggerGen();
 app.Run();
