@@ -1,0 +1,8 @@
+Design Of AereoSkull's Database:
+
+To Do:
+	✅️ basic my-sql code to implement it.	
+	❌️ fill basic implementation with garbage values.
+
+Remainders:
+	🤏️ how setup my-sql in c#. 
