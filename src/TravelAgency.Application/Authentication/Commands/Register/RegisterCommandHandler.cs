@@ -3,6 +3,7 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Domain.Entities;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Common.Exceptions;
 
 namespace TravelAgency.Application.Authentication.Commands.Register;
 
@@ -20,7 +21,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
     public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         if (await _userRepository.GetUserByEmail(command.Email) is not null)
-            throw new Exception("Email is already registered");
+            throw new AgencyException("Email is already registered", status: 400);
 
         // TODO: Use a mapper to create user
         // Create user
