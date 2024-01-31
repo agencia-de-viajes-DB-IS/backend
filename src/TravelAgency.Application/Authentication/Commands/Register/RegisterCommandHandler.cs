@@ -6,7 +6,7 @@ using TravelAgency.Application.Interfaces.Persistence;
 
 namespace TravelAgency.Application.Authentication.Commands.Register;
 
-public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResult>
+public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResponse>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
@@ -17,16 +17,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         _userRepository = userRepository;
     }
 
-    public async Task<AuthenticationResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        if(await _userRepository.GetUserByEmail(command.Email) is not null)
-        {
-            return new AuthenticationResult(){
-            Error = null,
-            ErrorMessage = "Email has been already registered",
-            Success = false
-            };
-        }
+        if (await _userRepository.GetUserByEmail(command.Email) is not null)
+            throw new Exception("Email is already registered");
 
         // TODO: Use a mapper to create user
         // Create user
@@ -47,16 +41,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         var token = _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
-        var result = new AuthenticationData(
+        var response = new AuthenticationResponse(
             user.Email,
             token
         );
 
-        return new AuthenticationResult(){
-            Data = result,
-            Error = null,
-            ErrorMessage = null,
-            Success = true
-        };
+        return response;
     }
 }

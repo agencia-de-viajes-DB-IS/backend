@@ -1,12 +1,11 @@
 using FastEndpoints;
-using TravelAgency.Api.Contracts.Authentication;
 using TravelAgency.Application.Authentication.Commands.Register;
 using TravelAgency.Application.Authentication.Common;
 using MediatR;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 
-public class RegisterEndpoint : Endpoint<RegisterCommand, AuthenticationResult>
+public class RegisterEndpoint : Endpoint<RegisterCommand, AuthenticationResponse>
 {
     private readonly ISender _mediator;
 
@@ -22,7 +21,7 @@ public class RegisterEndpoint : Endpoint<RegisterCommand, AuthenticationResult>
     }
 
     public override async Task HandleAsync(RegisterCommand request, CancellationToken cancellationToken)
-    {   
+    {
         var result = await _mediator.Send(request);
         await SendAsync(result, statusCode: 200);
     }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace TravelAgency.Application.Authentication.Queries.Login;
 
-public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>
+public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResponse>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
@@ -15,41 +15,27 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResul
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
     }
-    public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
+    public async Task<AuthenticationResponse> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         // Verify user exists
         var user = await _userRepository.GetUserByEmail(query.Email);
-        
-        if(user is null)
-        {
-            return new AuthenticationResult(){
-                ErrorMessage = $"User not found with email {query.Email}.",
-                Success = false  
-            };
-        }
+
+        if (user is null)
+            throw new Exception("Email has not been registered");
+
         // Verify password
-        if(query.Password != user.Password)
-        {
-            return new AuthenticationResult(){
-                ErrorMessage = $"Password did not match, provided password: {query.Password}.",
-                Success = false  
-            };
-        }
+        if (query.Password != user.Password)
+            throw new Exception("Invalid password");
 
         // Generate token
         var token = _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
-        var result = new AuthenticationData(
+        var response = new AuthenticationResponse(
             user.Email,
             token
         );
 
-        return new AuthenticationResult(){
-            Data =  result,
-            Error = null,
-            ErrorMessage = null,
-            Success = true  
-        };
+        return response;
     }
 }
