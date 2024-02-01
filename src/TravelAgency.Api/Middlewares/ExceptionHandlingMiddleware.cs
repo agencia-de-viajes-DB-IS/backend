@@ -16,7 +16,7 @@ public class ErrorHandlingMiddleware
         {
             await _next(context);
         }
-        catch (AgencyException exception)
+        catch (TravelAgencyException exception)
         {
             await HandleAgencyExceptionAsync(context, exception);
         }
@@ -26,7 +26,7 @@ public class ErrorHandlingMiddleware
         }
     }
 
-    public static Task HandleAgencyExceptionAsync(HttpContext context, AgencyException exception)
+    public static Task HandleAgencyExceptionAsync(HttpContext context, TravelAgencyException exception)
     {
         var result = JsonConvert.SerializeObject(new
         {
