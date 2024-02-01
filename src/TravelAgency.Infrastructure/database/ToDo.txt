@@ -2,7 +2,11 @@ Design Of AereoSkull's Database:
 
 To Do:
 	✅️ basic my-sql code to implement it.	
-	❌️ fill basic implementation with garbage values.
+		- index to reference foreign key date type.
+	✅️ fill basic implementation with garbage values.
+		- did it using mockaroo.
+	❌️ use entity framework to handle business rules at c# level.
 
-Remainders:
-	🤏️ how setup my-sql in c#. 
+Business Rules:
+	1 - excursion has more than one day if it has associated hotels. // this has to be handled at the insertion level.
+	2 - implement agency works with constraints.
