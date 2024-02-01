@@ -22,11 +22,11 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
         var user = await _userRepository.GetUserByEmail(query.Email);
 
         if (user is null)
-            throw new AgencyException("Email has not been registered", status: 400);
+            throw new TravelAgencyException("Email has not been registered", status: 400);
 
         // Verify password
         if (query.Password != user.Password)
-            throw new AgencyException("Invalid password", status: 400);
+            throw new TravelAgencyException("Invalid password", status: 400);
 
         // Generate token
         var token = _jwtTokenGenerator.GenerateToken(user);
