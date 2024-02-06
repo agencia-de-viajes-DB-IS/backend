@@ -3,7 +3,7 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Application.Interfaces.Persistence;
 using MediatR;
 using TravelAgency.Domain.Common.Exceptions;
-using TravelAgency.Domain.Entities;
+using TravelAgency.Persistence.Models;
 
 namespace TravelAgency.Application.Authentication.Queries.Login;
 
@@ -12,7 +12,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IGenericRepository<User> _userRepository;
 
-    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository, IUnitOfWork unitOfWork)
+    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
@@ -30,7 +30,16 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
             throw new TravelAgencyException("Invalid password", status: 400);
 
         // Generate token
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        // TODO: Should be automatically mapped by the repository
+        var token = _jwtTokenGenerator.GenerateToken(
+            new Domain.Entities.User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role,
+            });
 
         // Create result
         var response = new AuthenticationResponse(

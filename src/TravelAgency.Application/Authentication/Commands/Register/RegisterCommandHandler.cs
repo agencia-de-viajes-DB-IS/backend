@@ -1,9 +1,9 @@
 using TravelAgency.Application.Authentication.Common;
 using TravelAgency.Application.Interfaces.Authentication;
-using TravelAgency.Domain.Entities;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Common.Exceptions;
+using TravelAgency.Persistence.Models;
 
 namespace TravelAgency.Application.Authentication.Commands.Register;
 
@@ -27,14 +27,14 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
 
         // TODO: Use a mapper to create user
         // Create user
-        var user = new User()
+        var user = new Persistence.Models.User()
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid().ToString(),
             FirstName = command.FirstName,
             LastName = command.LastName,
             Email = command.Email,
             Password = command.Password,
-            Role = UserRoles.Client
+            Role = Domain.Entities.UserRoles.Client
         };
 
         // Store user into DB
@@ -42,7 +42,15 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         await _unitOfWork.SaveAsync();
 
         // Generate token
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var token = _jwtTokenGenerator.GenerateToken(
+            new Domain.Entities.User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+                Role = user.Role,
+            });
 
         // Create result
         var response = new AuthenticationResponse(

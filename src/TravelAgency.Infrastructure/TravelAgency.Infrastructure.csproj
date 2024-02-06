@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TravelAgency.Domain\TravelAgency.Domain.csproj" />
     <ProjectReference Include="..\TravelAgency.Application\TravelAgency.Application.csproj" />
+    <ProjectReference Include="..\TravelAgency.Persistence\TravelAgency.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />

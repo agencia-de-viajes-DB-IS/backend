@@ -8,8 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
-using TravelAgency.Domain.Entities;
+using TravelAgency.Persistence.Models;
 
 namespace TravelAgency.Infrastructure;
 
@@ -19,11 +18,8 @@ public static class DependencyInjection
     {
         services.AddAuth(configuration);
         services.AddAuthorization();
-        services.AddDbContext<AeroSkullDbContext>(options =>
-            options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddRepositories();
-
         return services;
     }
 
@@ -48,6 +44,7 @@ public static class DependencyInjection
 
         return services;
     }
+
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();

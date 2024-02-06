@@ -1,17 +1,18 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Persistence.Models;
 
 namespace TravelAgency.Infrastructure.Persistence;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    private readonly AeroSkullDbContext _context;
+    private readonly AeroSkullContext _context;
     private readonly DbSet<T> _set;
-    public GenericRepository(AeroSkullDbContext context)
+    public GenericRepository(AeroSkullContext context)
     {
         _context = context;
-        _set = context.Set<T>();
+        _set = _context.Set<T>();
     }
     public async Task DeleteAsync(object id)
     {

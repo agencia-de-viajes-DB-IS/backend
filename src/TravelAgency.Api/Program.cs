@@ -3,12 +3,14 @@ using FastEndpoints;
 using FastEndpoints.Swagger;
 using TravelAgency.Api;
 using TravelAgency.Application;
+using TravelAgency.Persistence;
 using TravelAgency.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPresentation();
 builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCors(options =>
 {
