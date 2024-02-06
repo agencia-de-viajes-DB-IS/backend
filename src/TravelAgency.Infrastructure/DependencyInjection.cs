@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Infrastructure;
 
@@ -15,11 +17,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfigurationManager configuration)
     {
-        // services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
-        // services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SECTION_NAME));
         services.AddAuth(configuration);
         services.AddAuthorization();
-        services.AddSingleton<IUserRepository, InMemoryUserRepository>();
+        services.AddDbContext<AeroSkullDbContext>(options =>
+            options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!));
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddRepositories();
+
         return services;
     }
 
@@ -42,6 +46,11 @@ public static class DependencyInjection
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
         });
 
+        return services;
+    }
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
         return services;
     }
 }
