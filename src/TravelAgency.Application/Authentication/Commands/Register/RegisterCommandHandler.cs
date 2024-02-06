@@ -13,11 +13,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
     private readonly IGenericRepository<User> _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository, IUnitOfWork unitOfWork)
+    public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUnitOfWork unitOfWork)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
-        _userRepository = userRepository;
         _unitOfWork = unitOfWork;
+        _userRepository = _unitOfWork.GetRepository<User>();
     }
 
     public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)

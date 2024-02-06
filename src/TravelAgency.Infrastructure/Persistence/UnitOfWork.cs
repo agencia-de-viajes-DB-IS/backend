@@ -12,6 +12,9 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
     }
+    
     public async Task SaveAsync() => await _context
     .SaveChangesAsync();
+
+    public IGenericRepository<T> GetRepository<T>() where T : class => new GenericRepository<T>(_context);
 }

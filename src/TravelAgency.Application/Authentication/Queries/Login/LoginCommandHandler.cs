@@ -12,10 +12,10 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IGenericRepository<User> _userRepository;
 
-    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository)
+    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUnitOfWork unitOfWork)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
-        _userRepository = userRepository;
+        _userRepository = unitOfWork.GetRepository<User>();
     }
     public async Task<AuthenticationResponse> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
