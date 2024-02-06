@@ -10,17 +10,19 @@ namespace TravelAgency.Application.Authentication.Commands.Register;
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResponse>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IUserRepository _userRepository;
+    private readonly IGenericRepository<User> _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+    public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository, IUnitOfWork unitOfWork)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        if (await _userRepository.GetUserByEmail(command.Email) is not null)
+        if (await _userRepository.FindAsync(u => u.Email == command.Email) is not null)
             throw new TravelAgencyException("Email is already registered", status: 400);
 
         // TODO: Use a mapper to create user
@@ -36,7 +38,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         };
 
         // Store user into DB
-        await _userRepository.Add(user);
+        await _userRepository.InsertAsync(user);
+        await _unitOfWork.SaveAsync();
 
         // Generate token
         var token = _jwtTokenGenerator.GenerateToken(user);

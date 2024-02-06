@@ -3,15 +3,16 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Application.Interfaces.Persistence;
 using MediatR;
 using TravelAgency.Domain.Common.Exceptions;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Authentication.Queries.Login;
 
 public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResponse>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IUserRepository _userRepository;
+    private readonly IGenericRepository<User> _userRepository;
 
-    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+    public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IGenericRepository<User> userRepository, IUnitOfWork unitOfWork)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
@@ -19,7 +20,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
     public async Task<AuthenticationResponse> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         // Verify user exists
-        var user = await _userRepository.GetUserByEmail(query.Email);
+        var user = await _userRepository.FindAsync(u => u.Email == query.Email);
 
         if (user is null)
             throw new TravelAgencyException("Email has not been registered", status: 400);
