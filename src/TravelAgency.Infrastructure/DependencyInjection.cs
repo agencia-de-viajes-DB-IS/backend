@@ -8,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using TravelAgency.Persistence.Models;
+using Microsoft.EntityFrameworkCore;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Infrastructure;
 
@@ -18,6 +19,8 @@ public static class DependencyInjection
     {
         services.AddAuth(configuration);
         services.AddAuthorization();
+        services.AddDbContext<AeroSkullContext>(options =>
+            options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddRepositories();
         return services;

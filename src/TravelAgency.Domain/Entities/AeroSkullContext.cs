@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace TravelAgency.Persistence.Models;
+namespace TravelAgency.Domain.Entities;
 
 public partial class AeroSkullContext : DbContext
 {

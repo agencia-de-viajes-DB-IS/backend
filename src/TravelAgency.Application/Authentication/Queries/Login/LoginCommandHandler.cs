@@ -3,7 +3,7 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Application.Interfaces.Persistence;
 using MediatR;
 using TravelAgency.Domain.Common.Exceptions;
-using TravelAgency.Persistence.Models;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Authentication.Queries.Login;
 
@@ -31,15 +31,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationRespo
 
         // Generate token
         // TODO: Should be automatically mapped by the repository
-        var token = _jwtTokenGenerator.GenerateToken(
-            new Domain.Entities.User()
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Password = user.Password,
-                Role = user.Role,
-            });
+        var token = _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
         var response = new AuthenticationResponse(

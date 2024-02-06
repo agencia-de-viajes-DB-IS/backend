@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TravelAgency.Persistence.Models;
+namespace TravelAgency.Domain.Entities;
 
 public partial class Excursion
 {

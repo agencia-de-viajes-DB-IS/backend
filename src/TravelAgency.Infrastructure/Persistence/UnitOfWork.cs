@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.Interfaces.Persistence;
-using TravelAgency.Persistence.Models;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Infrastructure.Persistence;
 
