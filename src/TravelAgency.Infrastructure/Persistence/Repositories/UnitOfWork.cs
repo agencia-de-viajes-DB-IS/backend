@@ -1,17 +1,16 @@
 using TravelAgency.Application.Interfaces.Persistence;
-using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Infrastructure.Persistence;
+namespace TravelAgency.Infrastructure.Persistence.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly AeroSkullContext _context;
+    private readonly AeroSkullDbContext _context;
 
-    public UnitOfWork(AeroSkullContext context)
+    public UnitOfWork(AeroSkullDbContext context)
     {
         _context = context;
     }
-    
+
     public async Task SaveAsync() => await _context
     .SaveChangesAsync();
 

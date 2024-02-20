@@ -29,12 +29,11 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         // Create user
         var user = new User()
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Guid.NewGuid(),
             FirstName = command.FirstName,
             LastName = command.LastName,
             Email = command.Email,
-            Password = command.Password,
-            Role = UserRoles.Client
+            Password = command.Password
         };
 
         // Store user into DB

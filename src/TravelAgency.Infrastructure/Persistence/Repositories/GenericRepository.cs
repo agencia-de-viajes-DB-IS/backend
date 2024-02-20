@@ -1,15 +1,14 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.Interfaces.Persistence;
-using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Infrastructure.Persistence;
+namespace TravelAgency.Infrastructure.Persistence.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    private readonly AeroSkullContext _context;
+    private readonly AeroSkullDbContext _context;
     private readonly DbSet<T> _set;
-    public GenericRepository(AeroSkullContext context)
+    public GenericRepository(AeroSkullDbContext context)
     {
         _context = context;
         _set = _context.Set<T>();
