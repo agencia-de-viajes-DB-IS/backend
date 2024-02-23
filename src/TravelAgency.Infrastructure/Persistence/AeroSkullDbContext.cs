@@ -18,7 +18,10 @@ public class AeroSkullDbContext : DbContext
         modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
 
         modelBuilder.Entity<HotelDeal>()
-            .HasIndex(hotelDeal => hotelDeal.HotelId)
+            .HasIndex(hotelDeal => new {
+                hotelDeal.Id,
+                hotelDeal.HotelId
+            })
             .IsUnique();
 
         modelBuilder.Entity<HotelDealReservation>()
