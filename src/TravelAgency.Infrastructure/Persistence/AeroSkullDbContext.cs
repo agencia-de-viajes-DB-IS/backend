@@ -5,7 +5,46 @@ namespace TravelAgency.Infrastructure.Persistence;
 
 public class AeroSkullDbContext : DbContext
 {
+    public DbSet<User> Users {get; set;}
+    public DbSet<Tourist> Tourists {get; set;}
+    public DbSet<Agency> Agencies {get; set;}
+    public DbSet<Excursion> Excursions {get; set;}
+    public DbSet<ExtendedExcursion> ExtendedExcursions {get; set;}
+    public DbSet<Hotel> Hotels {get; set;}
     public AeroSkullDbContext(DbContextOptions<AeroSkullDbContext> options) : base(options) { }
-    
-    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
+
+        modelBuilder.Entity<HotelDeal>()
+            .HasIndex(hotelDeal => hotelDeal.HotelId)
+            .IsUnique();
+
+        modelBuilder.Entity<HotelDealReservation>()
+        .HasIndex(reservation => new
+        {
+            reservation.AgencyId,
+            reservation.UserId,
+            reservation.HotelDealId
+        })
+        .IsUnique();
+
+        modelBuilder.Entity<ExcursionReservation>()
+        .HasIndex(reservation => new
+        {
+            reservation.UserId,
+            reservation.ExcursionId
+        })
+        .IsUnique();
+
+        modelBuilder.Entity<PackageReservation>()
+        .HasIndex(reservation => new
+        {
+            reservation.AgencyId,
+            reservation.UserId,
+            reservation.PackageId
+        })
+        .IsUnique();
+    }
 }
