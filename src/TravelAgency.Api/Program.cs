@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", builder =>
     {
-        // TODO: set defaults origins.
+        // TODO: set defaults origins. 
         builder.AllowAnyOrigin();
         builder.AllowAnyHeader();
         builder.AllowAnyMethod();
