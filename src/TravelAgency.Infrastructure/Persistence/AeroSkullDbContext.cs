@@ -7,7 +7,6 @@ public class AeroSkullDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Tourist> Tourists { get; set; }
-    public DbSet<Role> Roles { get; set; }
     public DbSet<PackageReservation> PackageReservations { get; set; }
     public DbSet<Package> Packages { get; set; }
     public DbSet<HotelDealReservation> HotelDealReservations { get; set; }
@@ -26,6 +25,9 @@ public class AeroSkullDbContext : DbContext
     {
         modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
 
+        modelBuilder.Entity<User>()
+            .OwnsOne(user => user.Role);
+    
         modelBuilder.Entity<HotelDeal>()
             .HasIndex(hotelDeal => new
             {
