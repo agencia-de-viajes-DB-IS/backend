@@ -10,4 +10,5 @@ public class AgencyRelatedHotelDeal
     public required Agency Agency { get; set; }
     public Guid HotelDealId { get; set; }
     public required HotelDeal HotelDeal { get; set; }
+    public ICollection<HotelDealReservation>? HotelDealReservations { get; set; }
 }
