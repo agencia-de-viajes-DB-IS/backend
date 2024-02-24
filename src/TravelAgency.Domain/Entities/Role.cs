@@ -9,5 +9,5 @@ public class Role
     public required string Name { get; set; }
     
     // Relational Properties
-    public Collection<User>? Users {get; set;}
+    public ICollection<User>? Users {get; set;}
 }

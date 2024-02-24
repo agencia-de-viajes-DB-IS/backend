@@ -13,7 +13,6 @@ public class HotelDeal
     // Relational Properties
     public Guid HotelId { get; set; }
     public required Hotel Hotel { get; set; }
-    public ICollection<Agency>? Agencies { get; set; }
     public ICollection<ExtendedExcursion>? ExtendedExcursions { get; set; }
-    public ICollection<HotelDealReservation>? HotelDealReservations { get; set; }
+    public ICollection<AgencyRelatedHotelDeal>? AgencyRelatedHotelDeals { get; set; }
 }

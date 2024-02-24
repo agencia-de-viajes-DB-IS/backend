@@ -33,7 +33,12 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
             FirstName = command.FirstName,
             LastName = command.LastName,
             Email = command.Email,
-            Password = command.Password
+            Password = command.Password,
+            Role = new Role()
+            {
+                Id = 1,
+                Name = "Client"
+            }
         };
 
         // Store user into DB

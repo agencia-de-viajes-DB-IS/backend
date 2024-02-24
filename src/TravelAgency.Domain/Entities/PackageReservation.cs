@@ -5,6 +5,7 @@ public class PackageReservation
     public Guid Id { get; set; }
     public required string Airline { get; set; }
     public decimal Price { get; set; }
+    public DateTime ReservationDate { get; set; }
 
     // Relational Properties
     public Guid AgencyId { get; set; }

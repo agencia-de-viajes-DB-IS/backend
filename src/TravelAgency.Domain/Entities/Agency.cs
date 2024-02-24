@@ -11,7 +11,6 @@ public class Agency
 
     // Relational Properties
     public ICollection<Excursion>? Excursions {get; set;}
-    public ICollection<HotelDeal>? HotelDeals { get; set; }
     public ICollection<PackageReservation>? PackageReservations {get; set;}
-    public ICollection<HotelDealReservation>? HotelDealReservations {get; set;}
+    public ICollection<AgencyRelatedHotelDeal>? AgencyRelatedHotelDeals { get; set; }
 }
