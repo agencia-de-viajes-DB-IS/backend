@@ -487,4 +487,3 @@ $RECYCLE.BIN/
 *.swp
 src/.vscode/tasks.json
 src/.vscode/launch.json
-src/TravelAgency.Infrastructure/Migrations/

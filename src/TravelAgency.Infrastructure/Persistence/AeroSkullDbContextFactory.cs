@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace TravelAgency.Infrastructure.Persistence;
 
-public class BloggingContextFactory : IDesignTimeDbContextFactory<AeroSkullDbContext>
+public class AeroSkullContextFactory : IDesignTimeDbContextFactory<AeroSkullDbContext>
 {
     public AeroSkullDbContext CreateDbContext(string[] args)
     {
