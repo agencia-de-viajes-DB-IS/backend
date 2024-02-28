@@ -1,4 +1,4 @@
-namespace TravelAgency.Application.Authentication.Common;
+namespace TravelAgency.Application.Responses;
 
 public record AuthenticationResponse(
     string Email,

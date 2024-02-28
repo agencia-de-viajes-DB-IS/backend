@@ -1,7 +1,7 @@
 using FastEndpoints;
-using TravelAgency.Application.Authentication.Common;
-using TravelAgency.Application.Authentication.Queries.Login;
 using MediatR;
+using TravelAgency.Application.Handlers.Authentication.Login;
+using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 

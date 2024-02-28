@@ -1,34 +1,30 @@
-using TravelAgency.Application.Authentication.Common;
 using TravelAgency.Application.Interfaces.Authentication;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Common.Exceptions;
-using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Enums;
+using TravelAgency.Application.Responses;
+using System.Linq.Expressions;
 
-namespace TravelAgency.Application.Authentication.Commands.Register;
+namespace TravelAgency.Application.Handlers.Authentication.Register;
 
-public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResponse>
+public class RegisterCommandHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnitOfWork _unitOfWork) : IRequestHandler<RegisterCommand, AuthenticationResponse>
 {
-    private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IGenericRepository<User> _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
-
-    public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUnitOfWork unitOfWork)
-    {
-        _jwtTokenGenerator = jwtTokenGenerator;
-        _unitOfWork = unitOfWork;
-        _userRepository = _unitOfWork.GetRepository<User>();
-    }
-
     public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
-        if (await _userRepository.FindAsync(u => u.Email == command.Email) is not null)
+        var userRepo = _unitOfWork.GetRepository<Domain.Entities.User>();
+
+        var userFilter = new Expression<Func<Domain.Entities.User, bool>>[]
+        {
+            u => u.Email == command.Email
+        };
+
+        if (await userRepo.FindAsync(filters: userFilter) is not null)
             throw new TravelAgencyException("Email is already registered", status: 400);
 
         // TODO: Use a mapper to create user
         // Create user
-        var user = new User()
+        var user = new Domain.Entities.User()
         {
             Id = Guid.NewGuid(),
             FirstName = command.FirstName,
@@ -46,7 +42,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
         };
 
         // Store user into DB
-        await _userRepository.InsertAsync(user);
+        await userRepo.InsertAsync(user);
         await _unitOfWork.SaveAsync();
 
         // Generate token

@@ -1,7 +1,7 @@
 using MediatR;
-using TravelAgency.Application.Authentication.Common;
+using TravelAgency.Application.Responses;
 
-namespace TravelAgency.Application.Authentication.Commands.Register;
+namespace TravelAgency.Application.Handlers.Authentication.Register;
 
 public record RegisterCommand(
     string FirstName,
