@@ -9,8 +9,8 @@ public class ExcursionReservation
 
     // Relational Properties
     public Guid UserId { get; set; }
-    public required User User { get; set; }
+    public User User { get; set; } = null!;
     public Guid ExcursionId { get; set; }
-    public required Excursion Excursion { get; set; }
+    public Excursion Excursion { get; set; } = null!;
     public required ICollection<Tourist> Tourists { get; set; }
 }

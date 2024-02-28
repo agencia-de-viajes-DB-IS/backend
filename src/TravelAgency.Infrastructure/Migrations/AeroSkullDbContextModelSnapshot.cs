@@ -24,8 +24,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("ExcursionReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ExcursionReservationsId", "TouristsId");
 
@@ -84,8 +84,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("HotelDealReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("HotelDealReservationsId", "TouristsId");
 
@@ -99,8 +99,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("PackageReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("PackageReservationsId", "TouristsId");
 
@@ -385,9 +385,8 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

@@ -10,8 +10,8 @@ public class HotelDealReservation
 
     // Relational Properties
     public Guid UserId { get; set; }
-    public required User User { get; set; }
+    public User User { get; set; } = null!;
     public Guid AgencyRelatedHotelDealId { get; set; }
-    public required AgencyRelatedHotelDeal AgencyRelatedHotelDeal { get; set; }
+    public AgencyRelatedHotelDeal AgencyRelatedHotelDeal { get; set; } = null!;
     public required ICollection<Tourist> Tourists { get; set; }
 }

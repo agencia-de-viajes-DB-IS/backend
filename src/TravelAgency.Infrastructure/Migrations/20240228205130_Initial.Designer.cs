@@ -11,8 +11,8 @@ using TravelAgency.Infrastructure.Persistence;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(AeroSkullDbContext))]
-    [Migration("20240224233623_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240228205130_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("ExcursionReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ExcursionReservationsId", "TouristsId");
 
@@ -87,8 +87,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("HotelDealReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("HotelDealReservationsId", "TouristsId");
 
@@ -102,8 +102,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("PackageReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TouristsId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("TouristsId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("PackageReservationsId", "TouristsId");
 
@@ -270,9 +270,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<DateTime>("ArrivalDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime(6)");
 
@@ -391,9 +388,8 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

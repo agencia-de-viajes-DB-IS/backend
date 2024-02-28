@@ -10,6 +10,6 @@ public class Excursion
 
     // Relational Properties
     public Guid AgencyId { get; set; }
-    public required Agency Agency { get; set; }
+    public Agency Agency { get; set; } = null!;
     public ICollection<ExcursionReservation>? ExcursionReservations {get; set;}
 }

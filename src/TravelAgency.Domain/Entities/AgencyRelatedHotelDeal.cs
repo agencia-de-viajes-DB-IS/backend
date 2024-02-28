@@ -7,8 +7,8 @@ public class AgencyRelatedHotelDeal
 
     // Relational Properties
     public Guid AgencyId { get; set; }
-    public required Agency Agency { get; set; }
+    public Agency Agency { get; set; } = null!;
     public Guid HotelDealId { get; set; }
-    public required HotelDeal HotelDeal { get; set; }
+    public HotelDeal HotelDeal { get; set; } = null!;
     public ICollection<HotelDealReservation>? HotelDealReservations { get; set; }
 }

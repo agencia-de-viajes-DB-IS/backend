@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace TravelAgency.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,7 +81,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "Tourists",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false),
                     FirstName = table.Column<string>(type: "longtext", nullable: false),
                     LastName = table.Column<string>(type: "longtext", nullable: false),
                     Nationality = table.Column<string>(type: "longtext", nullable: false)
@@ -139,7 +139,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Category = table.Column<int>(type: "int", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DepartureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     HotelId = table.Column<Guid>(type: "char(36)", nullable: false)
@@ -296,7 +295,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     PackageReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -321,7 +320,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     ExcursionReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -425,7 +424,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     HotelDealReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
