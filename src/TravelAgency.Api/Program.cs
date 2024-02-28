@@ -4,6 +4,7 @@ using FastEndpoints.Swagger;
 using TravelAgency.Api;
 using TravelAgency.Application;
 using TravelAgency.Infrastructure;
+using TravelAgency.Infrastructure.Persistence.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,4 +29,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseFastEndpoints().UseCors("MyPolicy");
 app.UseSwaggerGen();
+app.EnsurePopulate();
 app.Run();
