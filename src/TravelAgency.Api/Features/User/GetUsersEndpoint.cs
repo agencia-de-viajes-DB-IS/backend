@@ -1,0 +1,23 @@
+using FastEndpoints;
+using MediatR;
+using TravelAgency.Api.Responses;
+using TravelAgency.Application.Handlers.User.GetUsers;
+
+namespace TravelAgency.Api.Features.User;
+
+public class GetUsersEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<UserResponse>>
+{
+    public override void Configure()
+    {
+        Get("/users");
+        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
+        AllowAnonymous();
+    }
+
+    public override async Task HandleAsync(CancellationToken ct)
+    {
+        var command = new GetUsersCommand();
+        var response = await _mediator.Send(command);
+        await SendOkAsync(response);
+    }
+}
