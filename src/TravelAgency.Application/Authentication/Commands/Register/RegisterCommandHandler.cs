@@ -4,6 +4,7 @@ using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Enums;
 
 namespace TravelAgency.Application.Authentication.Commands.Register;
 
@@ -33,7 +34,15 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Authentic
             FirstName = command.FirstName,
             LastName = command.LastName,
             Email = command.Email,
-            Password = command.Password
+            Password = command.Password,
+            // TODO: This can be prefixed somewhere else but here, set the right permissions
+            Role = new Domain.ValueObjects.Role{
+                Name = "Regular",
+                Permissions = new List<Permissions> {
+                    Permissions.ReadUsers,
+                    Permissions.WriteUsers
+                }
+            }
         };
 
         // Store user into DB
