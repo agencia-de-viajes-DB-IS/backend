@@ -27,7 +27,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             IEnumerable<Expression<Func<T, object>>> includesArray = includes as Expression<Func<T, object>>[] ?? includes.ToArray();
             if (includesArray.Any())
             {
-                includesArray.Aggregate(elements, (current, includeExpression) => current.Include(includeExpression));
+                elements = includesArray.Aggregate(elements, (current, includeExpression) => current.Include(includeExpression));
             }
         }
 
