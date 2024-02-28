@@ -19,13 +19,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _set.Remove(entity);
     }
 
-    public async Task<IEnumerable<T>> FindAllAsync(IEnumerable<Expression<Func<T, object>>>? includes,
-        IEnumerable<Expression<Func<T, bool>>>? filters)
+    public async Task<IEnumerable<T>> FindAllAsync(IEnumerable<Expression<Func<T, object>>>? includes = null, IEnumerable<Expression<Func<T, bool>>>? filters = null)
     {
         var elements = _set.OfType<T>();
         if (includes != null)
         {
-            IEnumerable<Expression<Func<T,object>>> includesArray = includes as Expression<Func<T, object>>[] ?? includes.ToArray();
+            IEnumerable<Expression<Func<T, object>>> includesArray = includes as Expression<Func<T, object>>[] ?? includes.ToArray();
             if (includesArray.Any())
             {
                 includesArray.Aggregate(elements, (current, includeExpression) => current.Include(includeExpression));
@@ -37,16 +36,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             var filtersArray = filters as Expression<Func<T, bool>>[] ?? filters.ToArray();
             if (filtersArray.Any())
             {
-                filtersArray.Aggregate(elements, (current, expression) => current.Where(expression));
+                elements = filtersArray.Aggregate(elements, (current, filterExpression) => current.Where(filterExpression));
             }
         }
         return await Task.Run(() => elements);
     }
-    
 
-    public async Task<T?> FindAsync(IEnumerable<Expression<Func<T, object>>>? includes,
-        IEnumerable<Expression<Func<T, bool>>>? filters) => (await FindAllAsync(includes, filters)).FirstOrDefault();
-    
+    public async Task<T?> FindAsync(IEnumerable<Expression<Func<T, object>>>? includes = null, IEnumerable<Expression<Func<T, bool>>>? filters = null) => (await FindAllAsync(includes, filters)).FirstOrDefault();
 
     public async Task InsertAsync(T entity)
     {
