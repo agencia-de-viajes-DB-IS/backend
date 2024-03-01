@@ -6,7 +6,7 @@ public class Excursion
     public Guid Id { get; set; }
     public required string Location { get; set; }
     public decimal Price { get; set; }
-    public DateTime ArrivalDate { get; set; }
+    public required DateTime ArrivalDate { get; set; }
 
     // Relational Properties
     public Guid AgencyId { get; set; }

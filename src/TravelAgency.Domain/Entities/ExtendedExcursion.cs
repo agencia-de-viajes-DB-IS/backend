@@ -3,7 +3,7 @@ namespace TravelAgency.Domain.Entities;
 public class ExtendedExcursion : Excursion
 {
     // Main Properties
-    public DateTime DepartureDate {get; set;}
+    public required DateTime DepartureDate {get; set;}
 
     // Relational Properties
     public ICollection<Package>? Packages { get; set; }
