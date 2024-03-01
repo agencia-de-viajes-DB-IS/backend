@@ -17,7 +17,7 @@ public class GetUsersEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnume
     public override async Task HandleAsync(CancellationToken ct)
     {
         var command = new GetUsersCommand();
-        var response = await _mediator.Send(command);
-        await SendOkAsync(response);
+        var response = await _mediator.Send(command, ct);
+        await SendOkAsync(response, ct);
     }
 }
