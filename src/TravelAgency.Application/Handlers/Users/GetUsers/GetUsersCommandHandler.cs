@@ -1,7 +1,6 @@
-using System.Linq.Expressions;
 using MediatR;
-using TravelAgency.Api.Responses;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Users.GetUsers;
 

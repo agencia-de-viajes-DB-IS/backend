@@ -1,7 +1,7 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Api.Responses;
 using TravelAgency.Application.Handlers.Users.GetUsers;
+using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.User;
 

@@ -1,4 +1,4 @@
-namespace TravelAgency.Api.Responses;
+namespace TravelAgency.Application.Responses;
 
 public record UserResponse(
     string FirstName,
