@@ -24,7 +24,6 @@ public class AeroSkullDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
-
         modelBuilder.Entity<User>()
             .OwnsOne(user => user.Role);
     
