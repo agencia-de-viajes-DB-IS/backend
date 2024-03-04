@@ -1,6 +1,6 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.PackagesHandlers.GetPackages;
+using TravelAgency.Application.Handlers.Packages.GetPackages;
 using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Package;
