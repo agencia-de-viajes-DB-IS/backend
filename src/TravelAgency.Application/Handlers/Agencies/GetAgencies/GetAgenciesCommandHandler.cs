@@ -11,48 +11,38 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
     public async Task<IEnumerable<AgencyResponse>> Handle(GetAgenciesCommand request, CancellationToken cancellationToken)
     {
         var agencyRepo = _unitOfWork.GetRepository<Agency>();
-        var agencyHotelDealsRepo = _unitOfWork.GetRepository<AgencyRelatedHotelDeal>();
-        
+        var agencyRelatedHotelDeal = _unitOfWork.GetRepository<AgencyRelatedHotelDeal>();       
+
         var agencyIncludes = new Expression<Func<Agency, object>>[]
         {
             agency => agency.Excursions!,
-            agency => agency.AgencyRelatedHotelDeals!
         };
 
-        Dictionary<Guid, List<AgencyRelatedHotelDeal>> d = new();
+        var agencyHotelDealIncludes = new Expression<Func<AgencyRelatedHotelDeal, object>>[]
+        {
+            agencyHotelDeal => agencyHotelDeal.HotelDeal.Hotel!
+        };
         
-        var hotelIncludes = new Expression<Func<AgencyRelatedHotelDeal, object>>[]
-        {
-            agency => agency.HotelDeal.Hotel,
-        };
-
-        var response2 = (await agencyHotelDealsRepo.FindAllAsync(hotelIncludes));
-        foreach (var xAgencyRelatedHotelDeal in response2)
-        {
-            if (!d.ContainsKey(xAgencyRelatedHotelDeal.AgencyId))
-            {
-                d[xAgencyRelatedHotelDeal.AgencyId] = new();
-            }
-            d[xAgencyRelatedHotelDeal.AgencyId].Add(xAgencyRelatedHotelDeal);
-        }
         var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes))
-            .Select(agency => new AgencyResponse(
+            .Select(async agency => (new AgencyResponse(
                 agency.Name,
                 agency.Address,
                 agency.FaxNumber,
                 agency.Email,
                 agency.Excursions!.Select(x => new AgencyExcursionResponse(
-                    x.Location, 
-                    x.Price, 
+                    x.Location,
+                    x.Price,
                     x.ArrivalDate)),
-                d[agency.Id].Select(
+                (await agencyRelatedHotelDeal.FindAllAsync(agencyHotelDealIncludes, filters: new Expression<Func<AgencyRelatedHotelDeal, bool>>[]{ x => x.AgencyId == agency.Id}))
+                    .Select(
                     x => new AgencyHotelDealResponse(
-                        x.HotelDeal.Hotel.Name,
-                        x.HotelDeal.Description,
-                        x.HotelDeal.Price,
-                        x.HotelDeal.ArrivalDate,
-                        x.HotelDeal.DepartureDate
-                        ))));
-        return response;
+                        x.HotelDeal.Hotel.Name, 
+                        x.HotelDeal.Description, 
+                        x.HotelDeal.Price, 
+                        x.HotelDeal.ArrivalDate, 
+                        x.HotelDeal.DepartureDate))
+                )));
+        var results = await Task.WhenAll(response);
+        return results;
     }
 }
