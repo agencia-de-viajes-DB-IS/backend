@@ -13,12 +13,12 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyPolicy", builder =>
+    options.AddPolicy("MyPolicy", configurePolicy =>
     {
         // TODO: set defaults origins. 
-        builder.AllowAnyOrigin();
-        builder.AllowAnyHeader();
-        builder.AllowAnyMethod();
+        configurePolicy.AllowAnyOrigin();
+        configurePolicy.AllowAnyHeader();
+        configurePolicy.AllowAnyMethod();
     });
 });
 
