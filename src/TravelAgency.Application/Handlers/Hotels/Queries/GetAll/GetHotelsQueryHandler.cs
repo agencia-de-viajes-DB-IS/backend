@@ -21,7 +21,6 @@ public class GetHotelsQueryHandler : IRequestHandler<GetHotelsQuery, IEnumerable
         var hotelsIncludes = new Expression<Func<Hotel, object>>[]
         {
             Hotels => Hotels.Deals!,
-            Hotels => Hotels.Category!
         };
         var response = (await hotelsRepo.FindAllAsync(includes: hotelsIncludes))
             .Select(Hotels => new HotelsResponse(
