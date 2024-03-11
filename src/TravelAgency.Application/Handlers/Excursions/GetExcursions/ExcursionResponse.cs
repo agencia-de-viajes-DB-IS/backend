@@ -1,7 +1,4 @@
-using TravelAgency.Domain.Entities;
-
-namespace TravelAgency.Application.Responses;
-
+namespace TravelAgency.Application.Handlers.Excursions.GetExcursions;
 public record ExcursionResponse(
     string Location,
     decimal Price,

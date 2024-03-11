@@ -1,9 +1,8 @@
 using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Agencies.GetAgencies;
-using TravelAgency.Application.Responses;
 
-namespace TravelAgency.Api.Features.Agency;
+namespace TravelAgency.Api.Features.Agency.Queries;
 
 public class GetAgenciesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<AgencyResponse>>
 {

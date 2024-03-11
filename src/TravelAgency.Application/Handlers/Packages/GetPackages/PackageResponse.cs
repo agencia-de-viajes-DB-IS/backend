@@ -1,7 +1,6 @@
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Responses;
-
+namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 public record PackageResponse(
     string Code,
     string Description,

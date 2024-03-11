@@ -1,6 +1,4 @@
-using TravelAgency.Domain.Entities;
-
-namespace TravelAgency.Application.Responses;
+namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
 public record AgencyResponse
 (
