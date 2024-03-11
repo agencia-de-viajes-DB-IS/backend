@@ -1,4 +1,4 @@
-using GloboTicket.TicketManagement.Application.Responses;
+using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 
