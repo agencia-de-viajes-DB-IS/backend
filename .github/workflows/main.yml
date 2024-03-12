@@ -29,6 +29,9 @@ jobs:
     - name: Check Path
       run: ls 
 
+    - name: Check Path
+      run: cat .\src\TravelAgency.Api\Properties\launchSettings.json
+    
     - name: Execute
       run: dotnet run --project '.\src\TravelAgency.Api\TravelAgency.Api.csproj' --launch-profile "workflow" 
     
