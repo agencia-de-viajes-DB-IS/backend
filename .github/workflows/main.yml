@@ -33,7 +33,7 @@ jobs:
       run: cat ./src/TravelAgency.Api/Properties/launchSettings.json
     
     - name: Execute
-      run: dotnet run --project './src/TravelAgency.Api/TravelAgency.Api.csproj' --launch-profile "workflow" 
+      run: dotnet run --project './src/TravelAgency.Api/TravelAgency.Api.csproj' --launch-profile "workflow" & 
     
     - name: Install ngrok 
       run:  curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
