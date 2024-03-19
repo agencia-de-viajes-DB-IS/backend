@@ -11,11 +11,13 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
     public async Task<IEnumerable<PackageResponse>> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
     {
         var packageRepo = _unitOfWork.GetRepository<Package>();
+        
         var packageIncludes = new Expression<Func<Package, object>>[]
         {
             package => package.Facilities!,
             package => package.ExtendedExcursions!
         };
+
         var response = (await packageRepo.FindAllAsync(includes: packageIncludes))
             .Select(package => new PackageResponse(
                 package.Code.ToString(),
@@ -23,8 +25,18 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 package.Price,
                 package.ArrivalDate,
                 package.DepartureDate,
-                package.Facilities!,
-                package.ExtendedExcursions!
+                package.Facilities!.Select(facility => new FacilityResponse(
+                    facility.Id,
+                    facility.Name,
+                    facility.Description
+                )),
+                package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
+                    excursion.Id,
+                    excursion.Location,
+                    excursion.Price,
+                    excursion.ArrivalDate,
+                    excursion.DepartureDate
+                ))
         ));
         return response;
     }
