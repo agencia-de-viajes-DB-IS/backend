@@ -1,3 +1,4 @@
+using TravelAgency.Application.Handlers.Facilities.GetFacilities;
 using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
@@ -13,11 +14,6 @@ public class PackageResponse : BaseResponse
     public IEnumerable<ExtendedExcursionResponse>? ExtendedExcursions {get; set;}
 }
 
-public record FacilityResponse(
-    int Id,
-    string Name,
-    string Description
-);
 
 public record ExtendedExcursionResponse(
     Guid Id,
