@@ -1,10 +1,10 @@
 using FluentValidation;
 
-namespace TravelAgency.Application.Handlers.Facilities.CreateFacility;
+namespace TravelAgency.Application.Handlers.Facilities.UpdateFacility;
 
-public class CreateFacilityCommandValidator : AbstractValidator<CreateFacilityCommand>
+public class UpdateFacilityCommandValidator : AbstractValidator<UpdateFacilityCommand>
 {
-    public CreateFacilityCommandValidator()
+    public UpdateFacilityCommandValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required")

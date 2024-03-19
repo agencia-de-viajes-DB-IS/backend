@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using MediatR;
-using TravelAgency.Application.Handlers.Packages.GetPackages;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
