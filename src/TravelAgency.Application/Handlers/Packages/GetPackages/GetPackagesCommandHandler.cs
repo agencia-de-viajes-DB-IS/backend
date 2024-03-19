@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using MediatR;
 using TravelAgency.Application.Handlers.Facilities.GetFacilities;
 using TravelAgency.Application.Interfaces.Persistence;
-using TravelAgency.Application.Responses;
 using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
@@ -27,11 +26,12 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 Price = package.Price,
                 ArrivalDate = package.ArrivalDate,
                 DepartureDate = package.DepartureDate,
-                Facilities = package.Facilities!.Select(facility => new FacilityResponse(
-                    facility.Id,
-                    facility.Name,
-                    facility.Description
-                )),
+                Facilities = package.Facilities!.Select(facility => new FacilityResponse()
+                {
+                    Id = facility.Id,
+                    Name = facility.Name,
+                    Description = facility.Description
+                }),
                 ExtendedExcursions = package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
                     excursion.Location,

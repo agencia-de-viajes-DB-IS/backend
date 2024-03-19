@@ -1,4 +1,5 @@
 using MediatR;
+using TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 using TravelAgency.Application.Handlers.Facilities.GetFacilities;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
@@ -9,6 +10,23 @@ public class CreateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHan
 {
     public async Task<FacilityResponse> Handle(CreateFacilityCommand request, CancellationToken cancellationToken)
     {
+        var validator = new CreateFacilityCommandValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (validationResult.Errors.Count > 0)
+        {
+            var failedResponse = new FacilityResponse
+            {
+                Success = false,
+                ValidationErrors = new List<string>()
+            };
+
+            foreach (var error in validationResult.Errors)
+                failedResponse.ValidationErrors.Add(error.ErrorMessage);
+
+            return failedResponse;
+        }
+
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
 
         var facility = new Facility()
@@ -20,11 +38,12 @@ public class CreateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHan
         await facilityRepo.InsertAsync(facility);
         await _unitOfWork.SaveAsync();
 
-        var response = new FacilityResponse(
-            facility.Id,
-            facility.Name,
-            facility.Description
-        );
+        var response = new FacilityResponse()
+        {
+            Id = facility.Id,
+            Name = facility.Name,
+            Description = facility.Description
+        };
 
         return response;
     }

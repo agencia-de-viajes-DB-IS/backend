@@ -11,12 +11,13 @@ public class GetFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
 
         var facilities = await facilityRepo.FindAllAsync();
-        
-        var response = facilities.Select(facility => new FacilityResponse(
-            facility.Id,
-            facility.Name,
-            facility.Description
-        ));
+
+        var response = facilities.Select(facility => new FacilityResponse()
+        {
+            Id = facility.Id,
+            Name = facility.Name,
+            Description = facility.Description
+        });
 
         return response;
     }

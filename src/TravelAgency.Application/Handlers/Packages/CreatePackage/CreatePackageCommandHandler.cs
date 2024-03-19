@@ -24,6 +24,8 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 
             foreach (var error in validationResult.Errors)
                 failedResponse.ValidationErrors.Add(error.ErrorMessage);
+
+            return failedResponse;
         }
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
@@ -64,11 +66,12 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             Price = package.Price,
             ArrivalDate = package.ArrivalDate,
             DepartureDate = package.DepartureDate,
-            Facilities = facilities.Select(facility => new FacilityResponse(
-                facility.Id,
-                facility.Name,
-                facility.Description
-            )),
+            Facilities = facilities.Select(facility => new FacilityResponse()
+            {
+                Id = facility.Id,
+                Name = facility.Name,
+                Description = facility.Description
+            }),
             ExtendedExcursions = extendedExcursions.Select(excursion => new ExtendedExcursionResponse(
                 excursion.Id,
                 excursion.Location,
