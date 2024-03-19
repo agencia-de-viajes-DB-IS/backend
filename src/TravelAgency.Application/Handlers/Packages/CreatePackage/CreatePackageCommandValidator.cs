@@ -40,8 +40,3 @@ public class CreatePackageCommandValidator : AbstractValidator<CreatePackageComm
         return excursions.All(excursion => excursion.ArrivalDate >= arrivalDate && excursion.DepartureDate <= departureDate) && excursions.All(excursion => excursion.AgencyId == agencyId);
     }
 }
-
-// GetFacilities
-// PostFacilities
-// DeleteFacilities
-// UpdateFacilities
