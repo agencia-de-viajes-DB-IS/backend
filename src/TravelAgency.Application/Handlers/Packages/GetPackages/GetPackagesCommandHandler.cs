@@ -19,25 +19,26 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         };
 
         var response = (await packageRepo.FindAllAsync(includes: packageIncludes))
-            .Select(package => new PackageResponse(
-                package.Code.ToString(),
-                package.Description,
-                package.Price,
-                package.ArrivalDate,
-                package.DepartureDate,
-                package.Facilities!.Select(facility => new FacilityResponse(
+            .Select(package => new PackageResponse
+            {                
+                Code = package.Code.ToString(),
+                Description = package.Description,
+                Price = package.Price,
+                ArrivalDate = package.ArrivalDate,
+                DepartureDate = package.DepartureDate,
+                Facilities = package.Facilities!.Select(facility => new FacilityResponse(
                     facility.Id,
                     facility.Name,
                     facility.Description
                 )),
-                package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
+                ExtendedExcursions = package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,
                     excursion.DepartureDate
                 ))
-        ));
+        });
         return response;
     }
 }
