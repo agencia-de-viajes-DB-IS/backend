@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using TravelAgency.Domain.Common.Exceptions;
 
-namespace FastBubberDinner.Api.Middleware;
+namespace TravelAgency.Api.Middlewares;
 
 public class ErrorHandlingMiddleware
 {
