@@ -4,10 +4,10 @@ POST  {{host}}/packages/
 Content-Type: application/json
 
 {
-  "description": "string",
+  "description": "Aventuras en la presa Zaza",
   "price": 0,
   "arrivalDate": "2024-03-19T03:28:45.548Z",
-  "departureDate": "2024-03-19T03:28:45.548Z",
+  "departureDate": "2024-03-29T03:28:45.548Z",
   "facilityIds": [],
   "extendedExcursionIds": []
 }
