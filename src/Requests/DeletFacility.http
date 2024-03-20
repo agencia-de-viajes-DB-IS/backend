@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE {{host}}/facilities/
+Content-Type: application/json
+
+{
+  "id": 3
+}
