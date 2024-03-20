@@ -1,12 +1,11 @@
 using FastEndpoints;
-using TravelAgency.Api.Contracts.Authentication;
-using TravelAgency.Application.Authentication.Common;
-using TravelAgency.Application.Authentication.Queries.Login;
 using MediatR;
+using TravelAgency.Application.Handlers.Authentication.Login;
+using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 
-public class LoginEndpoint : Endpoint<LoginQuery, AuthenticationResult>
+public class LoginEndpoint : Endpoint<LoginQuery, AuthenticationResponse>
 {
     private readonly ISender _mediator;
 
