@@ -1,0 +1,12 @@
+@host = http://localhost:5000
+
+PUT  {{host}}/packages/
+Content-Type: application/json
+
+{
+  "code": "11ef1efb-da67-424c-ae99-dc91cc3b2904",
+  "description": "Aventuras en el Río Toa",
+  "price": 250,
+  "facilityIds": [],
+  "extendedExcursionIds": []
+}

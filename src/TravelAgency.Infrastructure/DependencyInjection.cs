@@ -16,6 +16,7 @@ namespace TravelAgency.Infrastructure;
 
 public static class DependencyInjection
 {
+    private static bool _isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfigurationManager configuration)
     {
         services.AddAuth(configuration);
@@ -23,7 +24,10 @@ public static class DependencyInjection
 
         services.AddDbContext<AeroSkullDbContext>(options =>
         {
-            options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!);
+            if(_isDevelopment)
+                options.UseInMemoryDatabase("AeroSkull");
+            else
+                options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!);
         });
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         

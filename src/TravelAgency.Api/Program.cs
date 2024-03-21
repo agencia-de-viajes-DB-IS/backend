@@ -1,7 +1,7 @@
-using FastBubberDinner.Api.Middleware;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using TravelAgency.Api;
+using TravelAgency.Api.Middlewares;
 using TravelAgency.Application;
 using TravelAgency.Infrastructure;
 using TravelAgency.Infrastructure.Persistence.SeedData;
