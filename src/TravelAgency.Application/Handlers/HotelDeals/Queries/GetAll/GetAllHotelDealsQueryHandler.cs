@@ -4,7 +4,7 @@ using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Application.Responses;
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Handlers.HotelsDeals.GetHotelsDeals.Queries.GetAll;
+namespace TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
 
 public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, IEnumerable<HotelsDealsResponse>>
 {

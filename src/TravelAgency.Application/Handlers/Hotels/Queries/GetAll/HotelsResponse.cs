@@ -1,7 +1,6 @@
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Responses;
-
+namespace TravelAgency.Application.Handlers.Hotels.Queries.GetAll; 
 public record HotelsResponse(
     string Name, 
     string Address,

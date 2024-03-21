@@ -1,6 +1,5 @@
 using MediatR;
-using TravelAgency.Application.Responses;
 
-namespace TravelAgency.Application.Handlers.HotelsDeals.GetHotelsDeals.Queries.GetAll;
+namespace TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
 
 public record GetHotelsDealsQuery : IRequest<IEnumerable<HotelsDealsResponse>>;

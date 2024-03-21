@@ -1,6 +1,6 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.Hotels.GetHotels.Queries.GetAll;
+using TravelAgency.Application.Handlers.Hotels.Queries.GetAll;
 using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Hotels;
