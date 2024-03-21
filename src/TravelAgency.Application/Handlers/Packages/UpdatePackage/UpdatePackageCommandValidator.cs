@@ -1,7 +1,7 @@
 using FluentValidation;
-using TravelAgency.Application.Handlers.Packages.UpdatePackage;
 using TravelAgency.Application.Interfaces.Persistence;
-namespace TravelAgency.Application.Handlers.Packages.CreatePackage;
+
+namespace TravelAgency.Application.Handlers.Packages.UpdatePackage;
 
 public class UpdatePackageCommandValidator : AbstractValidator<UpdatePackageCommand>
 {

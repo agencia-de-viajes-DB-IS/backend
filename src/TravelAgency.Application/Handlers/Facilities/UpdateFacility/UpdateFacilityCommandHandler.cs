@@ -1,15 +1,18 @@
+using System.Linq.Expressions;
 using MediatR;
+using TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 using TravelAgency.Application.Handlers.Facilities.GetFacilities;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Handlers.Facilities.CreateFacility;
+namespace TravelAgency.Application.Handlers.Facilities.UpdateFacility;
 
-public class CreateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<CreateFacilityCommand, FacilityResponse>
+public class UpdateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<UpdateFacilityCommand, FacilityResponse>
 {
-    public async Task<FacilityResponse> Handle(CreateFacilityCommand request, CancellationToken cancellationToken)
+    public async Task<FacilityResponse> Handle(UpdateFacilityCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateFacilityCommandValidator();
+        var validator = new UpdateFacilityCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (validationResult.Errors.Count > 0)
@@ -28,13 +31,17 @@ public class CreateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHan
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
 
-        var facility = new Facility()
+        var facilityFilter = new Expression<Func<Facility, bool>>[]
         {
-            Name = request.Name,
-            Description = request.Description
+            facility => facility.Id == request.Id
         };
 
-        await facilityRepo.InsertAsync(facility);
+        var facility = (await facilityRepo.FindAllAsync(filters: facilityFilter)).FirstOrDefault() ?? 
+            throw new TravelAgencyException("Facility was not found", $"Facility with Id {request.Id} was not found", 404);
+
+        facility.Name = request.Name;
+        facility.Description = request.Description;
+        await facilityRepo.UpdateAsync(facility);
         await _unitOfWork.SaveAsync();
 
         var response = new FacilityResponse()
