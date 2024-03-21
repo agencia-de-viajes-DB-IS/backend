@@ -10,8 +10,8 @@ public class PackageResponse : BaseResponse
     public decimal Price {get; set;}
     public DateTime ArrivalDate {get; set;}
     public DateTime DepartureDate {get; set;}
-    public IEnumerable<FacilityResponse>? Facilities {get; set;}
-    public IEnumerable<ExtendedExcursionResponse>? ExtendedExcursions {get; set;}
+    public FacilityResponse[]? Facilities {get; set;}
+    public ExtendedExcursionResponse[]? ExtendedExcursions {get; set;}
 }
 
 

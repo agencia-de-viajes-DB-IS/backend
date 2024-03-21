@@ -3,4 +3,4 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 
-public record GetPackagesCommand : IRequest<IEnumerable<PackageResponse>>;
+public record GetPackagesCommand : IRequest<PackageResponse[]>;

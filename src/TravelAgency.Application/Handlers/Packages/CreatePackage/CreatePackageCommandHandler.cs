@@ -71,14 +71,14 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
                 Id = facility.Id,
                 Name = facility.Name,
                 Description = facility.Description
-            }),
+            }).ToArray(),
             ExtendedExcursions = extendedExcursions.Select(excursion => new ExtendedExcursionResponse(
                 excursion.Id,
                 excursion.Location,
                 excursion.Price,
                 excursion.ArrivalDate,
                 excursion.DepartureDate
-            ))
+            )).ToArray()
         };
 
         return response;
