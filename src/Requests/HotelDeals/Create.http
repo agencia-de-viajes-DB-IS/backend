@@ -1,0 +1,13 @@
+@host = http://localhost:5000
+
+POST {{host}}/hotelDeals/
+Content-Type: application/json
+
+{
+    "name":"Some Name",
+    "description":"Some Description",
+    "address": "Some Address", 
+    "price": 10, 
+    "departureDate" : "2024-03-19T03:28:45.548Z",
+    "arrivalDate": "2024-03-19T03:28:45.548Z"
+}
