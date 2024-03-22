@@ -8,7 +8,7 @@ public class DeleteExcursionEndpoint(ISender mediator) : Endpoint<DeleteExcursio
 {
     public override void Configure()
     {
-        Delete("/excursions/delete");
+        Delete("/excursions");
         AllowAnonymous();
     }
 

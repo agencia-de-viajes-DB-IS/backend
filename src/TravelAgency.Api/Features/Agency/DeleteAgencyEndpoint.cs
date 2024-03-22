@@ -9,7 +9,7 @@ public class DeleteAgencyEndpoint(ISender mediator) : Endpoint<DeleteAgencyComma
 {
     public override void Configure()
     {
-        Delete("/agencies/delete");
+        Delete("/agencies");
         AllowAnonymous();
     }
 

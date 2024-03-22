@@ -8,7 +8,7 @@ public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<IE
 {
     public override void Configure()
     {
-        Get("/excursions/");
+        Get("/excursions");
         // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
     }

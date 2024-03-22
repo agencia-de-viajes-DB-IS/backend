@@ -8,7 +8,7 @@ public class CreateAgencyEndpoint(ISender mediator) : Endpoint<CreateAgencyComma
 {
     public override void Configure()
     {
-        Post("/agencies/create");
+        Post("/agencies");
         AllowAnonymous();
     }
 

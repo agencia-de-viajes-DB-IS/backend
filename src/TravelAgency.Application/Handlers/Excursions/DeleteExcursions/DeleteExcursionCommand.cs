@@ -2,4 +2,7 @@ using MediatR;
 
 namespace TravelAgency.Application.Handlers.Excursions.DeleteExcursions;
 
-public record DeleteExcursionCommand( Guid Id) : IRequest<DeleteExcursionResponse>;
+public class DeleteExcursionCommand : IRequest<DeleteExcursionResponse>
+{
+    public required Guid Id {get;set;}
+}

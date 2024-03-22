@@ -8,7 +8,7 @@ public class CreateExcursionEndpoint(ISender mediator) : Endpoint<CreateExcursio
 {
     public override void Configure()
     {
-        Post("/excursions/create");
+        Post("/excursions");
         AllowAnonymous();
     }
 

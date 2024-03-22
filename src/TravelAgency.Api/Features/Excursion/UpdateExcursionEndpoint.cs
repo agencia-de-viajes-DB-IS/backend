@@ -1,6 +1,5 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.Excursions.GetExcursions;
 using TravelAgency.Application.Handlers.Excursions.UpdateExcursions;
 
 namespace TravelAgency.Api.Features.Excursion;
@@ -9,7 +8,7 @@ public class UpdateExcursionsEndpoint(ISender mediator) : Endpoint<UpdateExcursi
 {
     public override void Configure()
     {
-        Put("/excursions/update");
+        Put("/excursions");
         // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
     }

@@ -8,7 +8,7 @@ public class UpdateAgencyEndpoint(ISender mediator) : Endpoint<UpdateAgencyComma
 {
     public override void Configure()
     {
-        Put("/agencies/update");
+        Put("/agencies");
         AllowAnonymous();
     }
 
