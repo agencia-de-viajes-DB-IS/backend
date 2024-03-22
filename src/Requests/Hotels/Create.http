@@ -6,6 +6,7 @@ Content-Type: application/json
 {
     "name":"hola",
     "description":"Some ",
-    "address": "address"
+    "address": "address",
+    "category": 2
 
 }

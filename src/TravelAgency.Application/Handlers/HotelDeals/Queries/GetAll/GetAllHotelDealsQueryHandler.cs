@@ -26,6 +26,7 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, I
         var response = (await hotelsDealsRepo.FindAllAsync(includes: hotelsDealsIncludes))
             .Select(HotelsDeals => new HotelsDealsResponse(
                 HotelsDeals.Id,
+                HotelsDeals.HotelId,
                 HotelsDeals.Description, 
                 HotelsDeals.Price, 
                 HotelsDeals.ArrivalDate, 

@@ -11,4 +11,4 @@ public record CreateHotelDealCommand(
     Guid HotelId,
     decimal Price,
     string? Description
-) : IRequest<HotelDealResponse>{}
+) : IRequest<CreateHotelDealResponse>{}
