@@ -9,4 +9,4 @@ public record CreateHotelCommand(
     string Address, 
     int Category, 
     ICollection<HotelDeal> Deals
-) : IRequest<HotelResponse>{}
+) : IRequest<CreateHotelResponse>{}

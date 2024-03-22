@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Hotels.Commands.Create;
 
 namespace TravelAgency.Api.Features.Hotel;
 
-public class CreateHotelEndpoint(ISender _mediator) : Endpoint<CreateHotelCommand, HotelResponse>
+public class CreateHotelEndpoint(ISender _mediator) : Endpoint<CreateHotelCommand, CreateHotelResponse>
 {
     public override void Configure()
     {
