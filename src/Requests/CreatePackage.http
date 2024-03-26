@@ -4,6 +4,7 @@ POST  {{host}}/packages/
 Content-Type: application/json
 
 {
+  "name": "Zaza Adventures",
   "description": "Aventuras en la presa Zaza",
   "price": 100,
   "arrivalDate": "2024-03-19T03:28:45.548Z",

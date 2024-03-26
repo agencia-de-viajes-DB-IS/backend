@@ -41,6 +41,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         var facilities = (await facilityRepo.FindAllAsync(filters: facilityFilter)).ToList();
         var extendedExcursions = (await extendedExcursionRepo.FindAllAsync(filters: excursionFilter)).ToList();
 
+        package.Name = request.Name;
         package.Description = request.Description;
         package.Price = request.Price;
         package.Facilities = facilities;

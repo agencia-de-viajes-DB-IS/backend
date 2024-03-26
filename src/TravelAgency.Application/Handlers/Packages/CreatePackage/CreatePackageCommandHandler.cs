@@ -34,6 +34,7 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 
         var package = new Package()
         {
+            Name = request.Name,
             Description = request.Description,
             Price = request.Price,
             ArrivalDate = request.ArrivalDate,
