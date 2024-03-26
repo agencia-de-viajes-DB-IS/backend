@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAgency.Infrastructure.Persistence;
 
@@ -10,9 +11,11 @@ using TravelAgency.Infrastructure.Persistence;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(AeroSkullDbContext))]
-    partial class AeroSkullDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240326153921_Track Marketing Agents with AgencyId")]
+    partial class TrackMarketingAgentswithAgencyId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
