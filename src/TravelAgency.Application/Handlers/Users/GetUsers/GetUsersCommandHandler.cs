@@ -11,6 +11,7 @@ public class GetUsersCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<Ge
         var userRepo = unitOfWork.GetRepository<Domain.Entities.User>();
         var response = (await userRepo.FindAllAsync())
             .Select(user => new UserResponse(
+                user.Id,
                 user.FirstName,
                 user.LastName,
                 user.Email

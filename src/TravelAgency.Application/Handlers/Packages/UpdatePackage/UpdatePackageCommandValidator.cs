@@ -1,15 +1,13 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
 using TravelAgency.Application.Interfaces.Persistence;
 
 namespace TravelAgency.Application.Handlers.Packages.UpdatePackage;
 
-public class UpdatePackageCommandValidator : AbstractValidator<UpdatePackageCommand>
+public class UpdatePackageCommandValidator : TravelAgencyAbstractValidator<UpdatePackageCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    public UpdatePackageCommandValidator(IUnitOfWork unitOfWork)
+    public UpdatePackageCommandValidator()
     {
-        _unitOfWork = unitOfWork;
-
         // Validation process
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Description is required")
