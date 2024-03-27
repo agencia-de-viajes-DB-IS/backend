@@ -11,6 +11,13 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
     public async Task<PackageResponse[]> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
     {
         var packageRepo = _unitOfWork.GetRepository<Package>();
+
+        var packageFilters = new Expression<Func<Package, bool>>[]
+        {
+            package => request.PriceFilter == default || package.Price == request.PriceFilter,
+            package => request.ArrivalDateFilter == default || package.ArrivalDate == request.ArrivalDateFilter,
+            package => request.DepartureDateFilter == default || package.DepartureDate == request.DepartureDateFilter
+        };
         
         var packageIncludes = new Expression<Func<Package, object>>[]
         {
@@ -18,7 +25,7 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
             package => package.ExtendedExcursions!
         };
 
-        var response = (await packageRepo.FindAllAsync(includes: packageIncludes))
+        var response = (await packageRepo.FindAllAsync(includes: packageIncludes, filters: packageFilters))
             .Select(package => new PackageResponse
             {                
                 Code = package.Code.ToString(),
