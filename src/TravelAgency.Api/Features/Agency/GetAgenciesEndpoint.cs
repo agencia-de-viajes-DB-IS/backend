@@ -2,9 +2,9 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
-namespace TravelAgency.Api.Features.Agency.Queries;
+namespace TravelAgency.Api.Features.Agency;
 
-public class GetAgenciesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<AgencyResponse>>
+public class GetAgenciesEndpoint(ISender mediator) : EndpointWithoutRequest<IEnumerable<AgencyResponse>>
 {
     public override void Configure()
     {
@@ -16,7 +16,7 @@ public class GetAgenciesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEn
     public override async Task HandleAsync(CancellationToken ct)
     {
         var command = new GetAgenciesCommand();
-        var response = await _mediator.Send(command, ct);
+        var response = await mediator.Send(command, ct);
         await SendOkAsync(response, ct);
     }
 }

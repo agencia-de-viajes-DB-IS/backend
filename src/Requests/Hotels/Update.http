@@ -1,0 +1,10 @@
+@host = http://localhost:5000
+
+PUT {{host}}/hotels
+Content-Type: application/json
+
+{
+    "name":"hola",
+    "category": 2,
+    "id": "aa714f89-aeb8-44f1-9e6f-53dd842dfdac"
+}

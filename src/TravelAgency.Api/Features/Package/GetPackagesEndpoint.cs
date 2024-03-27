@@ -5,7 +5,7 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Package;
 
-public class GetPackagesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<PackageResponse>>
+public class GetPackagesEndpoint(ISender _mediator) : EndpointWithoutRequest<PackageResponse[]>
 {
     public override void Configure()
     {

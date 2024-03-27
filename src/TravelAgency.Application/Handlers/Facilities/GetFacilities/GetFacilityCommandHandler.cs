@@ -4,9 +4,9 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Facilities.GetFacilities;
 
-public class GetFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetFacilitiesCommand, IEnumerable<FacilityResponse>>
+public class GetFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetFacilitiesCommand, FacilityResponse[]>
 {
-    public async Task<IEnumerable<FacilityResponse>> Handle(GetFacilitiesCommand request, CancellationToken cancellationToken)
+    public async Task<FacilityResponse[]> Handle(GetFacilitiesCommand request, CancellationToken cancellationToken)
     {
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
 
@@ -17,7 +17,7 @@ public class GetFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
             Id = facility.Id,
             Name = facility.Name,
             Description = facility.Description
-        });
+        }).ToArray();
 
         return response;
     }

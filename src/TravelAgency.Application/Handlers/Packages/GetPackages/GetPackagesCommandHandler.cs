@@ -6,9 +6,9 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 
-public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, IEnumerable<PackageResponse>>
+public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, PackageResponse[]>
 {
-    public async Task<IEnumerable<PackageResponse>> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
+    public async Task<PackageResponse[]> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
     {
         var packageRepo = _unitOfWork.GetRepository<Package>();
         
@@ -31,15 +31,15 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                     Id = facility.Id,
                     Name = facility.Name,
                     Description = facility.Description
-                }),
+                }).ToArray(),
                 ExtendedExcursions = package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,
                     excursion.DepartureDate
-                ))
-        });
+                )).ToArray()
+        }).ToArray();
         return response;
     }
 }
