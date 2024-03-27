@@ -4,9 +4,9 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Users.GetUsers;
 
-public class GetUsersCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetUsersCommand, IEnumerable<UserResponse>>
+public class GetUsersCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetUsersCommand, UserResponse[]>
 {
-    public async Task<IEnumerable<UserResponse>> Handle(GetUsersCommand request, CancellationToken cancellationToken)
+    public async Task<UserResponse[]> Handle(GetUsersCommand request, CancellationToken cancellationToken)
     {
         var userRepo = unitOfWork.GetRepository<Domain.Entities.User>();
         var response = (await userRepo.FindAllAsync())
@@ -15,7 +15,7 @@ public class GetUsersCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<Ge
                 user.FirstName,
                 user.LastName,
                 user.Email
-        ));
+        )).ToArray();
         return response;
     }
 }

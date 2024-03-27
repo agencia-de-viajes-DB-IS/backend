@@ -3,4 +3,4 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Users.GetUsers;
 
-public record GetUsersCommand : IRequest<IEnumerable<UserResponse>>;
+public record GetUsersCommand : IRequest<UserResponse[]>;
