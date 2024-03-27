@@ -1,0 +1,16 @@
+@host = http://localhost:5000
+
+POST  {{host}}/reservation/package
+Content-Type: application/json
+
+{
+  "Airline": "Air Europa",
+  "price": 300,
+  "reservationDate": "2024-03-19T03:28:45.548Z",
+  "userId": "01833a7e-be7c-4c90-b144-45afd925bcb9",
+  "packageId": "4c5cadff-803c-4675-8a23-2a22ef1fac35",
+  "touristIds": []
+}
+
+
+

@@ -9,7 +9,7 @@ GET {{host}}/packages?priceFilter=0&arrivalDateFilter=2024-11-01T00%3A00%3A00&de
 
 ###
 
-GET {{host}}/packages?priceFilter=52&arrivalDateFilter=01%2F01%2F0001%2000%3A00%3A00&departureDateFilter=01%2F01%2F0001%2000%3A00%3A00
+GET {{host}}/packages?priceFilter=100&arrivalDateFilter=01%2F01%2F0001%2000%3A00%3A00&departureDateFilter=01%2F01%2F0001%2000%3A00%3A00
 
 ###
 
