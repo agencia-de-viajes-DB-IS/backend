@@ -62,7 +62,6 @@ public class AeroSkullDbContext : DbContext
         modelBuilder.Entity<PackageReservation>()
         .HasIndex(reservation => new
         {
-            reservation.AgencyId,
             reservation.UserId,
             reservation.PackageId
         })

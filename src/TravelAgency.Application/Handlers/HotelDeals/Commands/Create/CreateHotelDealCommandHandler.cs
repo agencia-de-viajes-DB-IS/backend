@@ -26,6 +26,7 @@ public class CreateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
         var s = request;  
         var HotelDeal = new HotelDeal()
         {
+            Name = request.Name,
             ArrivalDate = request.ArrivalDate,
             DepartureDate = request.DepartureDate,
             Description = request.Description ?? "No description",

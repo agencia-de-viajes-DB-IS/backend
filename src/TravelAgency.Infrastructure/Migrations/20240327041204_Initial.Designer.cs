@@ -11,8 +11,8 @@ using TravelAgency.Infrastructure.Persistence;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(AeroSkullDbContext))]
-    [Migration("20240326153921_Track Marketing Agents with AgencyId")]
-    partial class TrackMarketingAgentswithAgencyId
+    [Migration("20240327041204_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,6 +280,10 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("HotelId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -341,6 +345,10 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -353,9 +361,6 @@ namespace TravelAgency.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AgencyId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Airline")
@@ -378,9 +383,7 @@ namespace TravelAgency.Infrastructure.Migrations
 
                     b.HasIndex("PackageId");
 
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("AgencyId", "UserId", "PackageId")
+                    b.HasIndex("UserId", "PackageId")
                         .IsUnique();
 
                     b.ToTable("PackageReservations");
@@ -619,12 +622,6 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.PackageReservation", b =>
                 {
-                    b.HasOne("TravelAgency.Domain.Entities.Agency", "Agency")
-                        .WithMany("PackageReservations")
-                        .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TravelAgency.Domain.Entities.Package", "Package")
                         .WithMany("PackageReservations")
                         .HasForeignKey("PackageId")
@@ -636,8 +633,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Agency");
 
                     b.Navigation("Package");
 
@@ -685,8 +680,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("AgencyRelatedHotelDeals");
 
                     b.Navigation("Excursions");
-
-                    b.Navigation("PackageReservations");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.AgencyRelatedHotelDeal", b =>

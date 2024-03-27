@@ -10,5 +10,6 @@ public record CreateHotelDealCommand(
     ICollection<ExtendedExcursion>? ExtendedExcursions,
     Guid HotelId,
     decimal Price,
-    string? Description
+    string? Description,
+    string Name
 ) : IRequest<CreateHotelDealResponse>{}

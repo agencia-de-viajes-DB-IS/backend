@@ -8,8 +8,6 @@ public class PackageReservation
     public DateTime ReservationDate { get; set; }
 
     // Relational Properties
-    public Guid AgencyId { get; set; }
-    public Agency Agency { get; set; } = null!;
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
     public Guid PackageId { get; set; }
