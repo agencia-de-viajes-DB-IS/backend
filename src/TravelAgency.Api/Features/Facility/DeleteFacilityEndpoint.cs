@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Facilities.DeleteFacility;
 
 namespace TravelAgency.Api.Features.Facility;
 
-public class DeletFacilityEndpoint(ISender _mediator) : Endpoint<DeleteFacilityCommand, DeleteFacilityResponse>
+public class DeleteFacilityEndpoint(ISender _mediator) : Endpoint<DeleteFacilityCommand, DeleteFacilityResponse>
 {
     public override void Configure()
     {
