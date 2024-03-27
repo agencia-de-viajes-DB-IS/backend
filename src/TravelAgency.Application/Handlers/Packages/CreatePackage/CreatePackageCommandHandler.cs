@@ -11,22 +11,9 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 {
     public async Task<PackageResponse> Handle(CreatePackageCommand request, CancellationToken cancellationToken)
     {
+        // Validate request
         var validator = new CreatePackageCommandValidator(_unitOfWork);
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (validationResult.Errors.Count > 0)
-        {
-            var failedResponse = new PackageResponse
-            {
-                Success = false,
-                ValidationErrors = new List<string>()
-            };
-
-            foreach (var error in validationResult.Errors)
-                failedResponse.ValidationErrors.Add(error.ErrorMessage);
-
-            return failedResponse;
-        }
+        await validator.ValidateAsync(request, cancellationToken);
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
         var extendedExcursionRepo = _unitOfWork.GetRepository<ExtendedExcursion>();
@@ -47,6 +34,7 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 
         var package = new Package()
         {
+            Name = request.Name,
             Description = request.Description,
             Price = request.Price,
             ArrivalDate = request.ArrivalDate,

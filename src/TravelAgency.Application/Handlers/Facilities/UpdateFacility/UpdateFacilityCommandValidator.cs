@@ -1,8 +1,9 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
 
 namespace TravelAgency.Application.Handlers.Facilities.UpdateFacility;
 
-public class UpdateFacilityCommandValidator : AbstractValidator<UpdateFacilityCommand>
+public class UpdateFacilityCommandValidator : TravelAgencyAbstractValidator<UpdateFacilityCommand>
 {
     public UpdateFacilityCommandValidator()
     {

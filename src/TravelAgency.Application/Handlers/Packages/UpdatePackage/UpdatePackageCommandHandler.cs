@@ -12,22 +12,9 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 {
     public async Task<PackageResponse> Handle(UpdatePackageCommand request, CancellationToken cancellationToken)
     {
-        var validator = new UpdatePackageCommandValidator(_unitOfWork);
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (validationResult.Errors.Count > 0)
-        {
-            var failedResponse = new PackageResponse
-            {
-                Success = false,
-                ValidationErrors = new List<string>()
-            };
-
-            foreach (var error in validationResult.Errors)
-                failedResponse.ValidationErrors.Add(error.ErrorMessage);
-
-            return failedResponse;
-        }
+        // Validate request
+        var validator = new UpdatePackageCommandValidator();
+        await validator.ValidateAsync(request, cancellationToken);
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
         var extendedExcursionRepo = _unitOfWork.GetRepository<ExtendedExcursion>();
@@ -54,6 +41,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         var facilities = (await facilityRepo.FindAllAsync(filters: facilityFilter)).ToList();
         var extendedExcursions = (await extendedExcursionRepo.FindAllAsync(filters: excursionFilter)).ToList();
 
+        package.Name = request.Name;
         package.Description = request.Description;
         package.Price = request.Price;
         package.Facilities = facilities;

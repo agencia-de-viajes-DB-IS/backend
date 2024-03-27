@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE {{host}}/hotelDeals/
+Content-Type: application/json
+
+{
+    "id":"f7930cf7-6068-4696-9b10-7ec84fb65d32"
+}

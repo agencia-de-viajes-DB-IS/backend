@@ -1,10 +1,11 @@
 using System.Linq.Expressions;
 using FluentValidation;
+using TravelAgency.Application.Common;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
 namespace TravelAgency.Application.Handlers.Packages.CreatePackage;
 
-public class CreatePackageCommandValidator : AbstractValidator<CreatePackageCommand>
+public class CreatePackageCommandValidator : TravelAgencyAbstractValidator<CreatePackageCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
     public CreatePackageCommandValidator(IUnitOfWork unitOfWork)
