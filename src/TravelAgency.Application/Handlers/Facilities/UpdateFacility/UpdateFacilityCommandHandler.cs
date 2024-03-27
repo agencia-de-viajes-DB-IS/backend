@@ -12,22 +12,9 @@ public class UpdateFacilityCommandHandler(IUnitOfWork _unitOfWork) : IRequestHan
 {
     public async Task<FacilityResponse> Handle(UpdateFacilityCommand request, CancellationToken cancellationToken)
     {
+        // Validate request
         var validator = new UpdateFacilityCommandValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
-        if (validationResult.Errors.Count > 0)
-        {
-            var failedResponse = new FacilityResponse
-            {
-                Success = false,
-                ValidationErrors = new List<string>()
-            };
-
-            foreach (var error in validationResult.Errors)
-                failedResponse.ValidationErrors.Add(error.ErrorMessage);
-
-            return failedResponse;
-        }
+        await validator.ValidateAsync(request, cancellationToken);
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();
 

@@ -5,7 +5,7 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.User;
 
-public class GetUsersEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<UserResponse>>
+public class GetUsersEndpoint(ISender _mediator) : EndpointWithoutRequest<UserResponse[]>
 {
     public override void Configure()
     {

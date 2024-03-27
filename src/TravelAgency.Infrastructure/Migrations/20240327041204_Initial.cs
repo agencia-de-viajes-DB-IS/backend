@@ -66,6 +66,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     Code = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -102,7 +103,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     Email = table.Column<string>(type: "longtext", nullable: false),
                     Password = table.Column<string>(type: "longtext", nullable: false),
                     Role_Name = table.Column<string>(type: "longtext", nullable: false),
-                    Role_Permissions = table.Column<string>(type: "longtext", nullable: false)
+                    Role_Permissions = table.Column<string>(type: "longtext", nullable: false),
+                    AgencyId = table.Column<Guid>(type: "char(36)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -137,6 +139,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -188,19 +191,12 @@ namespace TravelAgency.Infrastructure.Migrations
                     Airline = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReservationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AgencyId = table.Column<Guid>(type: "char(36)", nullable: false),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false),
                     PackageId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PackageReservations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PackageReservations_Agencies_AgencyId",
-                        column: x => x.AgencyId,
-                        principalTable: "Agencies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PackageReservations_Packages_PackageId",
                         column: x => x.PackageId,
@@ -519,20 +515,15 @@ namespace TravelAgency.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PackageReservations_AgencyId_UserId_PackageId",
-                table: "PackageReservations",
-                columns: new[] { "AgencyId", "UserId", "PackageId" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PackageReservations_PackageId",
                 table: "PackageReservations",
                 column: "PackageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PackageReservations_UserId",
+                name: "IX_PackageReservations_UserId_PackageId",
                 table: "PackageReservations",
-                column: "UserId");
+                columns: new[] { "UserId", "PackageId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PackageReservationTourist_TouristsId",

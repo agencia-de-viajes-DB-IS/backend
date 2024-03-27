@@ -1,11 +1,10 @@
 using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Packages.GetPackages;
-using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Package;
 
-public class GetPackagesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<PackageResponse>>
+public class GetPackagesEndpoint(ISender _mediator) : Endpoint<GetPackagesCommand,PackageResponse[]>
 {
     public override void Configure()
     {
@@ -13,9 +12,8 @@ public class GetPackagesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEn
         // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
     }
-    public override async Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(GetPackagesCommand command, CancellationToken ct)
     {
-        var command = new GetPackagesCommand();
         var response = await _mediator.Send(command, ct);
         await SendOkAsync(response, ct);
     }

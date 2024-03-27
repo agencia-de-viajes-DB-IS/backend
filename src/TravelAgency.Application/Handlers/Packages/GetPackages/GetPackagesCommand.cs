@@ -1,6 +1,9 @@
 using MediatR;
-using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 
-public record GetPackagesCommand : IRequest<IEnumerable<PackageResponse>>;
+public record GetPackagesCommand(
+    decimal PriceFilter,
+    DateTime ArrivalDateFilter,
+    DateTime DepartureDateFilter
+) : IRequest<PackageResponse[]>;

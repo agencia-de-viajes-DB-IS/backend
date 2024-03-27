@@ -2,26 +2,19 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 
-namespace TravelAgency.Api.Features.Agency.Commands;
+namespace TravelAgency.Api.Features.Agency;
 
-public class CreateAgencyEndpoint : Endpoint<CreateAgencyCommand, CreateAgencyResponse>
+public class CreateAgencyEndpoint(ISender mediator) : Endpoint<CreateAgencyCommand, CreateAgencyResponse>
 {
-    private readonly ISender _mediator;
-
-    public CreateAgencyEndpoint(ISender mediator)
-    {
-        _mediator = mediator;
-    }
-
     public override void Configure()
     {
-        Post("/agencies/create");
+        Post("/agencies");
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(CreateAgencyCommand request, CancellationToken ct)
     {
-        var response = await _mediator.Send(request, ct);
+        var response = await mediator.Send(request, ct);
         await SendOkAsync(response, ct);
     }
 }

@@ -1,8 +1,9 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
 
 namespace TravelAgency.Application.Handlers.Facilities.CreateFacility;
 
-public class CreateFacilityCommandValidator : AbstractValidator<CreateFacilityCommand>
+public class CreateFacilityCommandValidator : TravelAgencyAbstractValidator<CreateFacilityCommand>
 {
     public CreateFacilityCommandValidator()
     {

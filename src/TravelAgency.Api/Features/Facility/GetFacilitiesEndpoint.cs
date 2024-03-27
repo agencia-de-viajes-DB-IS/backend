@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Facilities.GetFacilities;
 
 namespace TravelAgency.Api.Features.Facility;
 
-public class GetFacilitiesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<FacilityResponse>>
+public class GetFacilitiesEndpoint(ISender _mediator) : EndpointWithoutRequest<FacilityResponse[]>
 {
     public override void Configure()
     {

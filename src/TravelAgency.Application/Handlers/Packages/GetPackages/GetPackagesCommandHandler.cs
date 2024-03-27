@@ -6,11 +6,18 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 
-public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, IEnumerable<PackageResponse>>
+public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, PackageResponse[]>
 {
-    public async Task<IEnumerable<PackageResponse>> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
+    public async Task<PackageResponse[]> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
     {
         var packageRepo = _unitOfWork.GetRepository<Package>();
+
+        var packageFilters = new Expression<Func<Package, bool>>[]
+        {
+            package => request.PriceFilter == default || package.Price == request.PriceFilter,
+            package => request.ArrivalDateFilter == default || package.ArrivalDate == request.ArrivalDateFilter,
+            package => request.DepartureDateFilter == default || package.DepartureDate == request.DepartureDateFilter
+        };
         
         var packageIncludes = new Expression<Func<Package, object>>[]
         {
@@ -18,7 +25,7 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
             package => package.ExtendedExcursions!
         };
 
-        var response = (await packageRepo.FindAllAsync(includes: packageIncludes))
+        var response = (await packageRepo.FindAllAsync(includes: packageIncludes, filters: packageFilters))
             .Select(package => new PackageResponse
             {                
                 Code = package.Code.ToString(),
@@ -31,15 +38,15 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                     Id = facility.Id,
                     Name = facility.Name,
                     Description = facility.Description
-                }),
+                }).ToArray(),
                 ExtendedExcursions = package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,
                     excursion.DepartureDate
-                ))
-        });
+                )).ToArray()
+        }).ToArray();
         return response;
     }
 }
