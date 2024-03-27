@@ -8,15 +8,16 @@ using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
 using Xunit;
 
-namespace TravelAgency.Application.UnitTests.Authentication.Login;
+namespace TravelAgency.Application.UnitTests.Authentication;
 
 public class LoginCommandHandlerTest
 {
+    private readonly TestGenerator _generator = new();
     [Fact]
     public async void HandleLoginQuery_WheEmailIsRegisteredAndPasswordIsCorrect_ShouldCompleteOk()
     {
         // Arrange
-        var user = TestGenerator.GenerateUser();
+        var user = _generator.GenerateUser();
         var command = new LoginQuery(user.Email, user.Password);
         const string TOKEN = "jwt_token";
 
@@ -24,7 +25,7 @@ public class LoginCommandHandlerTest
         var unitOfWorkMocked = Substitute.For<IUnitOfWork>();
         var userRepoMocked = Substitute.For<IGenericRepository<User>>();
         var jwtGeneratorMock = Substitute.For<IJwtTokenGenerator>();
-
+        
         var userFilter = new Expression<Func<User, bool>>[]
         {
             u => u.Email == command.Email
@@ -48,7 +49,7 @@ public class LoginCommandHandlerTest
     public async void HandleLoginQuery_WheEmailIsRegisteredAndPasswordIsNotCorrect_ShouldThrowException()
     {
         // Arrange
-        var user = TestGenerator.GenerateUser();
+        var user = _generator.GenerateUser();
         var command = new LoginQuery(user.Email, "wrong_password");
 
         // Mocking services
@@ -74,7 +75,7 @@ public class LoginCommandHandlerTest
     public async void HandleLoginQuery_WheEmailIsNotRegistered_ShouldThrowException()
     {
         // Arrange
-        var user = TestGenerator.GenerateUser();
+        var user = _generator.GenerateUser();
         var command = new LoginQuery(user.Email, user.Password);
 
         // Mocking services

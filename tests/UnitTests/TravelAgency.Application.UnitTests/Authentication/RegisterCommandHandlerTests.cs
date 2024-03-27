@@ -8,10 +8,11 @@ using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
 using Xunit;
 
-namespace TravelAgency.Application.UnitTests.Authentication.Register;
+namespace TravelAgency.Application.UnitTests.Authentication;
 
 public class RegisterCommandHandlerTests
 {
+    private readonly TestGenerator _generator = new TestGenerator();
     [Fact]
     public async void HandleRegisterCommand_WheEmailIsNotRegistered_ShouldCompleteOk()
     {
@@ -57,7 +58,7 @@ public class RegisterCommandHandlerTests
         var jwtGeneratorMock = Substitute.For<IJwtTokenGenerator>();
 
         unitOfWorkMocked.GetRepository<User>().Returns(userRepoMocked);
-        userRepoMocked.FindAsync(filters: Arg.Any<IEnumerable<Expression<Func<User, bool>>>>())!.Returns(Task.FromResult(TestGenerator.GenerateUser()));
+        userRepoMocked.FindAsync(filters: Arg.Any<IEnumerable<Expression<Func<User, bool>>>>())!.Returns(Task.FromResult(_generator.GenerateUser()));
 
         var handler = new RegisterCommandHandler(jwtGeneratorMock, unitOfWorkMocked);
 
