@@ -1,0 +1,9 @@
+@host = http://localhost:5000
+
+POST  {{host}}/facilities/
+Content-Type: application/json
+
+{
+  "name": "Desayuno incluido",
+  "description": "Se brinda desayuno de primera categoría con recetas con un toque de tradición cubana"
+}

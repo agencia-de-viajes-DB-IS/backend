@@ -1,5 +1,6 @@
 using FastEndpoints;
 using TravelAgency.Api.Common;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Api.Features.Authentication.Register;
 

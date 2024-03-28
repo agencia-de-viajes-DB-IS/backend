@@ -1,0 +1,10 @@
+@host = http://localhost:5000
+
+PUT  {{host}}/facilities/
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "Desayuno y almuerzo incluido",
+  "description": "Se brinda desayuno de primera categoría con recetas con un toque de tradición cubana. Los almuerzos al aire libre o bajo el techo de un bohío"
+}

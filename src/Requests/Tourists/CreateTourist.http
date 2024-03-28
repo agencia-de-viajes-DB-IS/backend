@@ -1,0 +1,24 @@
+@host = http://localhost:5000
+
+POST  {{host}}/tourists/
+Content-Type: application/json
+
+{
+  "id": "1234567891011",
+  "firstName": "Ken",
+  "lastName": "Adams",
+  "nationality": "Ireland"
+}
+
+
+###
+
+POST  {{host}}/tourists/
+Content-Type: application/json
+
+{
+  "id": "1110987654321",
+  "firstName": "Rachel",
+  "lastName": "Green",
+  "nationality": "Canada"
+}

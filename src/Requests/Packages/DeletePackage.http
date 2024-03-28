@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE {{host}}/packages/
+Content-Type: application/json
+
+{
+  "code": "8d9009c6-c337-4782-85e0-419b277f92fe"
+}

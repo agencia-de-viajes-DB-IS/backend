@@ -5,12 +5,15 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TravelAgency.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Text.Json;
 
 namespace TravelAgency.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
-    private const string Roles = "roles";
+    private static readonly string Roles = "roles";
     private readonly JwtSettings _jwtSettings;
 
     public JwtTokenGenerator(IOptions<JwtSettings> jwtSettingsOptions)
@@ -30,7 +33,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(Roles, user.Role),
+            new Claim(Roles,JsonSerializer.Serialize(user.Role.Permissions)),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
