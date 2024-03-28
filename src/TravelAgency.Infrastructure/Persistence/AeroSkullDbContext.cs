@@ -18,14 +18,12 @@ public class AeroSkullDbContext : DbContext
     public DbSet<Excursion> Excursions { get; set; }
     public DbSet<AgencyRelatedHotelDeal> AgencyRelatedHotelDeals { get; set; }
     public DbSet<Agency> Agencies { get; set; }
-
+    public DbSet<Role> Roles { get; set; }
     public AeroSkullDbContext(DbContextOptions<AeroSkullDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
-        modelBuilder.Entity<User>()
-            .OwnsOne(user => user.Role);
     
         modelBuilder.Entity<HotelDeal>()
             .HasIndex(hotelDeal => new

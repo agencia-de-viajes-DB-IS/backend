@@ -23,5 +23,6 @@ public static partial class SeedData
         PopulateAgencyRelatedHotelDeals(context);
         PopulateExtendedExcursions(context);
         PopulatePackages(context);
+        PopulateRoles(context); 
     }
 }
