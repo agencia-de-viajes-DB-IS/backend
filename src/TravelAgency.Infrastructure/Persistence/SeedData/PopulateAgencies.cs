@@ -1,5 +1,5 @@
 using TravelAgency.Domain.Entities;
-
+using Bogus;
 namespace TravelAgency.Infrastructure.Persistence.SeedData;
 
 public static partial class SeedData
@@ -9,57 +9,15 @@ public static partial class SeedData
         if (context.Agencies.Any())
             return;
 
-        context.Agencies.AddRange(
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Cuba Verde",
-                Address = "Vedado, Habana",
-                FaxNumber = 5500,
-                Email = "verdeCuba@gmail.com"
-            },
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Caribe Resorts",
-                Address = "Playa, Habana",
-                FaxNumber = 6000,
-                Email = "caribe@gmail.com"
-            },
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Wild Cuba",
-                Address = "Vedado, Habana",
-                FaxNumber = 1200,
-                Email = "cubaWild@gmail.com"
-            },
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Llave del Golfo",
-                Address = "Varadero, Matanzas",
-                FaxNumber = 3400,
-                Email = "llave@gmail.com"
-            },
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Green Paradise",
-                Address = "Viñales, Pinar del Río",
-                FaxNumber = 7800,
-                Email = "paradise@gmail.com"
-            },
-            new Agency()
-            {
-                Id = Guid.NewGuid(),
-                Name = "East Heights",
-                Address = "Baracoa, Guantánamo",
-                FaxNumber = 7800,
-                Email = "eastHeights@gmail.com"
-            }
-        );
+        var testAgencies = new Faker<Agency>()
+            .RuleFor(a => a.Id, f => f.Random.Guid())
+            .RuleFor(a => a.Name, f => f.PickRandom(new List<string> { "Cuba Verde", "Caribe Resorts", "Havana Tours", "Varadero Vacations", "Trinidad Travel" }))
+            .RuleFor(a => a.Address, f => f.PickRandom(new List<string> { "Vedado, Habana", "Playa, Habana", "Centro, Varadero", "Historic Center, Trinidad", "Downtown, Cienfuegos" }))
+            .RuleFor(a => a.FaxNumber, f => f.Random.Int(1000, 9999))
+            .RuleFor(a => a.Email, f => f.Internet.Email())
+            .Generate(10);
 
+        context.Agencies.AddRange(testAgencies);
         context.SaveChanges();
     }
 }

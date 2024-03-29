@@ -1,5 +1,5 @@
 using TravelAgency.Domain.Entities;
-
+using Bogus;
 namespace TravelAgency.Infrastructure.Persistence.SeedData;
 
 public static partial class SeedData
@@ -14,92 +14,22 @@ public static partial class SeedData
             .Select(agency => agency.Id)
             .ToList();
 
-        if(agencyIds.Count == 0)
+        if (agencyIds.Count == 0)
             throw new Exception("There are no agencies");
 
-        context.Excursions.AddRange(
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Habana Vieja",
-                Price = 30,
-                ArrivalDate = new DateTime(2024, 8, 15),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Cueva de Saturno",
-                Price = 30,
-                ArrivalDate = new DateTime(2024, 8, 20),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Guamá",
-                Price = 50,
-                ArrivalDate = new DateTime(2024, 9, 1),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Viñales",
-                Price = 60,
-                ArrivalDate = new DateTime(2024, 9, 15),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Pico Turquino",
-                Price = 50,
-                ArrivalDate = new DateTime(2024, 10, 14),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Varadero",
-                Price = 70,
-                ArrivalDate = new DateTime(2024, 8, 28),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Jardines del Rey",
-                Price = 150,
-                ArrivalDate = new DateTime(2024, 11, 23),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Cayo Largo",
-                Price = 100,
-                ArrivalDate = new DateTime(2024, 10, 5),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Trinidad",
-                Price = 70,
-                ArrivalDate = new DateTime(2024, 9, 10),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            },
-            new Excursion()
-            {
-                Id = Guid.NewGuid(),
-                Location = "Topes de Collantes",
-                Price = 45,
-                ArrivalDate = new DateTime(2024, 11, 1),
-                AgencyId = agencyIds[random.Next(0, agencyIds.Count - 1)]
-            }
-        );
 
+        var testExcursions = new Faker<Excursion>()
+            .RuleFor(e => e.Id, f => f.Random.Guid())
+            .RuleFor(e => e.Name, f => f.PickRandom(new List<string> { "Havana Day Trip", "Varadero Beach Excursion", "Trinidad History Tour", "Cienfuegos City Tour", "Santa Clara Revolution Tour" }))
+            .RuleFor(e => e.Description, f => f.Lorem.Paragraph())
+            .RuleFor(e => e.Location, f => f.PickRandom(new List<string> { "Havana", "Varadero", "Trinidad", "Cienfuegos", "Santa Clara" }))
+            .RuleFor(e => e.Price, f => f.Random.Decimal(10, 100))
+            .RuleFor(e => e.ArrivalDate, f => f.Date.Between(new DateTime(2024, 9, 1), new DateTime(2026, 12, 31)))
+            .RuleFor(e => e.AgencyId, f => f.PickRandom(agencyIds))
+            .Generate(10);
+
+        context.Excursions.AddRange(testExcursions);
+        context.SaveChanges();
         context.SaveChanges();
     }
 }
