@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Excursions.GetExcursions;
 
 namespace TravelAgency.Api.Features.Excursion;
 
-public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<IEnumerable<GetExcursionResponse>>
+public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<GetExcursionResponse[]>
 {
     public override void Configure()
     {

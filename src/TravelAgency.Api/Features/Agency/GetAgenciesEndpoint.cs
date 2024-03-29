@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
 namespace TravelAgency.Api.Features.Agency;
 
-public class GetAgenciesEndpoint(ISender mediator) : EndpointWithoutRequest<IEnumerable<AgencyResponse>>
+public class GetAgenciesEndpoint(ISender mediator) : EndpointWithoutRequest<GetAgencyResponse[]>
 {
     public override void Configure()
     {

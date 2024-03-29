@@ -44,6 +44,8 @@ public static partial class SeedData
             new ExtendedExcursion()
             {
                 Id = Guid.NewGuid(),
+                Name = "Viaje al Nicho",
+                Description = "Lorem",
                 Location = "El Nicho",
                 Price = 60,
                 ArrivalDate = new DateTime(2024, 8, 1),
@@ -54,6 +56,8 @@ public static partial class SeedData
             new ExtendedExcursion()
             {
                 Id = Guid.NewGuid(),
+                Name = "Viaje al Cauto",
+                Description = "Lorem",
                 Location = "Río Cauto",
                 Price = 65,
                 ArrivalDate = new DateTime(2024, 9, 1),
@@ -64,6 +68,8 @@ public static partial class SeedData
             new ExtendedExcursion()
             {
                 Id = Guid.NewGuid(),
+                Name = "Viaje al Pico Turquino",
+                Description = "Lorem",
                 Location = "Pico Turquino",
                 Price = 100,
                 ArrivalDate = new DateTime(2024, 10, 1),
@@ -74,6 +80,8 @@ public static partial class SeedData
             new ExtendedExcursion()
             {
                 Id = Guid.NewGuid(),
+                Name = "Viaje a Cienfuegos",
+                Description = "Lorem",
                 Location = "Cienfuegos",
                 Price = 80,
                 ArrivalDate = new DateTime(2024, 11, 1),
@@ -84,6 +92,8 @@ public static partial class SeedData
             new ExtendedExcursion()
             {
                 Id = Guid.NewGuid(),
+                Name = "Viaje a la Isla",
+                Description = "Lorem",
                 Location = "Isla de la Juventud",
                 Price = 120,
                 ArrivalDate = new DateTime(2024, 12, 1),
