@@ -1,4 +1,5 @@
 using MediatR;
+using TravelAgency.Application.Handlers.Tourists.CreateTourist;
 
 namespace TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
 
@@ -8,6 +9,6 @@ public record CreatePackageReservationCommand(
     DateTime ReservationDate,
     Guid UserId,
     Guid PackageId,
-    IEnumerable<string> TouristIds
+    IEnumerable<CreateTouristCommand> Tourists
 ) : IRequest<PackageReservationResponse>;
 

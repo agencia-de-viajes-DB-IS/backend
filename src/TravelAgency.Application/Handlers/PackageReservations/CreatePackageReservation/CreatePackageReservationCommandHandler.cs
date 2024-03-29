@@ -11,12 +11,30 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
-        var touristFilter = new Expression<Func<Tourist, bool>>[]
-        {
-            tourist => request.TouristIds.Contains(tourist.Id)
-        };
+        var tourists = new List<Tourist>();
 
-        var tourists = (await touristRepo.FindAllAsync(filters: touristFilter)).ToList();
+        foreach(var requestTourist in request.Tourists)
+        {
+            var storedTourist = await touristRepo.FindAsync(filters: [tourist => tourist.Id == requestTourist.Id]);
+
+            if(storedTourist is null)
+            {
+                var newTourist = new Tourist()
+                {
+                    Id = requestTourist.Id,
+                    FirstName = requestTourist.FirstName,
+                    LastName = requestTourist.LastName,
+                    Nationality = requestTourist.Nationality
+                };
+
+                await touristRepo.InsertAsync(newTourist);
+                tourists.Add(newTourist);
+            }
+            else
+            {
+                tourists.Add(storedTourist);
+            }
+        }
 
         var reservation = new PackageReservation()
         {
