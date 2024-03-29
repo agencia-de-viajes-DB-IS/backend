@@ -2,10 +2,8 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursionReservation;
 
-public class CreateExcursionReservationResponse(CreateExcursionReservationDto createExcursionReservationDto)
+public class CreateExcursionReservationResponse(Guid Id)
     : BaseResponse
 {
-    public CreateExcursionReservationDto CreateExcursionReservationDto { get; set; } = createExcursionReservationDto;
+    Guid Id { get; set; } = Id;
 }
-
-public record CreateExcursionReservationDto(Guid Id);

@@ -25,7 +25,6 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes))
             .Select(async agency => (
                 new GetAgencyResponse(
-                new GetAgencyDto(
                     agency.Id,
                     agency.Name,
                     agency.Address,
@@ -42,12 +41,12 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                             x.HotelDeal.Description,
                             x.HotelDeal.Price,
                             x.HotelDeal.ArrivalDate,
-                            x.HotelDeal.DepartureDate))))));
+                            x.HotelDeal.DepartureDate)))));
                 ;
         var results = await Task.WhenAll(response);
         foreach (var item in results)
         {
-            item.GetAgencyDto.HotelDeals = item.GetAgencyDto.HotelDeals.ToArray();
+            item.HotelDeals = item.HotelDeals.ToArray();
         }
         return results;
     }

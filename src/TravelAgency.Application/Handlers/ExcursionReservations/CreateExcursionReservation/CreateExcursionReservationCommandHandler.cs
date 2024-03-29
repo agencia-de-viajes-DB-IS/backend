@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
@@ -28,7 +27,7 @@ public class CreateExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : 
         await excursionReservationRepo.InsertAsync(reservation);
         await unitOfWork.SaveAsync();
 
-        return new CreateExcursionReservationResponse(new CreateExcursionReservationDto(reservation.Id));
+        return new CreateExcursionReservationResponse(reservation.Id);
 
 
     }

@@ -10,7 +10,7 @@ public class GetHotelsDealsEndpoint(ISender _mediator) : EndpointWithoutRequest<
     public override void Configure()
     {
         // TODO: auth this endpoint
-        Get("/hotelsDeals");
+        Get("/hotelDeals");
         AllowAnonymous();
     }
     public override async Task HandleAsync(CancellationToken ct)

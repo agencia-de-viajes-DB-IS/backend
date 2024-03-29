@@ -17,7 +17,6 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
         
         var response = (await excursionRepo.FindAllAsync(excursionIncludes))
             .Select(excursion => new GetExcursionResponse(
-                new GetExcursionDto(
                     excursion.Id,
                     excursion.Name,
                     excursion.Name,
@@ -29,7 +28,7 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
                         excursion.Agency.Address,
                         excursion.Agency.FaxNumber,
                         excursion.Agency.Email)
-                )));
+                ));
         return response.ToArray();
     }
 }

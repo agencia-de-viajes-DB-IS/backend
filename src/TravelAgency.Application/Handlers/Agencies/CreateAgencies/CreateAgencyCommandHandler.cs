@@ -26,16 +26,12 @@ public class CreateAgencyCommandHandler(IUnitOfWork iunitOfWork)
 
         await iunitOfWork.GetRepository<Agency>().InsertAsync(agency);
         await iunitOfWork.SaveAsync();
-
         var createAgencyResponse = new CreateAgencyResponse
-        {
-            Agency = new CreateAgencyDto
         (
             agency.Id,
             agency.Name,
             agency.Email
-        )
-        };
+        );
         return createAgencyResponse;
     }
 }

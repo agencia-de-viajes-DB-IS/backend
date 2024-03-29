@@ -2,7 +2,12 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Excursions.CreateExcursions;
 
-public class CreateExcursionResponse : BaseResponse
+public class CreateExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate) : BaseResponse
 {
-    public CreateExcursionDto? Excursion { get; set; }
+    Guid Id { get; set; } = id;
+    string Name { get; set; } = name;
+    string Description { get; set; } = description;
+    string Location { get; set; } = location;
+    decimal Price { get; set; } = price;
+    DateTime ArrivalDate { get; set; } = arrivalDate;
 }

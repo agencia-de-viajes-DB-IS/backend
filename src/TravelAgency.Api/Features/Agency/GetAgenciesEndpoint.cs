@@ -10,7 +10,7 @@ public class GetAgenciesEndpoint(ISender mediator) : EndpointWithoutRequest<GetA
     {
         Get("/agencies");
         // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
-        Permissions(Domain.Enums.Permissions.ReadAgencies.ToString());
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken ct)
