@@ -54,4 +54,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         await Task.Run(() => _set.Attach(entity));
         _context.Entry(entity).State = EntityState.Modified;
     }
+
+    public async Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate) => await _set.OfType<T>().AnyAsync(predicate);
 }
