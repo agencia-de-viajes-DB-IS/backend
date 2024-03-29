@@ -5,5 +5,5 @@ namespace TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursio
 public class CreateExcursionReservationResponse(Guid Id)
     : BaseResponse
 {
-    Guid Id { get; set; } = Id;
+    	public Guid Id { get; set; } = Id;
 }

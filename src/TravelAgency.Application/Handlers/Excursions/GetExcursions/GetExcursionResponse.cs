@@ -4,13 +4,13 @@ namespace TravelAgency.Application.Handlers.Excursions.GetExcursions;
 
 public class GetExcursionResponse : BaseResponse
 {
-    Guid Id { get; set; }
-    string Name { get; set; }
-    string Description { get; set; }
-    string Location { get; set; }
-    decimal Price { get; set; }
-    DateTime ArrivalDate { get; set; }
-    ExcursionAgencyResponse Agency { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string Location { get; set; }
+    public decimal Price { get; set; }
+    public DateTime ArrivalDate { get; set; }
+    public ExcursionAgencyResponse Agency { get; set; }
 
     public GetExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate, ExcursionAgencyResponse agency)
     {

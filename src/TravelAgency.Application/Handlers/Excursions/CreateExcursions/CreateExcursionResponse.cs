@@ -4,10 +4,10 @@ namespace TravelAgency.Application.Handlers.Excursions.CreateExcursions;
 
 public class CreateExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate) : BaseResponse
 {
-    Guid Id { get; set; } = id;
-    string Name { get; set; } = name;
-    string Description { get; set; } = description;
-    string Location { get; set; } = location;
-    decimal Price { get; set; } = price;
-    DateTime ArrivalDate { get; set; } = arrivalDate;
+    public Guid Id { get; set; } = id;
+    public string Name { get; set; } = name;
+    public string Description { get; set; } = description;
+    public string Location { get; set; } = location;
+    public decimal Price { get; set; } = price;
+    public DateTime ArrivalDate { get; set; } = arrivalDate;
 }
