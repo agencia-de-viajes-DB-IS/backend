@@ -14,5 +14,6 @@ public enum Permissions
     ReadPackages,
     ReadExcursions,
     ReadUsers,
-    ReadRoles
+    ReadRoles,
+    WriteAgencies
 }

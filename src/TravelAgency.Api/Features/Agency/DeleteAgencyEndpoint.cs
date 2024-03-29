@@ -10,7 +10,7 @@ public class DeleteAgencyEndpoint(ISender mediator) : Endpoint<DeleteAgencyComma
     public override void Configure()
     {
         Delete("/agencies");
-        AllowAnonymous();
+        Permissions(Domain.Enums.Permissions.WriteAgencies.ToString());
     }
 
     public override async Task HandleAsync(DeleteAgencyCommand request, CancellationToken ct)

@@ -10,7 +10,7 @@ public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<IE
     {
         Get("/excursions");
         // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
-        AllowAnonymous();
+        Permissions(Domain.Enums.Permissions.ReadExcursions.ToString());
     }
 
     public override async Task HandleAsync(CancellationToken ct)

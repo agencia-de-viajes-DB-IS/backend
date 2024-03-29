@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
 
-namespace TravelAgency.Api.Features.Package;
+namespace TravelAgency.Api.Features.PackageReservation;
 
 public class CreatePackageReservationEndpoint(ISender _mediator) : Endpoint<CreatePackageReservationCommand, PackageReservationResponse>
 {

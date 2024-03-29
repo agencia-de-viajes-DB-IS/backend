@@ -9,7 +9,7 @@ public class CreateExcursionEndpoint(ISender mediator) : Endpoint<CreateExcursio
     public override void Configure()
     {
         Post("/excursions");
-        AllowAnonymous();
+        Permissions(Domain.Enums.Permissions.WriteExcursions.ToString());
     }
 
     public override async Task HandleAsync(CreateExcursionCommand request, CancellationToken ct)

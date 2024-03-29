@@ -1,6 +1,6 @@
 namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
-public record AgencyResponse
+public record GetAgencyDto
 (
     Guid Id,
     string Name,

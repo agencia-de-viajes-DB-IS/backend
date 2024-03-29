@@ -2,4 +2,4 @@ using MediatR;
 
 namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
-public record GetAgenciesCommand : IRequest<AgencyResponse[]>;
+public record GetAgenciesCommand : IRequest<GetAgencyResponse[]>;

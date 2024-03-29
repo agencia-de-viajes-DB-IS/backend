@@ -1,7 +1,5 @@
 using System.Linq.Expressions;
 using MediatR;
-using TravelAgency.Application.Handlers.Facilities.GetFacilities;
-using TravelAgency.Application.Handlers.Packages.GetPackages;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
 
@@ -29,12 +27,10 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
             PackageId = request.PackageId,
             Tourists = tourists
         };
-
         await packageReservationRepo.InsertAsync(reservation);
         await _unitOfWork.SaveAsync();
 
         var response = new PackageReservationResponse(reservation.Id);
-
         return response;
     }
 }
