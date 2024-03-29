@@ -10,8 +10,8 @@ public class DeleteTouristEndpoint(ISender _mediator) : Endpoint<DeleteTouristCo
     public override void Configure()
     {
         Delete("/tourists");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("DeleteTourists");
     }
     public override async Task HandleAsync(DeleteTouristCommand command, CancellationToken ct)
     {

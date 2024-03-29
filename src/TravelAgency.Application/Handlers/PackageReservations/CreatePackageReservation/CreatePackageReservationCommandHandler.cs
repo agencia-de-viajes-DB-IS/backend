@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
@@ -11,34 +10,11 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
-        var tourists = new List<Tourist>();
-
-        foreach(var requestTourist in request.Tourists)
-        {
-            var storedTourist = await touristRepo.FindAsync(filters: [tourist => tourist.Id == requestTourist.Id]);
-
-            if(storedTourist is null)
-            {
-                var newTourist = new Tourist()
-                {
-                    Id = requestTourist.Id,
-                    FirstName = requestTourist.FirstName,
-                    LastName = requestTourist.LastName,
-                    Nationality = requestTourist.Nationality
-                };
-
-                await touristRepo.InsertAsync(newTourist);
-                tourists.Add(newTourist);
-            }
-            else
-            {
-                tourists.Add(storedTourist);
-            }
-        }
+        var tourists = await touristRepo.StoreRequestTourists(request.Tourists);
 
         var reservation = new PackageReservation()
         {
-            Airline = request.Airline,
+            AirlineId = request.AirlineId,
             Price = request.Price,
             ReservationDate = request.ReservationDate,
             UserId = request.UserId,

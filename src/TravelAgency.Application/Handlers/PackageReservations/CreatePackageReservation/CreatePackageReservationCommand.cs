@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Tourists.CreateTourist;
 namespace TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
 
 public record CreatePackageReservationCommand(
-    string Airline,
+    Guid AirlineId,
     decimal Price,
     DateTime ReservationDate,
     Guid UserId,

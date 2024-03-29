@@ -4,7 +4,6 @@ public class HotelDealReservation
 {
     // Main Properties
     public Guid Id { get; set; }
-    public required string Airline { get; set; }
     public decimal Price { get; set; }
     public DateTime ReservationDate { get; set; }
 
@@ -13,5 +12,7 @@ public class HotelDealReservation
     public User User { get; set; } = null!;
     public Guid AgencyRelatedHotelDealId { get; set; }
     public AgencyRelatedHotelDeal AgencyRelatedHotelDeal { get; set; } = null!;
+    public Guid AirlineId { get; set; }
+    public Airline Airline { get; set; } = null!;
     public required ICollection<Tourist> Tourists { get; set; }
 }

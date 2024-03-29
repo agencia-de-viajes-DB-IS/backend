@@ -9,8 +9,8 @@ public class CreateTouristEndpoint(ISender _mediator) : Endpoint<CreateTouristCo
     public override void Configure()
     {
         Post("/tourists");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("WriteTourists");
     }
     public override async Task HandleAsync(CreateTouristCommand command, CancellationToken ct)
     {

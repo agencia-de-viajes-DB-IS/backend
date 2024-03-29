@@ -9,8 +9,8 @@ public class GetFacilitiesEndpoint(ISender _mediator) : EndpointWithoutRequest<F
     public override void Configure()
     {
         Get("/facilities");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("ReadFacilities");
     }
     public override async Task HandleAsync(CancellationToken ct)
     {
