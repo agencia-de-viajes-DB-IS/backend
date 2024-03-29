@@ -1,21 +1,21 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.Hotels.Queries.GetAll;
+using TravelAgency.Application.Handlers.Roles.Queries.GetAll;
 using TravelAgency.Application.Responses;
 
-namespace TravelAgency.Api.Features.Hotels;
+namespace TravelAgency.Api.Features.Roles;
 
-public class GetHotelsEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<GetHotelsResponse>>
+public class GetRolesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<GetRolesResponse>>
 {
     public override void Configure()
     {
         // TODO: auth this endpoint
-        Get("/hotels");
-        AllowAnonymous();
+        Get("/Roles");
+        Permissions("ReadRoles"); 
     }
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var query = new GetHotelsQuery();
+        var query = new GetRolesQuery();
         var response = await _mediator.Send(query, ct);
         await SendOkAsync(response, ct);
     }

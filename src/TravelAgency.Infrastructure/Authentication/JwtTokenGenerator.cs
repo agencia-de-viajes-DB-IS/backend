@@ -5,35 +5,47 @@ using TravelAgency.Application.Interfaces.Authentication;
 using TravelAgency.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using TravelAgency.Domain.ValueObjects;
-using Microsoft.EntityFrameworkCore.Storage;
 using System.Text.Json;
+using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Common.Exceptions;
+using System.Linq.Expressions;
 
 namespace TravelAgency.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
+    private static readonly string Permissions = "Permissions";
     private static readonly string Roles = "roles";
     private readonly JwtSettings _jwtSettings;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettingsOptions)
+    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettingsOptions, IUnitOfWork unitOfWork)
     {
         _jwtSettings = jwtSettingsOptions.Value;
+        _unitOfWork = unitOfWork;
     }
 
-    public string GenerateToken(User user)
+    public async Task<string> GenerateToken(User user)
     {
+        var rolesRepo = _unitOfWork.GetRepository<Role>(); 
         var key = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256
         );
+
+        var role = await rolesRepo.FindAsync(null, filters:new Expression<Func<Domain.Entities.Role, bool>>[]
+        {
+            u => u.Name == "Customer"
+        }) ?? throw new TravelAgencyException("Operation Error", status: 500);
+        var permissions = role.Permissions.Select(x => x.ToString());
 
         var claims = new Claim[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(Roles,JsonSerializer.Serialize(user.Role.Permissions)),
+            new Claim(Roles,user.RoleId.ToString()),
+            new Claim(Permissions,JsonSerializer.Serialize(permissions),JsonClaimValueTypes.JsonArray),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

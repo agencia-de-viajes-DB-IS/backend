@@ -27,7 +27,7 @@ public class LoginQueryHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnitOfWor
             throw new TravelAgencyException("Invalid password", status: 400);
 
         // Generate token
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var token = await _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
         var response = new AuthenticationResponse(
