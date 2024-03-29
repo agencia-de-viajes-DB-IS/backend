@@ -11,13 +11,10 @@ public class CreateAgencyCommandHandler(IUnitOfWork iunitOfWork)
 {
     public async Task<CreateAgencyResponse> Handle(CreateAgencyCommand request, CancellationToken cancellationToken)
     {
-        var createAgencyResponse = new CreateAgencyResponse();
         var validator = new CreateAgencyCommandValidator();
 
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-        createAgencyResponse.Success  =  validationResult.IsValid;
+        await validator.ValidateAsync(request, cancellationToken);
 
-        if (!createAgencyResponse.Success) return createAgencyResponse;
         var agency = new Agency
         {
             Id = new Guid(),
@@ -29,12 +26,16 @@ public class CreateAgencyCommandHandler(IUnitOfWork iunitOfWork)
 
         await iunitOfWork.GetRepository<Agency>().InsertAsync(agency);
         await iunitOfWork.SaveAsync();
-        createAgencyResponse.Agency = new CreateAgencyDto
+
+        var createAgencyResponse = new CreateAgencyResponse
+        {
+            Agency = new CreateAgencyDto
         (
             agency.Id,
             agency.Name,
             agency.Email
-        );
+        )
+        };
         return createAgencyResponse;
     }
 }

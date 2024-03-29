@@ -17,8 +17,8 @@ public class UpdateAgencyCommandHandler(IUnitOfWork unitOfWork)
         });
 
         var validator = new UpdateAgencyCommandValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-        
+        await validator.ValidateAsync(request, cancellationToken);
+                
         if (agency != null)
         {
             agency.Email = request.Email;
