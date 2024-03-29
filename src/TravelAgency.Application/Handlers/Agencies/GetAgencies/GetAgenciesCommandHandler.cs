@@ -21,9 +21,10 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         {
             agencyHotelDeal => agencyHotelDeal.HotelDeal.Hotel!
         };
-        
+
         var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes))
-            .Select(async agency => (new GetAgencyResponse(
+            .Select(async agency => (
+                new GetAgencyResponse(
                 new GetAgencyDto(
                     agency.Id,
                     agency.Name,
@@ -34,16 +35,20 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                         x.Location,
                         x.Price,
                         x.ArrivalDate)).ToArray(),
-                    (await agencyRelatedHotelDeal.FindAllAsync(agencyHotelDealIncludes, filters: new Expression<Func<AgencyRelatedHotelDeal, bool>>[]{ x => x.AgencyId == agency.Id}))
+                    (await agencyRelatedHotelDeal.FindAllAsync(agencyHotelDealIncludes, filters: [x => x.AgencyId == agency.Id]))
                     .Select(
                         x => new AgencyHotelDealResponse(
-                            x.HotelDeal.Hotel.Name, 
-                            x.HotelDeal.Description, 
-                            x.HotelDeal.Price, 
-                            x.HotelDeal.ArrivalDate, 
-                            x.HotelDeal.DepartureDate)).ToArray()))))
+                            x.HotelDeal.Hotel.Name,
+                            x.HotelDeal.Description,
+                            x.HotelDeal.Price,
+                            x.HotelDeal.ArrivalDate,
+                            x.HotelDeal.DepartureDate))))));
                 ;
         var results = await Task.WhenAll(response);
-        return results.ToArray();
+        foreach (var item in results)
+        {
+            item.GetAgencyDto.HotelDeals = item.GetAgencyDto.HotelDeals.ToArray();
+        }
+        return results;
     }
 }
