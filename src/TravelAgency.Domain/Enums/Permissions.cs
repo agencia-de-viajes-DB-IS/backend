@@ -6,7 +6,7 @@ public enum Permissions
     WriteUsers,
     WriteExcursions,
     WritePackages,
-
+    WriteRoles, 
     // Reads
     ReadAgencies,
     ReadHotels,
@@ -14,4 +14,5 @@ public enum Permissions
     ReadPackages,
     ReadExcursions,
     ReadUsers,
+    ReadRoles
 }

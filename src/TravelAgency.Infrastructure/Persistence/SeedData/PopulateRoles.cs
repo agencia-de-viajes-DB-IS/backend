@@ -44,7 +44,9 @@ public static partial class SeedData
                         Permissions.WriteUsers,
                         Permissions.ReadUsers,
                         Permissions.ReadExcursions,
-                        Permissions.WriteExcursions
+                        Permissions.WriteExcursions,
+                        Permissions.WriteRoles,
+                        Permissions.ReadRoles
                 }
             }
         );
