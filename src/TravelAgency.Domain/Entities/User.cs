@@ -12,6 +12,7 @@ public class User
     // Tracker for Marketing Agents
     public Guid? AgencyId { get; set; }
     // Relational Properties
+    public ICollection<Tourist>? Tourists { get; set; }
     public ICollection<PackageReservation>? PackageReservations { get; set; }
     public ICollection<ExcursionReservation>? ExcursionReservations { get; set; }
     public ICollection<HotelDealReservation>? HotelDealReservations { get; set; }

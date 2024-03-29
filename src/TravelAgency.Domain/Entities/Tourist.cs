@@ -9,6 +9,7 @@ public class Tourist
     public required string Nationality { get; set; }
 
     // Relational Properties
+    public ICollection<User>? Users { get; set; }
     public ICollection<PackageReservation> PackageReservations { get; set; } = null!;
     public ICollection<ExcursionReservation> ExcursionReservations { get; set; } = null!;
     public ICollection<HotelDealReservation> HotelDealReservations { get; set; } = null!;
