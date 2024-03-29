@@ -5,7 +5,7 @@ namespace TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursio
 
 public class CreateExcursionReservationCommand : IRequest<CreateExcursionReservationResponse>
 {
-    public required string Airline { get; set; }
+    public Guid AirlineId { get; set; }
     public decimal Price { get; set; }
     public DateTime ReservationDate { get; set; }
     public Guid UserId { get; set; }
