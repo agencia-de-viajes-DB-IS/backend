@@ -5,8 +5,8 @@ namespace TravelAgency.Application.Handlers.Users.AddTouristUser;
 
 public class AddUserTouristCommand : IRequest<AddTouristResponse>
 {
-    public Guid UserId { get; set; }
-    public string? TouristId { get; set; }
+    public required Guid UserId { get; set; }
+    public required string TouristId { get; set; }
 }
 
 public class AddTouristResponse : BaseResponse

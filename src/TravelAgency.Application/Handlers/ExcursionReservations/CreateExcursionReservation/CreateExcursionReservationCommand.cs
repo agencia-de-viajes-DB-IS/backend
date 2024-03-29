@@ -5,10 +5,10 @@ namespace TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursio
 
 public class CreateExcursionReservationCommand : IRequest<CreateExcursionReservationResponse>
 {
-    public Guid AirlineId { get; set; }
-    public decimal Price { get; set; }
-    public DateTime ReservationDate { get; set; }
-    public Guid UserId { get; set; }
-    public Guid ExcursionId { get; set; }
+    public required Guid AirlineId { get; set; }
+    public required decimal Price { get; set; }
+    public required DateTime ReservationDate { get; set; }
+    public required Guid UserId { get; set; }
+    public required Guid ExcursionId { get; set; }
     public required IEnumerable<CreateTouristCommand> Tourists { get; set; }
 }
