@@ -40,7 +40,7 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
 
         var reservation = new PackageReservation()
         {
-            Airline = request.Airline,
+            AirlineId = request.AirlineId,
             Price = request.Price,
             ReservationDate = request.ReservationDate,
             UserId = request.UserId,
