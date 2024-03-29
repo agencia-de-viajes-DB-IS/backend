@@ -4,7 +4,7 @@ POST  {{host}}/reservation/package
 Content-Type: application/json
 
 {
-  "airline": "Air Europa",
+  "airlineId": "4f28605f-5148-4a58-8c9b-f1cf3bea7c67",
   "price": 300,
   "reservationDate": "2024-03-19T03:28:45.548Z",
   "userId": "51041bd1-39c9-4a69-8ffb-8829b50b4c15",
