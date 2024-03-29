@@ -20,12 +20,13 @@ public class AeroSkullDbContext : DbContext
     public DbSet<Agency> Agencies { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Airline> Airlines { get; set; }
+    public DbSet<PaymentOperation> PaymentOperations { get; set; }
     public AeroSkullDbContext(DbContextOptions<AeroSkullDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ExtendedExcursion>().ToTable("ExtendedExcursions");
-    
+
         modelBuilder.Entity<HotelDeal>()
             .HasIndex(hotelDeal => new
             {
