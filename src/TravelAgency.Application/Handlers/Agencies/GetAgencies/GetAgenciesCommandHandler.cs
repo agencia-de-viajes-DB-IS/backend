@@ -5,9 +5,9 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
-public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetAgenciesCommand, IEnumerable<AgencyResponse>>
+public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetAgenciesCommand, AgencyResponse[]>
 {
-    public async Task<IEnumerable<AgencyResponse>> Handle(GetAgenciesCommand request, CancellationToken cancellationToken)
+    public async Task<AgencyResponse[]> Handle(GetAgenciesCommand request, CancellationToken cancellationToken)
     {
         var agencyRepo = _unitOfWork.GetRepository<Agency>();
         var agencyRelatedHotelDeal = _unitOfWork.GetRepository<AgencyRelatedHotelDeal>();       
@@ -24,6 +24,7 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         
         var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes))
             .Select(async agency => (new AgencyResponse(
+                agency.Id,
                 agency.Name,
                 agency.Address,
                 agency.FaxNumber,
@@ -31,7 +32,7 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 agency.Excursions!.Select(x => new AgencyExcursionResponse(
                     x.Location,
                     x.Price,
-                    x.ArrivalDate)),
+                    x.ArrivalDate)).ToArray(),
                 (await agencyRelatedHotelDeal.FindAllAsync(agencyHotelDealIncludes, filters: new Expression<Func<AgencyRelatedHotelDeal, bool>>[]{ x => x.AgencyId == agency.Id}))
                     .Select(
                     x => new AgencyHotelDealResponse(
@@ -39,9 +40,9 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                         x.HotelDeal.Description, 
                         x.HotelDeal.Price, 
                         x.HotelDeal.ArrivalDate, 
-                        x.HotelDeal.DepartureDate))
+                        x.HotelDeal.DepartureDate)).ToArray()
                 )));
         var results = await Task.WhenAll(response);
-        return results;
+        return results.ToArray();
     }
 }

@@ -1,9 +1,10 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
 using TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 
 namespace TravelAgency.Application.Handlers.Excursions.CreateExcursions;
 
-public class CreateExcursionCommandValidator : AbstractValidator<CreateExcursionCommand>
+public class CreateExcursionCommandValidator : TravelAgencyAbstractValidator<CreateExcursionCommand>
 { 
     public CreateExcursionCommandValidator()
     {

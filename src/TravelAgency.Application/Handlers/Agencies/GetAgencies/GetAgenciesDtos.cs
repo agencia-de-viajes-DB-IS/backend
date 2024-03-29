@@ -2,12 +2,13 @@ namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
 public record AgencyResponse
 (
+    Guid Id,
     string Name,
     string Address,
     int FaxNumber,
     string Email,
-    IEnumerable<AgencyExcursionResponse>? Excursions,
-    IEnumerable<AgencyHotelDealResponse>? HotelDeals
+    AgencyExcursionResponse[] Excursions,
+    AgencyHotelDealResponse[] HotelDeals
 );
 
 public record AgencyHotelDealResponse(

@@ -1,7 +1,8 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
 namespace TravelAgency.Application.Handlers.Agencies.UpdateAgencies;
 
-public class UpdateAgencyCommandValidator : AbstractValidator<UpdateAgencyCommand>
+public class UpdateAgencyCommandValidator : TravelAgencyAbstractValidator<UpdateAgencyCommand>
 {
     public UpdateAgencyCommandValidator()
     {

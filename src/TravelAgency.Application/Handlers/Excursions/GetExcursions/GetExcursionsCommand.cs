@@ -3,7 +3,7 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Application.Handlers.Excursions.GetExcursions;
 
-public record GetExcursionsCommand : IRequest<IEnumerable<ExcursionResponse>> 
+public record GetExcursionsCommand : IRequest<ExcursionResponse[]> 
 {   
     
 }

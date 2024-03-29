@@ -1,7 +1,10 @@
 using FluentValidation;
+using TravelAgency.Application.Common;
+using TravelAgency.Domain.Entities;
+
 namespace TravelAgency.Application.Handlers.Agencies.CreateAgencies;
 
-public class CreateAgencyCommandValidator : AbstractValidator<CreateAgencyCommand>
+public class CreateAgencyCommandValidator : TravelAgencyAbstractValidator<CreateAgencyCommand>
 {
     public CreateAgencyCommandValidator()
     {

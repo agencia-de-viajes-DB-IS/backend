@@ -16,7 +16,7 @@ public class UpdateExcursionCommandHandler(IUnitOfWork unitOfWork)
         });
 
         var validator = new UpdateExcursionCommandValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        await validator.ValidateAsync(request, cancellationToken);
         
         if (excursion != null)
         {

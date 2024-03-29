@@ -15,36 +15,26 @@ public class CreateAgencyCommandHandler(IUnitOfWork iunitOfWork)
         var validator = new CreateAgencyCommandValidator();
 
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        createAgencyResponse.Success  =  validationResult.IsValid;
 
-        if (validationResult.Errors.Count > 0)
+        if (!createAgencyResponse.Success) return createAgencyResponse;
+        var agency = new Agency
         {
-            createAgencyResponse.Success = false;
-            createAgencyResponse.ValidationErrors = new List<string>();
-            foreach (var error in validationResult.Errors)
-            {
-                createAgencyResponse.ValidationErrors.Add(error.ErrorMessage);
-            }
-        }
+            Id = new Guid(),
+            Name = request.Name,
+            Address = request.Address,
+            FaxNumber = request.FaxNumber,
+            Email = request.Email
+        };
 
-        if (createAgencyResponse.Success)
-        {
-            var agency = new Agency
-            {
-                Id = new Guid(),
-                Name = request.Name,
-                Address = request.Address,
-                FaxNumber = request.FaxNumber,
-                Email = request.Email
-            };
-
-            await iunitOfWork.GetRepository<Agency>().InsertAsync(agency);
-            await iunitOfWork.SaveAsync();
-            createAgencyResponse.Agency = new CreateAgencyDto
-            (
-                agency.Name,
-                agency.Email
-            );
-        }
+        await iunitOfWork.GetRepository<Agency>().InsertAsync(agency);
+        await iunitOfWork.SaveAsync();
+        createAgencyResponse.Agency = new CreateAgencyDto
+        (
+            agency.Id,
+            agency.Name,
+            agency.Email
+        );
         return createAgencyResponse;
     }
 }

@@ -1,5 +1,6 @@
 namespace TravelAgency.Application.Handlers.Excursions.GetExcursions;
 public record ExcursionResponse(
+    Guid Id, 
     string Location,
     decimal Price,
     DateTime ArrivalDate,
