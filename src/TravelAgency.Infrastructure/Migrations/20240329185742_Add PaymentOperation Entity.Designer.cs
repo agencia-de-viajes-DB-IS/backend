@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAgency.Infrastructure.Persistence;
 
@@ -10,9 +11,11 @@ using TravelAgency.Infrastructure.Persistence;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(AeroSkullDbContext))]
-    partial class AeroSkullDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329185742_Add PaymentOperation Entity")]
+    partial class AddPaymentOperationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,21 +112,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.ToTable("PackageReservationTourist");
                 });
 
-            modelBuilder.Entity("TouristUser", b =>
-                {
-                    b.Property<string>("TouristsId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("TouristsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("TouristUser");
-                });
-
             modelBuilder.Entity("TravelAgency.Domain.Entities.Agency", b =>
                 {
                     b.Property<Guid>("Id")
@@ -199,15 +187,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<DateTime>("ArrivalDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -630,21 +610,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasOne("TravelAgency.Domain.Entities.Tourist", null)
                         .WithMany()
                         .HasForeignKey("TouristsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TouristUser", b =>
-                {
-                    b.HasOne("TravelAgency.Domain.Entities.Tourist", null)
-                        .WithMany()
-                        .HasForeignKey("TouristsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TravelAgency.Domain.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
