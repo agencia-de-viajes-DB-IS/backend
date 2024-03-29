@@ -12,8 +12,8 @@ public class CreateFacilityEndpoint(ISender _mediator) : Endpoint<CreateFacility
     public override void Configure()
     {
         Post("/facilities");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("WriteFacilities");
     }
     public override async Task HandleAsync(CreateFacilityCommand command, CancellationToken ct)
     {

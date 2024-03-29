@@ -9,8 +9,8 @@ public class CreatePackageReservationEndpoint(ISender _mediator) : Endpoint<Crea
     public override void Configure()
     {
         Post("/reservation/package");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("WritePackageReservation");
     }
     public override async Task HandleAsync(CreatePackageReservationCommand command, CancellationToken ct)
     {

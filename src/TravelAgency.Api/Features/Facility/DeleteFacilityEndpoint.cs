@@ -9,8 +9,8 @@ public class DeleteFacilityEndpoint(ISender _mediator) : Endpoint<DeleteFacility
     public override void Configure()
     {
         Delete("/facilities");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("DeleteFacilities");
     }
     public override async Task HandleAsync(DeleteFacilityCommand command, CancellationToken ct)
     {

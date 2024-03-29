@@ -11,8 +11,8 @@ public class UpdatePackageEndpoint(ISender _mediator) : Endpoint<UpdatePackageCo
     public override void Configure()
     {
         Put("/packages");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("UpdatePackages");
     }
     public override async Task HandleAsync(UpdatePackageCommand command, CancellationToken ct)
     {

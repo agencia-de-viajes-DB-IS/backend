@@ -10,8 +10,8 @@ public class GetTouristsEndpoint(ISender _mediator) : EndpointWithoutRequest<Tou
     public override void Configure()
     {
         Get("/tourists");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("ReadTourists");
     }
     public override async Task HandleAsync(CancellationToken ct)
     {

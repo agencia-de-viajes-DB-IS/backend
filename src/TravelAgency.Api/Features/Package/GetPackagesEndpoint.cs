@@ -9,8 +9,8 @@ public class GetPackagesEndpoint(ISender _mediator) : Endpoint<GetPackagesComman
     public override void Configure()
     {
         Get("/packages");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
         AllowAnonymous();
+        // Permissions("ReadPackages");
     }
     public override async Task HandleAsync(GetPackagesCommand command, CancellationToken ct)
     {
