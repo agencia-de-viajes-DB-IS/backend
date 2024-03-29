@@ -10,6 +10,5 @@ public class CreateExcursionReservationValidator : TravelAgencyAbstractValidator
         // price must be > 0
         RuleFor(x => x.Price)
             .GreaterThan(0).WithMessage("Price must be greater than 0");
-        
     }
 }

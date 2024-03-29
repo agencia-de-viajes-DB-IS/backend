@@ -11,16 +11,58 @@ public class CreateExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : 
     {
         var excursionReservationRepo = unitOfWork.GetRepository<ExcursionReservation>();
         var touristRepo = unitOfWork.GetRepository<Tourist>();
+        
+        var tourists = new List<Tourist>();
 
-        var touristFilter = new Expression<Func<Tourist, bool>>[]
+        foreach(var requestTourist in request.Tourists)
         {
-            tourist => request.TouristsIDs.Contains(tourist.Id)
-        };
-        var user = unitOfWork.GetRepository<User>();
-        var tourists = (await touristRepo.FindAllAsync(filters: touristFilter)).ToList();
+            var storedTourist = await touristRepo.FindAsync(filters: [tourist => tourist.Id == requestTourist.Id]);
+
+            if(storedTourist is null)
+            {
+                var newTourist = new Tourist()
+                {
+                    Id = requestTourist.Id,
+                    FirstName = requestTourist.FirstName,
+                    LastName = requestTourist.LastName,
+                    Nationality = requestTourist.Nationality
+                };
+
+                await touristRepo.InsertAsync(newTourist);
+                tourists.Add(newTourist);
+            }
+            else
+            {
+                tourists.Add(storedTourist);
+            }
+        }
+
+        var guid = new Guid();
+        var response = new CreateExcursionReservationResponse(new CreateExcursionReservationDto(guid));
+        var user = await unitOfWork.GetRepository<User>().FindAsync(filters: new List<Expression<Func<User, bool>>> { u => u.Id == request.UserId});
+        if (user is null)
+        {
+            response.Success = false;
+            response.ValidationErrors!.Add("User not found");
+        }
+        var excursion = await unitOfWork.GetRepository<Excursion>().FindAsync(filters: new List<Expression<Func<Excursion, bool>>> { e => e.Id == request.ExcursionId});
+        if (excursion is null)
+        {
+            response.Success = false;
+            response.ValidationErrors!.Add("Excursion not found");
+            return response;
+        }
+        
+        if (request.ReservationDate > excursion.ArrivalDate)
+        {
+            response.Success = false;
+            response.ValidationErrors!.Add("Reservation date must be between excursion start and end date");
+            return response;
+        }
+        
         var reservation = new ExcursionReservation
         {
-            Id = new Guid(),
+            Id = guid,
             Airline = request.Airline,
             Price = request.Price,
             ReservationDate = request.ReservationDate,
@@ -30,7 +72,6 @@ public class CreateExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : 
         };
         await excursionReservationRepo.InsertAsync(reservation);
         await unitOfWork.SaveAsync();
-        var response = new CreateExcursionReservationResponse(new CreateExcursionReservationDto(reservation.Id));
         return response;
     }
 }
