@@ -9,7 +9,7 @@ public class GetTouristsUserEndpoint(ISender mediator) : Endpoint<GetUserTourist
 {
     public override void Configure()
     {
-        Get("/users");
+        Get("/users/tourists");
         AllowAnonymous();
         // Permissions("ReadUsers");
     }
