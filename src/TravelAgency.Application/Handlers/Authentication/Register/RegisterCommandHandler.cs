@@ -5,6 +5,7 @@ using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Enums;
 using TravelAgency.Application.Responses;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TravelAgency.Application.Handlers.Authentication.Register;
 
@@ -13,6 +14,7 @@ public class RegisterCommandHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnit
     public async Task<AuthenticationResponse> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         var userRepo = _unitOfWork.GetRepository<Domain.Entities.User>();
+        var roleRepo = _unitOfWork.GetRepository<Domain.Entities.Role>(); 
 
         var userFilter = new Expression<Func<Domain.Entities.User, bool>>[]
         {
@@ -24,6 +26,12 @@ public class RegisterCommandHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnit
 
         // TODO: Use a mapper to create user
         // Create user
+        Domain.Entities.Role? role = await roleRepo.FindAsync(null, filters:new Expression<Func<Domain.Entities.Role, bool>>[]
+        {
+            u => u.Name == "Customer"
+        }) ?? throw new TravelAgencyException("Operation Error", status: 500);
+        var roleId = role.Id;
+        
         var user = new Domain.Entities.User()
         {
             Id = Guid.NewGuid(),
@@ -31,14 +39,8 @@ public class RegisterCommandHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnit
             LastName = command.LastName,
             Email = command.Email,
             Password = command.Password,
+            RoleId = roleId 
             // TODO: This can be prefixed somewhere else but here, set the right permissions
-            Role = new Domain.ValueObjects.Role{
-                Name = "Regular",
-                Permissions = new List<Permissions> {
-                    Permissions.ReadUsers,
-                    Permissions.WriteUsers
-                }
-            }
         };
 
         // Store user into DB
@@ -46,7 +48,7 @@ public class RegisterCommandHandler(IJwtTokenGenerator _jwtTokenGenerator, IUnit
         await _unitOfWork.SaveAsync();
 
         // Generate token
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var token = await _jwtTokenGenerator.GenerateToken(user);
 
         // Create result
         var response = new AuthenticationResponse(

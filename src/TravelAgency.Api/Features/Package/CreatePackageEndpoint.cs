@@ -10,8 +10,7 @@ public class CreatePackageEndpoint(ISender _mediator) : Endpoint<CreatePackageCo
     public override void Configure()
     {
         Post("/packages");
-        // TODO: This cannot remain anonymous. Only authorized and with specified permission can access this endpoint
-        AllowAnonymous();
+        Permissions("WritePackages");
     }
     public override async Task HandleAsync(CreatePackageCommand command, CancellationToken ct)
     {

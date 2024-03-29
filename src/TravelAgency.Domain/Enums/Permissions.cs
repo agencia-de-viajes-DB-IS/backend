@@ -1,7 +1,18 @@
-namespace TravelAgency.Domain.Enums; 
+namespace TravelAgency.Domain.Enums;
 
-public enum Permissions{
-    ReadUsers, 
-    WriteUsers
-    // For example 
+public enum Permissions
+{
+    // Writes
+    WriteUsers,
+    WriteExcursions,
+    WritePackages,
+    WriteRoles, 
+    // Reads
+    ReadAgencies,
+    ReadHotels,
+    ReadHotelDeals,
+    ReadPackages,
+    ReadExcursions,
+    ReadUsers,
+    ReadRoles
 }
