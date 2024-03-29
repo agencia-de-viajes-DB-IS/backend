@@ -8,6 +8,12 @@ public class CreateExcursionCommandValidator : TravelAgencyAbstractValidator<Cre
 { 
     public CreateExcursionCommandValidator()
     {
+            // rule for name
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Name is required")
+                .MaximumLength(200).WithMessage("Name must not exceed 200 characters");
+            
+
             RuleFor(x => x.Location)
                 .NotEmpty().WithMessage("Location is required")
                 .MaximumLength(200).WithMessage("Location must not exceed 200 characters");

@@ -19,6 +19,8 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
             .Select(excursion => new GetExcursionResponse(
                 new GetExcursionDto(
                     excursion.Id,
+                    excursion.Name,
+                    excursion.Name,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,

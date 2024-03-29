@@ -11,12 +11,12 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
         var createExcursionResponse = new CreateExcursionResponse();
         var validator = new CreateExcursionCommandValidator();
 
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-        createExcursionResponse.Success = validationResult.IsValid;
-        if (!createExcursionResponse.Success) return createExcursionResponse;
+        await validator.ValidateAsync(request, cancellationToken);
         var excursion = new Excursion
         {
             Id = new Guid(),
+            Name = request.Name,
+            Description = request.Description,
             Location = request.Location,
             Price = request.Price,
             ArrivalDate = request.ArrivalDate,
@@ -28,6 +28,8 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
         createExcursionResponse.Excursion = new CreateExcursionDto
         (
             excursion.Id,
+            excursion.Name,
+            excursion.Description,
             excursion.Location,
             excursion.Price,
             excursion.ArrivalDate

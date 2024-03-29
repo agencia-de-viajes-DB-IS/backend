@@ -13,6 +13,8 @@ public class GetExcursionResponse : BaseResponse
 }
 public record GetExcursionDto(
     Guid Id, 
+    string Name, 
+    string Description,
     string Location,
     decimal Price,
     DateTime ArrivalDate,

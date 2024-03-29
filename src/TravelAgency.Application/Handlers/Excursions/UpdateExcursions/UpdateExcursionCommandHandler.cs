@@ -20,6 +20,8 @@ public class UpdateExcursionCommandHandler(IUnitOfWork unitOfWork)
         
         if (excursion != null)
         {
+            excursion.Name = request.Name;
+            excursion.Description = request.Description;
             excursion.Location = request.Location;
             excursion.ArrivalDate = request.ArrivalDate;
             excursion.Price = request.Price;
