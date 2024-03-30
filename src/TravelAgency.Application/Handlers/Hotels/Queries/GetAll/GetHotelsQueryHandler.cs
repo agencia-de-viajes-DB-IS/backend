@@ -5,7 +5,7 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Hotels.Queries.GetAll; 
 
-public class GetHotelsQueryHandler : IRequestHandler<GetHotelsQuery, IEnumerable<GetHotelsResponse>>
+public class GetHotelsQueryHandler : IRequestHandler<GetHotelsQuery, GetHotelsResponse[]>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -14,7 +14,7 @@ public class GetHotelsQueryHandler : IRequestHandler<GetHotelsQuery, IEnumerable
         unitOfWork = _unitOfWork;
     }
 
-    public async Task<IEnumerable<GetHotelsResponse>> Handle(GetHotelsQuery request, CancellationToken cancellationToken)
+    public async Task<GetHotelsResponse[]> Handle(GetHotelsQuery request, CancellationToken cancellationToken)
     {
         var hotelsRepo = unitOfWork.GetRepository<Hotel>();
         var hotelsIncludes = new Expression<Func<Hotel, object>>[]
@@ -29,6 +29,6 @@ public class GetHotelsQueryHandler : IRequestHandler<GetHotelsQuery, IEnumerable
                 Hotels.Category, 
                 Hotels.Id
         ));
-        return response;
+        return [..response];
     }
 }

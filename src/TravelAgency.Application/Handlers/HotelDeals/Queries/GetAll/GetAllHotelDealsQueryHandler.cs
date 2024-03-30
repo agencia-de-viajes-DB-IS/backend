@@ -6,7 +6,7 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
 
-public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, IEnumerable<HotelsDealsResponse>>
+public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, HotelsDealsResponse[]>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -15,7 +15,7 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, I
         unitOfWork = _unitOfWork;
     }
 
-    public async Task<IEnumerable<HotelsDealsResponse>> Handle(GetHotelsDealsQuery request, CancellationToken cancellationToken)
+    public async Task<HotelsDealsResponse[]> Handle(GetHotelsDealsQuery request, CancellationToken cancellationToken)
     {
         var hotelsDealsRepo = unitOfWork.GetRepository<HotelDeal>();
         var hotelsDealsIncludes = new Expression<Func<HotelDeal, object>>[]
@@ -27,11 +27,12 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, I
             .Select(HotelsDeals => new HotelsDealsResponse(
                 HotelsDeals.Id,
                 HotelsDeals.HotelId,
+                HotelsDeals.Name, 
                 HotelsDeals.Description, 
                 HotelsDeals.Price, 
                 HotelsDeals.ArrivalDate, 
                 HotelsDeals.DepartureDate
         ));
-        return response;
+        return [..response];
     }
 }
