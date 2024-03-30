@@ -51,28 +51,28 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 
         await _unitOfWork.SaveAsync();
 
-        var response = new PackageResponse
-        {
-            Code = package.Code.ToString(),
-            Description = package.Description,
-            Price = package.Price,
-            ArrivalDate = package.ArrivalDate,
-            DepartureDate = package.DepartureDate,
-            Facilities = facilities.Select(facility => new FacilityResponse()
+        var response = new PackageResponse(
+            package.Code.ToString(),
+            package.Name,
+            package.Description,
+            package.Price,
+            package.ArrivalDate,
+            package.DepartureDate,
+            facilities.Select(facility => new FacilityResponse()
             {
                 Id = facility.Id,
                 Name = facility.Name,
                 Description = facility.Description
             }).ToArray(),
-            ExtendedExcursions = extendedExcursions.Select(excursion => new ExtendedExcursionResponse(
+            extendedExcursions.Select(excursion => new ExtendedExcursionResponse(
                 excursion.Id,
                 excursion.Location,
                 excursion.Price,
                 excursion.ArrivalDate,
                 excursion.DepartureDate
             )).ToArray()
-        };
-
+        );
+ 
         return response;
     }
 }

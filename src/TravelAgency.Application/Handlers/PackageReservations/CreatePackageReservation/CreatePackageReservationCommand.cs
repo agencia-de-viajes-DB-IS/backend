@@ -10,5 +10,5 @@ public record CreatePackageReservationCommand(
     Guid UserId,
     Guid PackageId,
     IEnumerable<CreateTouristCommand> Tourists
-) : IRequest<PackageReservationResponse>;
+) : IRequest<CreatePackageReservationResponse>;
 

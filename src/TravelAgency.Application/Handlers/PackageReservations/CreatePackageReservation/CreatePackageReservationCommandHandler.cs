@@ -3,9 +3,9 @@ using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
-public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<CreatePackageReservationCommand, PackageReservationResponse>
+public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<CreatePackageReservationCommand, CreatePackageReservationResponse>
 {
-    public async Task<PackageReservationResponse> Handle(CreatePackageReservationCommand request, CancellationToken cancellationToken)
+    public async Task<CreatePackageReservationResponse> Handle(CreatePackageReservationCommand request, CancellationToken cancellationToken)
     {
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
@@ -24,7 +24,7 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
         await packageReservationRepo.InsertAsync(reservation);
         await _unitOfWork.SaveAsync();
 
-        var response = new PackageReservationResponse(reservation.Id);
+        var response = new CreatePackageReservationResponse(reservation.Id);
         return response;
     }
 }

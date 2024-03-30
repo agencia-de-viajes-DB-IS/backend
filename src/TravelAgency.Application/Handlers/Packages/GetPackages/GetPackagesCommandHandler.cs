@@ -26,27 +26,28 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
         };
 
         var response = (await packageRepo.FindAllAsync(includes: packageIncludes, filters: packageFilters))
-            .Select(package => new PackageResponse
-            {                
-                Code = package.Code.ToString(),
-                Description = package.Description,
-                Price = package.Price,
-                ArrivalDate = package.ArrivalDate,
-                DepartureDate = package.DepartureDate,
-                Facilities = package.Facilities!.Select(facility => new FacilityResponse()
+            .Select(package => new PackageResponse(
+                package.Code.ToString(),
+                package.Name,
+                package.Description,
+                package.Price,
+                package.ArrivalDate,
+                package.DepartureDate,
+                package.Facilities!.Select(facility => new FacilityResponse()
                 {
                     Id = facility.Id,
                     Name = facility.Name,
                     Description = facility.Description
                 }).ToArray(),
-                ExtendedExcursions = package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
+                package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,
                     excursion.DepartureDate
                 )).ToArray()
-        }).ToArray();
+            )).ToArray();
+
         return response;
     }
 }

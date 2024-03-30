@@ -1,5 +1,5 @@
 namespace TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
 
-public record PackageReservationResponse(
+public record CreatePackageReservationResponse(
     Guid Id
 );
