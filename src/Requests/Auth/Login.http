@@ -1,5 +1,15 @@
 @host = http://localhost:5000
 
+# Admin login
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "holmes@mail.net",
+    "password": "adminPassword"
+}
+
+###
 POST {{host}}/auth/login
 Content-Type: application/json
 

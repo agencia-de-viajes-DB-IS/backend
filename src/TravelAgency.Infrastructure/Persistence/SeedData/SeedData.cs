@@ -25,6 +25,7 @@ public static partial class SeedData
         PopulatePackages(context);
         PopulateRoles(context);
         PopulateAirlines(context);
+        PopulateAdmin(context);
         PopulateTourist(context);
     }
 }
