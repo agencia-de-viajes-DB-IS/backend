@@ -9,8 +9,8 @@ public class DeletePackageEndpoint(ISender _mediator) : Endpoint<DeletePackageCo
     public override void Configure()
     {
         Delete("/packages");
-        AllowAnonymous();
-        // Permissions("WritePackages");
+        // AllowAnonymous();
+        Permissions("WritePackages");
     }
     public override async Task HandleAsync(DeletePackageCommand command, CancellationToken ct)
     {

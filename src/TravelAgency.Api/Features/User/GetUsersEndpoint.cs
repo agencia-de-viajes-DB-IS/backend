@@ -10,8 +10,8 @@ public class GetUsersEndpoint(ISender _mediator) : EndpointWithoutRequest<UserRe
     public override void Configure()
     {
         Get("/users");
-        AllowAnonymous();
-        // Permissions("ReadUsers");
+        // AllowAnonymous();
+        Permissions("ReadUsers");
     }
 
     public override async Task HandleAsync(CancellationToken ct)

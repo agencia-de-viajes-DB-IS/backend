@@ -10,8 +10,8 @@ public class DeleteTouristEndpoint(ISender _mediator) : Endpoint<DeleteTouristCo
     public override void Configure()
     {
         Delete("/tourists");
-        AllowAnonymous();
-        // Permissions("DeleteTourists");
+        // AllowAnonymous();
+        Permissions("WriteTourists");
     }
     public override async Task HandleAsync(DeleteTouristCommand command, CancellationToken ct)
     {

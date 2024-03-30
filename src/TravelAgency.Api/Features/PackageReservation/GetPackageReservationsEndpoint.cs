@@ -10,8 +10,8 @@ public class GetPackageReservationsEndpoint(ISender _mediator) : Endpoint<GetPac
     public override void Configure()
     {
         Get("/reservation/package");
-        AllowAnonymous();
-        // Permissions("ReadPackageReservation");
+        // AllowAnonymous();
+        Permissions("ReadPackageReservation");
     }
     public override async Task HandleAsync(GetPackageReservationsCommand command, CancellationToken ct)
     {

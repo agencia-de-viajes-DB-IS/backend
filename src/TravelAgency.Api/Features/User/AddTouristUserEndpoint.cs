@@ -9,8 +9,8 @@ public class AddTouristsUserEndpoint(ISender mediator) : Endpoint<AddUserTourist
     public override void Configure()
     {
         Post("/users/tourists");
-        AllowAnonymous();
-        // Permissions("ReadUsers");
+        // AllowAnonymous();
+        Permissions("ReadUsers");
     }
 
     public override async Task HandleAsync(AddUserTouristCommand request, CancellationToken ct)

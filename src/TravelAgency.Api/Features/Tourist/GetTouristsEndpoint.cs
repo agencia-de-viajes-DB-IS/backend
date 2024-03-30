@@ -10,8 +10,8 @@ public class GetTouristsEndpoint(ISender _mediator) : EndpointWithoutRequest<Tou
     public override void Configure()
     {
         Get("/tourists");
-        AllowAnonymous();
-        // Permissions("ReadTourists");
+        // AllowAnonymous();
+        Permissions("ReadTourists");
     }
     public override async Task HandleAsync(CancellationToken ct)
     {

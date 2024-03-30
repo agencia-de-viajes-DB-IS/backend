@@ -12,8 +12,8 @@ public class CreateFacilityEndpoint(ISender _mediator) : Endpoint<CreateFacility
     public override void Configure()
     {
         Post("/facilities");
-        AllowAnonymous();
-        // Permissions("WriteFacilities");
+        // AllowAnonymous();
+        Permissions("WriteFacilities");
     }
     public override async Task HandleAsync(CreateFacilityCommand command, CancellationToken ct)
     {

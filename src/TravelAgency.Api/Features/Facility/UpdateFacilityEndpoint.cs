@@ -10,8 +10,8 @@ public class UpdateFacilityEndpoint(ISender _mediator) : Endpoint<UpdateFacility
     public override void Configure()
     {
         Put("/facilities");
-        AllowAnonymous();
-        // Permissions("WriteFacilities");
+        // AllowAnonymous();
+        Permissions("WriteFacilities");
     }
     public override async Task HandleAsync(UpdateFacilityCommand command, CancellationToken ct)
     {

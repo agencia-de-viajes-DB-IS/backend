@@ -10,8 +10,8 @@ public class DeletePackageReservationEndpoint(ISender _mediator) : Endpoint<Dele
     public override void Configure()
     {
         Delete("/reservation/package");
-        AllowAnonymous();
-        // Permissions("WritePackageReservation");
+        // AllowAnonymous();
+        Permissions("WritePackageReservation");
     }
     public override async Task HandleAsync(DeletePackageReservationCommand command, CancellationToken ct)
     {
