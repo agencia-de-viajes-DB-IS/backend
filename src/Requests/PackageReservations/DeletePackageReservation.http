@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE  {{host}}/reservation/package
+Content-Type: application/json
+
+{
+  "id": "da339968-078c-4166-b915-59d811e5c4ff"
+}

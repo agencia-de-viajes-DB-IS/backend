@@ -11,7 +11,7 @@ public class GetPackageReservationsEndpoint(ISender _mediator) : Endpoint<GetPac
     {
         Get("/reservation/package");
         AllowAnonymous();
-        // Permissions("WritePackageReservation");
+        // Permissions("ReadPackageReservation");
     }
     public override async Task HandleAsync(GetPackageReservationsCommand command, CancellationToken ct)
     {
