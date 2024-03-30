@@ -10,7 +10,7 @@ public enum Permissions
     WriteTourists,
     WriteFacilities,
     WritePackageReservation,
-
+    WriteAgencies,
     // Reads
     ReadAgencies,
     ReadHotels,
@@ -33,5 +33,5 @@ public enum Permissions
     DeleteTourists,
     DeleteFacilities,
     DeletePackageReservation,
-    WriteAgencies
+    
 }

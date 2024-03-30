@@ -42,11 +42,25 @@ public static partial class SeedData
                 Name = "Super Admin",
                 Permissions = new List<Permissions>(){
                         Permissions.WriteUsers,
-                        Permissions.ReadUsers,
-                        Permissions.ReadExcursions,
                         Permissions.WriteExcursions,
+                        Permissions.WritePackages,
                         Permissions.WriteRoles,
-                        Permissions.ReadRoles
+                        Permissions.WriteTourists,
+                        Permissions.WriteFacilities,
+                        Permissions.WritePackageReservation,
+                        Permissions.WriteAgencies,
+
+                        Permissions.ReadAgencies,
+                        Permissions.ReadHotels,
+                        Permissions.ReadHotelDeals,
+                        Permissions.ReadPackages,
+                        Permissions.ReadExcursions,
+                        Permissions.ReadUsers,
+                        Permissions.ReadRoles,
+                        Permissions.ReadAirlines,
+                        Permissions.ReadTourists,
+                        Permissions.ReadFacilities,
+                        Permissions.ReadPackageReservation,
                 }
             }
         );
