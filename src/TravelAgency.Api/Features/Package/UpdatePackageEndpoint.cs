@@ -12,7 +12,7 @@ public class UpdatePackageEndpoint(ISender _mediator) : Endpoint<UpdatePackageCo
     {
         Put("/packages");
         AllowAnonymous();
-        // Permissions("UpdatePackages");
+        // Permissions("WritePackages");
     }
     public override async Task HandleAsync(UpdatePackageCommand command, CancellationToken ct)
     {

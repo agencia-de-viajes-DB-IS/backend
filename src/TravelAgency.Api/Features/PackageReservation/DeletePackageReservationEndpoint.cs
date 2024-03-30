@@ -11,7 +11,7 @@ public class DeletePackageReservationEndpoint(ISender _mediator) : Endpoint<Dele
     {
         Delete("/reservation/package");
         AllowAnonymous();
-        // Permissions("DeletePackageReservation");
+        // Permissions("WritePackageReservation");
     }
     public override async Task HandleAsync(DeletePackageReservationCommand command, CancellationToken ct)
     {

@@ -10,7 +10,7 @@ public class DeletePackageEndpoint(ISender _mediator) : Endpoint<DeletePackageCo
     {
         Delete("/packages");
         AllowAnonymous();
-        // Permissions("DeletePackages");
+        // Permissions("WritePackages");
     }
     public override async Task HandleAsync(DeletePackageCommand command, CancellationToken ct)
     {

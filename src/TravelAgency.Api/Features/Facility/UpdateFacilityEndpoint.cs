@@ -11,7 +11,7 @@ public class UpdateFacilityEndpoint(ISender _mediator) : Endpoint<UpdateFacility
     {
         Put("/facilities");
         AllowAnonymous();
-        // Permissions("UpdateFacilities");
+        // Permissions("WriteFacilities");
     }
     public override async Task HandleAsync(UpdateFacilityCommand command, CancellationToken ct)
     {

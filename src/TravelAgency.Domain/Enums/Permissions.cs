@@ -22,16 +22,5 @@ public enum Permissions
     ReadAirlines,
     ReadTourists,
     ReadFacilities,
-    ReadPackageReservation,
-
-    // Updates
-    UpdatePackages,
-    UpdateFacilities,
-
-    // Deletes
-    DeletePackages,
-    DeleteTourists,
-    DeleteFacilities,
-    DeletePackageReservation,
-    
+    ReadPackageReservation    
 }
