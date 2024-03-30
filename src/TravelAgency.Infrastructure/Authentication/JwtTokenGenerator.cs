@@ -15,7 +15,7 @@ namespace TravelAgency.Infrastructure.Authentication;
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private static readonly string Permissions = "Permissions";
-    private static readonly string Roles = "roles";
+    private static readonly string Role = "role";
     private readonly JwtSettings _jwtSettings;
     private readonly IUnitOfWork _unitOfWork;
 
@@ -32,10 +32,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256
         );
-
         var role = await rolesRepo.FindAsync(null, filters:new Expression<Func<Domain.Entities.Role, bool>>[]
         {
-            u => u.Name == "Customer"
+            r => r.Id == user.RoleId
         }) ?? throw new TravelAgencyException("Operation Error", status: 500);
         var permissions = role.Permissions.Select(x => x.ToString());
 
@@ -44,7 +43,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(Roles,user.RoleId.ToString()),
+            new Claim(Role,role.Name),
             new Claim(Permissions,JsonSerializer.Serialize(permissions),JsonClaimValueTypes.JsonArray),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
