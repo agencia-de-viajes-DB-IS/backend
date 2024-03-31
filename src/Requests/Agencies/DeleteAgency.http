@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE  {{host}}/agencies/
+Content-Type: application/json
+
+{
+  "Id" : "1eccd777-8a58-b109-f5fe-4e889a44128b"
+}
