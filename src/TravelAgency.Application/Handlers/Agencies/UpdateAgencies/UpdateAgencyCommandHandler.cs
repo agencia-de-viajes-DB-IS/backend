@@ -22,6 +22,9 @@ public class UpdateAgencyCommandHandler(IUnitOfWork unitOfWork)
         if (agency != null)
         {
             agency.Email = request.Email;
+            agency.Address = request.Address;
+            agency.Name = request.Name;
+            agency.FaxNumber = request.FaxNumber;
             await unitOfWork.GetRepository<Agency>().UpdateAsync(agency);
             await unitOfWork.SaveAsync();
             return new UpdateAgencyResponse();    

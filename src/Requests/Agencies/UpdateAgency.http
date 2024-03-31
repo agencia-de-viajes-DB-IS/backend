@@ -1,0 +1,12 @@
+@host = http://localhost:5000
+
+PUT {{host}}/agencies/
+Content-Type: application/json
+
+{
+    "id": "1eccd777-8a58-b109-f5fe-4e889a44128b",
+    "name": "Cuba Verdeeeee",
+    "address": "Downtown, Cienfuegos",
+    "faxNumber": 3970,
+    "email": "Esteban0@gmail.com"
+}
