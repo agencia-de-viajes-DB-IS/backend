@@ -1,0 +1,13 @@
+@host = http://localhost:5000
+
+POST {{host}}/backOffice/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMzg2OWM2Ni0xZTRjLTRhMjYtYjQ0ZC03ODZhMjZhM2U1YzkiLCJnaXZlbl9uYW1lIjoiU2hlcmxvY2siLCJmYW1pbHlfbmFtZSI6IkhvbG1lcyIsInJvbGUiOiJTdXBlciBBZG1pbiIsIlBlcm1pc3Npb25zIjpbIldyaXRlVXNlcnMiLCJXcml0ZUV4Y3Vyc2lvbnMiLCJXcml0ZVBhY2thZ2VzIiwiV3JpdGVSb2xlcyIsIldyaXRlVG91cmlzdHMiLCJXcml0ZUZhY2lsaXRpZXMiLCJXcml0ZVBhY2thZ2VSZXNlcnZhdGlvbiIsIldyaXRlQWdlbmNpZXMiLCJSZWFkQWdlbmNpZXMiLCJSZWFkSG90ZWxzIiwiUmVhZEhvdGVsRGVhbHMiLCJSZWFkUGFja2FnZXMiLCJSZWFkRXhjdXJzaW9ucyIsIlJlYWRVc2VycyIsIlJlYWRSb2xlcyIsIlJlYWRBaXJsaW5lcyIsIlJlYWRUb3VyaXN0cyIsIlJlYWRGYWNpbGl0aWVzIiwiUmVhZFBhY2thZ2VSZXNlcnZhdGlvbiJdLCJqdGkiOiI2ZDg5NWMyOS0wOTEyLTRlODctYWFmZC1lMzA3NDJmN2ZhNzEiLCJleHAiOjE3MTE5MjgwOTUsImlzcyI6IlRyYXZlbEFnZW5jeSIsImF1ZCI6IlRyYXZlbEFnZW5jeSJ9.3E8ZTWKgt0NJd67FDJuK-tC8b065Z4Z9DZBZ0d2_e0E
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "doeJohn@ms.netss",
+    "password": "doepass",
+    "roleId": "a5c5842d-e4d2-432b-938a-af261cb9938f"
+}

@@ -5,7 +5,7 @@ using TravelAgency.Application.Responses;
 
 namespace TravelAgency.Api.Features.Roles;
 
-public class GetRolesEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<GetRolesResponse>>
+public class GetRolesEndpoint(ISender _mediator) : EndpointWithoutRequest<GetRolesResponse[]>
 {
     public override void Configure()
     {

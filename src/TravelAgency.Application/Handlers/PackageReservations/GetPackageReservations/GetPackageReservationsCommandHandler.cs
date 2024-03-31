@@ -38,7 +38,8 @@ public class GetPackageReservationsCommandHandler(IUnitOfWork _unitOfWork) : IRe
                     packageReservation.User.Id,
                     packageReservation.User.FirstName,
                     packageReservation.User.LastName,
-                    packageReservation.User.Email
+                    packageReservation.User.Email,
+                    packageReservation.UserId
                 ),
                 new PackageResponseOnReservation(
                     packageReservation.Package.Code.ToString(),

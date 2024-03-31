@@ -3,6 +3,7 @@ using TravelAgency.Domain.Enums;
 
 namespace TravelAgency.Application.Handlers.Roles.Queries.GetAll; 
 public record GetRolesResponse(
+    Guid Id,
     string Name, 
-    ICollection<Permissions> Permissions 
+    ICollection<string> Permissions 
 );

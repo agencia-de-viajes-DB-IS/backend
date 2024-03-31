@@ -5,7 +5,7 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Roles.Queries.GetAll; 
 
-public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, IEnumerable<GetRolesResponse>>
+public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, GetRolesResponse[]>
 {
     private readonly IUnitOfWork unitOfWork;
 
@@ -14,14 +14,15 @@ public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, IEnumerable<G
         unitOfWork = _unitOfWork;
     }
 
-    public async Task<IEnumerable<GetRolesResponse>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
+    public async Task<GetRolesResponse[]> Handle(GetRolesQuery request, CancellationToken cancellationToken)
     {
         var RolesRepo = unitOfWork.GetRepository<Role>();
         var response = (await RolesRepo.FindAllAsync())
             .Select(Roles => new GetRolesResponse(
+                Roles.Id, 
                 Roles.Name,
-                Roles.Permissions
+                Roles.Permissions.Select(x => x.ToString()).ToList()
         ));
-        return response;
+        return response.ToArray();
     }
 }

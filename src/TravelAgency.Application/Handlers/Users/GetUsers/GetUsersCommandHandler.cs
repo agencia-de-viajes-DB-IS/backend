@@ -14,8 +14,9 @@ public class GetUsersCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<Ge
                 user.Id,
                 user.FirstName,
                 user.LastName,
-                user.Email
+                user.Email,
+                user.RoleId
         )).ToArray();
-        return response;
+        return response!;
     }
 }
