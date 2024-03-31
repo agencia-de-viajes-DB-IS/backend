@@ -1,8 +1,7 @@
 using FastEndpoints;
 using TravelAgency.Api.Common;
-using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Api.Features.Authentication.Register;
+namespace TravelAgency.Api.Features.Sample;
 
 public class SampleEndpoint : EndpointWithoutRequest<string>
 {

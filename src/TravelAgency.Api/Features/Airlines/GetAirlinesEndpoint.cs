@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Airlines.GetAirlines;
 
-namespace TravelAgency.Api.Features.Agency;
+namespace TravelAgency.Api.Features.Airlines;
 
 public class GetAirlinesEndpoint(ISender mediator) : EndpointWithoutRequest<AirlineResponse[]>
 {

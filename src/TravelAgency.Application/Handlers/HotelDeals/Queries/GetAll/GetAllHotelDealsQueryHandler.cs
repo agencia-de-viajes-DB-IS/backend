@@ -1,10 +1,9 @@
 using System.Linq.Expressions;
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
-using TravelAgency.Application.Responses;
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
+namespace TravelAgency.Application.Handlers.HotelDeals.Queries.GetAll;
 
 public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, HotelsDealsResponse[]>
 {

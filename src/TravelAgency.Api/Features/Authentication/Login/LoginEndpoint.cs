@@ -3,7 +3,7 @@ using MediatR;
 using TravelAgency.Application.Handlers.Authentication.Login;
 using TravelAgency.Application.Responses;
 
-namespace TravelAgency.Api.Features.Authentication.Register;
+namespace TravelAgency.Api.Features.Authentication.Login;
 
 public class LoginEndpoint : Endpoint<LoginQuery, AuthenticationResponse>
 {

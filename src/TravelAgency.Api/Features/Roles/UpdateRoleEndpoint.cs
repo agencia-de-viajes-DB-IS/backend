@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Roles.Commands.Update;
 
-namespace TravelAgency.Api.Features.Role;
+namespace TravelAgency.Api.Features.Roles;
 
 public class UpdateRoleEndpoint(ISender _mediator) : Endpoint<UpdateRoleCommand, UpdateRoleResponse>
 {

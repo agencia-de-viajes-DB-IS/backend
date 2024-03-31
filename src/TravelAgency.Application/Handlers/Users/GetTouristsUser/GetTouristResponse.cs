@@ -1,6 +1,4 @@
-using TravelAgency.Application.Responses;
-
-namespace TravelAgency.Application.Handlers.Users.GetTourist;
+namespace TravelAgency.Application.Handlers.Users.GetTouristsUser;
 
 public record GetTouristDto
 (

@@ -1,4 +1,4 @@
-namespace TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
+namespace TravelAgency.Application.Handlers.HotelDeals.Queries.GetAll;
 public record HotelsDealsResponse(
     Guid Id,
     Guid HotelId,

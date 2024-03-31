@@ -1,5 +1,6 @@
 using MediatR;
-namespace TravelAgency.Application.Handlers.Users.GetTourist;
+
+namespace TravelAgency.Application.Handlers.Users.GetTouristsUser;
 
 
 public class GetUserTouristCommand : IRequest<GetTouristDto[]> {

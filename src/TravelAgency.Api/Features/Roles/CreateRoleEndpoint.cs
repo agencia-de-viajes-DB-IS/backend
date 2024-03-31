@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Roles.Commands.Create;
 
-namespace TravelAgency.Api.Features.Role;
+namespace TravelAgency.Api.Features.Roles;
 
 public class CreateRoleEndpoint(ISender _mediator) : Endpoint<CreateRoleCommand, CreateRoleResponse>
 {

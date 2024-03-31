@@ -1,9 +1,8 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.HotelsDeals.Queries.GetAll;
-using TravelAgency.Application.Responses;
+using TravelAgency.Application.Handlers.HotelDeals.Queries.GetAll;
 
-namespace TravelAgency.Api.Features.HotelsDeals;
+namespace TravelAgency.Api.Features.HotelDeals;
 
 public class GetHotelsDealsEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<HotelsDealsResponse>>
 {

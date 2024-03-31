@@ -1,9 +1,8 @@
 using FastEndpoints;
 using MediatR;
-using TravelAgency.Application.Handlers.ExcursionReservations;
 using TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursionReservation;
 
-namespace TravelAgency.Api.Features.ExcursionReservations;
+namespace TravelAgency.Api.Features.ExcursionReservation;
 
 public class CreateExcursionReservationEndpoint(ISender _mediator) : Endpoint<CreateExcursionReservationCommand, CreateExcursionReservationResponse>
 {

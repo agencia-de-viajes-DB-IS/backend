@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Excursions.GetExcursions;
 
 namespace TravelAgency.Api.Features.Excursion;
 
-public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<GetExcursionResponse[]>
+public class GetExcursionsEndpoint(ISender mediator) : Endpoint<GetExcursionsCommand, GetExcursionResponse[]>
 {
     public override void Configure()
     {
@@ -13,9 +13,8 @@ public class GetExcursionsEndpoint(ISender mediator) : EndpointWithoutRequest<Ge
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(GetExcursionsCommand command, CancellationToken ct)
     {
-        var command = new GetExcursionsCommand();
         var response = await mediator.Send(command, ct);
         await SendOkAsync(response, ct);
     }

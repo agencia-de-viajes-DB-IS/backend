@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.HotelDeals.Commands.Update;
 
-namespace TravelAgency.Api.Features.HotelDeal;
+namespace TravelAgency.Api.Features.HotelDeals;
 
 public class UpdateHotelDealEndpoint(ISender _mediator) : Endpoint<UpdateHotelDealCommand, UpdateHotelDealResponse>
 {

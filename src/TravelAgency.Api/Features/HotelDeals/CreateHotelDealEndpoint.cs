@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.HotelDeals.Commands.Create;
 
-namespace TravelAgency.Api.Features.HotelDeal;
+namespace TravelAgency.Api.Features.HotelDeals;
 
 public class CreateHotelDealEndpoint(ISender _mediator) : Endpoint<CreateHotelDealCommand, CreateHotelDealResponse>
 {

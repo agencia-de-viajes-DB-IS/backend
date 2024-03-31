@@ -2,7 +2,7 @@ using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.HotelDeals.Commands.Delete;
 
-namespace TravelAgency.Api.Features.HotelDeal;
+namespace TravelAgency.Api.Features.HotelDeals;
 
 public class DeleteHotelDealEndpoint(ISender _mediator) : Endpoint<DeleteHotelDealCommand, DeleteHotelDealResponse>
 {
