@@ -1,12 +1,14 @@
 using FluentValidation;
 using TravelAgency.Application.Common;
 using TravelAgency.Application.Handlers.Agencies.CreateAgencies;
+using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Excursions.CreateExcursions;
 
 public class CreateExcursionCommandValidator : TravelAgencyAbstractValidator<CreateExcursionCommand>
 { 
-    public CreateExcursionCommandValidator()
+    public CreateExcursionCommandValidator(IUnitOfWork unitOfWork)
     {
             // rule for name
             RuleFor(x => x.Name)
@@ -26,5 +28,9 @@ public class CreateExcursionCommandValidator : TravelAgencyAbstractValidator<Cre
 
             RuleFor(x => x.AgencyId)
                 .NotEmpty().WithMessage("Excursion ID is required");
+
+        RuleFor(x => x.AgencyId)
+            .MustAsync((id, token) => unitOfWork.GetRepository<Agency>().ExistsAsync(x => x.Id == id))
+            .WithMessage("Agency not found");
     }
 }

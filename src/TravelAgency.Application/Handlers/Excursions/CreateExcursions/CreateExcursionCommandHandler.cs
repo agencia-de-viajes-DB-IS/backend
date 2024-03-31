@@ -8,7 +8,7 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
 {
     public async Task<CreateExcursionResponse> Handle(CreateExcursionCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateExcursionCommandValidator();
+        var validator = new CreateExcursionCommandValidator(iunitOfWork);
 
         await validator.ValidateAsync(request, cancellationToken);
         var excursion = new Excursion
@@ -23,16 +23,7 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
         };
 
         await iunitOfWork.GetRepository<Excursion>().InsertAsync(excursion);
-        await iunitOfWork.SaveAsync();
-        var response = new CreateExcursionResponse
-        (
-            excursion.Id,
-            excursion.Name,
-            excursion.Description,
-            excursion.Location,
-            excursion.Price,
-            excursion.ArrivalDate
-        );
-        return response;
+        await iunitOfWork.SaveAsync(); 
+        return new CreateExcursionResponse();;
     }
 }
