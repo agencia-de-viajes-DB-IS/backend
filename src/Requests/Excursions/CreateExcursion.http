@@ -1,0 +1,13 @@
+@host = http://localhost:5000
+
+POST {{host}}/excursions/
+Content-Type: application/json
+
+{
+    Name : "Chama",
+    Description: "Suspenso",
+    Location : "Cuba",
+    Price: "10",
+    ArrivalDate: "2024-04-19T03:28:45.548Z",
+    AgencyId: "1eccd777-8a58-b109-f5fe-4e889a44128b"
+}

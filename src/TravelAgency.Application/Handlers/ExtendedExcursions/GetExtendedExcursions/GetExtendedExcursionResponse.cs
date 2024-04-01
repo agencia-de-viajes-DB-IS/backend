@@ -4,7 +4,7 @@ namespace TravelAgency.Application.Handlers.ExtendedExcursions.GetExtendedExcurs
 
 public class GetExtendedExcursionResponse
 {
-    public GetExtendedExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate, ExcursionAgencyResponse agency, DateTime departureDate, IEnumerable<GetExtendedExcursionHotelDealResponse> hotelDeals)
+    public GetExtendedExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate, ExcursionAgencyResponse agency, DateTime departureDate, GetExtendedExcursionHotelDealResponse[] hotelDeals)
     {
         Id = id;
         Name = name;
@@ -25,5 +25,5 @@ public class GetExtendedExcursionResponse
     public DateTime ArrivalDate { get; set; }
     public ExcursionAgencyResponse Agency { get; set; }
     public DateTime DepartureDate { get; set; }
-    public IEnumerable<GetExtendedExcursionHotelDealResponse> HotelDeals { get; set; }
+    public GetExtendedExcursionHotelDealResponse[] HotelDeals { get; set; }
 }
