@@ -16,6 +16,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private static readonly string Permissions = "Permissions";
     private static readonly string Role = "role";
+    private static readonly string AgencyId = "agencyId";
     private readonly JwtSettings _jwtSettings;
     private readonly IUnitOfWork _unitOfWork;
 
@@ -44,6 +45,8 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
             new Claim(Role,role.Name),
+            new Claim(AgencyId,(user.AgencyId ?? Guid.Empty).ToString()),
+            new Claim(JwtRegisteredClaimNames.Email,user.Email),
             new Claim(Permissions,JsonSerializer.Serialize(permissions),JsonClaimValueTypes.JsonArray),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };

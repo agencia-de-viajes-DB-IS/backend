@@ -17,6 +17,8 @@ public class AddUserFromBackOfficeCommandHandler(IUnitOfWork unitOfWork) : IRequ
     {
         var userRepo = _unitOfWork.GetRepository<User>();
         var roleRepo = _unitOfWork.GetRepository<Role>();
+        var agencyRepo = _unitOfWork.GetRepository<Agency>();
+
         var isAlreadyCreated = await userRepo.FindAsync(filters: [
             x => x.Email == request.Email
         ]); 
@@ -28,12 +30,17 @@ public class AddUserFromBackOfficeCommandHandler(IUnitOfWork unitOfWork) : IRequ
             x => x.Id == request.RoleId
         ]) ?? throw new TravelAgencyException("Role not found","", 400); 
 
+        var isValidAgency = await agencyRepo.FindAsync(filters: [
+            x => x.Id == request.AgencyId
+        ]) ?? throw new TravelAgencyException("Agency not found","", 400); 
+
         await userRepo.InsertAsync( new User(){
             Email = request.Email,
             FirstName = request.FirstName, 
             LastName = request.LastName,
             Password = request.Password,
-            RoleId = request.RoleId
+            RoleId = request.RoleId,
+            AgencyId = request.AgencyId,
         });
 
         await _unitOfWork.SaveAsync();

@@ -8,5 +8,6 @@ public record AddUserFromBackOfficeCommand
     string LastName,
     string Email,
     string Password,
-    Guid RoleId
+    Guid RoleId, 
+    Guid? AgencyId 
 ): IRequest<AddUserFromBackOfficeResponse>;
