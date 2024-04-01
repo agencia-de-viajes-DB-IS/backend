@@ -39,6 +39,7 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             Price = request.Price,
             ArrivalDate = request.ArrivalDate,
             DepartureDate = request.DepartureDate,
+            Capacity = request.Capacity,
             Facilities = facilities,
             ExtendedExcursions = extendedExcursions
         };

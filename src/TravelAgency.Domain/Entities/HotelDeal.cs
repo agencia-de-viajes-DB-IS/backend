@@ -9,6 +9,7 @@ public class HotelDeal
     public decimal Price { get; set; }
     public required DateTime ArrivalDate { get; set; }
     public required DateTime DepartureDate { get; set; }
+    public int Capacity { get; set; }
 
     // Relational Properties
     public Guid HotelId { get; set; }

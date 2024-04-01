@@ -26,6 +26,7 @@ public static partial class SeedData
             .RuleFor(e => e.Price, f => f.Random.Decimal(10, 100))
             .RuleFor(e => e.ArrivalDate, f => f.Date.Between(new DateTime(2024, 9, 1), new DateTime(2026, 12, 31)))
             .RuleFor(e => e.AgencyId, f => f.PickRandom(agencyIds))
+            .RuleFor(a => a.Capacity, f => f.Random.Int(5, 30))
             .Generate(10);
 
         context.Excursions.AddRange(testExcursions);

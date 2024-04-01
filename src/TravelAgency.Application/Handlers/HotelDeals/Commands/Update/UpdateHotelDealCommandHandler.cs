@@ -27,6 +27,7 @@ public class UpdateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
         hotelDeal.ExtendedExcursions = request.ExtendedExcursions ?? hotelDeal.ExtendedExcursions;
         hotelDeal.HotelId = request.HotelId ?? hotelDeal.HotelId;
         hotelDeal.Price = request.Price ?? hotelDeal.Price;
+        hotelDeal.Capacity = request.Capacity;
         
         await hotelDealRepo.UpdateAsync(hotelDeal);
         await _unitOfWork.SaveAsync();

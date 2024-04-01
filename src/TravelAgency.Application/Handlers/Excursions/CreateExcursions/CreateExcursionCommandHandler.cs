@@ -19,6 +19,7 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
             Location = request.Location,
             Price = request.Price,
             ArrivalDate = request.ArrivalDate,
+            Capacity = request.Capacity,
             AgencyId = request.AgencyId
         };
 

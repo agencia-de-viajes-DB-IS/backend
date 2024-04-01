@@ -11,5 +11,6 @@ public record UpdateHotelDealCommand(
     ICollection<ExtendedExcursion>? ExtendedExcursions,
     Guid? HotelId,
     decimal? Price,
-    string? Description
+    string? Description,
+    int Capacity
 ) : IRequest<UpdateHotelDealResponse>{}

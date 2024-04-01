@@ -10,4 +10,5 @@ public class UpdateExcursionCommand : IRequest<UpdateExcursionResponse>
     public required string Location { get; set; }
     public decimal Price { get; set; }
     public DateTime ArrivalDate { get; set; }
+    public int Capacity { get; set; }
 }

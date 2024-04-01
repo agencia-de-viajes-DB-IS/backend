@@ -26,6 +26,7 @@ public class UpdateExtendedExcursionCommandHandler(IUnitOfWork unitOfWork) : IRe
             excursion.Location = request.Location;
             excursion.ArrivalDate = request.ArrivalDate;
             excursion.Price = request.Price;
+            excursion.Capacity = request.Capacity;
             excursion.HotelDeals = hotelDeals.ToList();
             await unitOfWork.GetRepository<ExtendedExcursion>().UpdateAsync(excursion);
             await unitOfWork.SaveAsync();
