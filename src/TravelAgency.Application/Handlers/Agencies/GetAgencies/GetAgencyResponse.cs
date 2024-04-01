@@ -4,15 +4,13 @@ namespace TravelAgency.Application.Handlers.Agencies.GetAgencies;
 
 public class GetAgencyResponse : BaseResponse
 {
-    public GetAgencyResponse(Guid id, string name, string address, int faxNumber, string email, IEnumerable<AgencyExcursionResponse> excursions, IEnumerable<AgencyHotelDealResponse> hotelDeals)
+    public GetAgencyResponse(Guid id, string name, string address, int faxNumber, string email)
     {
         Id = id;
         Name = name;
         Address = address;
         FaxNumber = faxNumber;
         Email = email;
-        Excursions = excursions;
-        HotelDeals = hotelDeals;
     }
 
     public Guid Id { get; set; }
@@ -20,8 +18,6 @@ public class GetAgencyResponse : BaseResponse
     public string Address { get; set; }
     public int FaxNumber { get; set; }
     public string Email { get; set; }
-    public IEnumerable<AgencyExcursionResponse> Excursions { get; set; }
-    public IEnumerable<AgencyHotelDealResponse> HotelDeals { get; set; }
 };
 
 public record AgencyHotelDealResponse(
