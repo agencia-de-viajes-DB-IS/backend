@@ -33,7 +33,8 @@ public class CreateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
             AgencyRelatedHotelDeals = request.AgencyRelatedHotelDeals,
             ExtendedExcursions = request.ExtendedExcursions,
             HotelId = request.HotelId,
-            Price = request.Price 
+            Price = request.Price,
+            Capacity = request.Capacity
         };
 
         await HotelDealRepo.InsertAsync(HotelDeal);

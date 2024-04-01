@@ -8,6 +8,7 @@ Content-Type: application/json
     Description: "Suspenso",
     Location : "Cuba",
     Price: "10",
+    Capacity: 15,
     ArrivalDate: "2024-04-19T03:28:45.548Z",
     AgencyId: "1eccd777-8a58-b109-f5fe-4e889a44128b"
 }

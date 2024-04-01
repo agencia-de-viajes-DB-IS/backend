@@ -8,6 +8,7 @@ Content-Type: application/json
   "Description": "Aventuras en la presa Zaza",
   "Location": "Cuba",
   "Price": 100,
+  "Capacity": 20,
   "ArrivalDate": "2024-04-01T03:28:45.548Z",
   "DepartureDate": "2024-04-19T03:28:45.548Z",
   "HotelDealsIds": [],

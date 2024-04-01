@@ -25,6 +25,7 @@ public class CreateExtendedExcursionCommandHandler(IUnitOfWork unitOfWork) : IRe
             ArrivalDate = request.ArrivalDate,
             AgencyId = request.AgencyId,
             DepartureDate = request.DepartureDate,
+            Capacity = request.Capacity,
             HotelDeals = hoteldeals.ToList(),
         };
         await unitOfWork.GetRepository<ExtendedExcursion>().InsertAsync(excursion);

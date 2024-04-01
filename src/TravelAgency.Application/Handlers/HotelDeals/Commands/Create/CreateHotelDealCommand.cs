@@ -11,5 +11,6 @@ public record CreateHotelDealCommand(
     Guid HotelId,
     decimal Price,
     string? Description,
-    string Name
+    string Name,
+    int Capacity
 ) : IRequest<CreateHotelDealResponse>{}

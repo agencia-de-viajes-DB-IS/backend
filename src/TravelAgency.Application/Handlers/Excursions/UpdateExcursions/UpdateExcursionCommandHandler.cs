@@ -25,6 +25,7 @@ public class UpdateExcursionCommandHandler(IUnitOfWork unitOfWork)
             excursion.Location = request.Location;
             excursion.ArrivalDate = request.ArrivalDate;
             excursion.Price = request.Price;
+            excursion.Capacity = request.Capacity;
             await unitOfWork.GetRepository<Excursion>().UpdateAsync(excursion);
             await unitOfWork.SaveAsync();
             return new UpdateExcursionResponse();    

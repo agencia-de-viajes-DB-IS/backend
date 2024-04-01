@@ -9,6 +9,7 @@ public record CreatePackageCommand(
     decimal Price,
     DateTime ArrivalDate,
     DateTime DepartureDate,
+    int Capacity,
     IEnumerable<int> FacilityIds,
     IEnumerable<Guid> ExtendedExcursionIds
 ) : IRequest<PackageResponse>;

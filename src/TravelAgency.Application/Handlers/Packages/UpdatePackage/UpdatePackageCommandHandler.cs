@@ -44,6 +44,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         package.Name = request.Name;
         package.Description = request.Description;
         package.Price = request.Price;
+        package.Capacity = request.Capacity;
         package.Facilities = facilities;
         package.ExtendedExcursions = extendedExcursions;
 

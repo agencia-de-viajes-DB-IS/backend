@@ -25,7 +25,8 @@ public static partial class SeedData
                 Price = 155,
                 ArrivalDate = new DateTime(2024, 8, 4),
                 DepartureDate = new DateTime(2024, 8, 24),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal()
             {
@@ -35,7 +36,8 @@ public static partial class SeedData
                 Price = 150,
                 ArrivalDate = new DateTime(2024, 9, 1),
                 DepartureDate = new DateTime(2024, 9, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal()
             {
@@ -45,7 +47,8 @@ public static partial class SeedData
                 Price = 175,
                 ArrivalDate = new DateTime(2024, 9, 16),
                 DepartureDate = new DateTime(2024, 9, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal()
             {
@@ -55,7 +58,8 @@ public static partial class SeedData
                 Price = 190,
                 ArrivalDate = new DateTime(2024, 12, 16),
                 DepartureDate = new DateTime(2024, 12, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -64,7 +68,8 @@ public static partial class SeedData
                 Price = 200,
                 ArrivalDate = new DateTime(2024, 8, 1),
                 DepartureDate = new DateTime(2024, 8, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -73,7 +78,8 @@ public static partial class SeedData
                 Price = 220,
                 ArrivalDate = new DateTime(2024, 8, 16),
                 DepartureDate = new DateTime(2024, 8, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -82,7 +88,8 @@ public static partial class SeedData
                 Price = 180,
                 ArrivalDate = new DateTime(2024, 12, 1),
                 DepartureDate = new DateTime(2024, 12, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -100,7 +107,8 @@ public static partial class SeedData
                 Price = 180,
                 ArrivalDate = new DateTime(2024, 8, 16),
                 DepartureDate = new DateTime(2024, 8, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -109,7 +117,8 @@ public static partial class SeedData
                 Price = 150,
                 ArrivalDate = new DateTime(2024, 9, 1),
                 DepartureDate = new DateTime(2024, 9, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -118,7 +127,8 @@ public static partial class SeedData
                 Price = 220,
                 ArrivalDate = new DateTime(2024, 9, 16),
                 DepartureDate = new DateTime(2024, 9, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -127,7 +137,8 @@ public static partial class SeedData
                 Price = 190,
                 ArrivalDate = new DateTime(2024, 10, 1),
                 DepartureDate = new DateTime(2024, 10, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -136,7 +147,8 @@ public static partial class SeedData
                 Price = 250,
                 ArrivalDate = new DateTime(2024, 10, 16),
                 DepartureDate = new DateTime(2024, 10, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -145,7 +157,8 @@ public static partial class SeedData
                 Price = 210,
                 ArrivalDate = new DateTime(2024, 11, 1),
                 DepartureDate = new DateTime(2024, 11, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -154,7 +167,8 @@ public static partial class SeedData
                 Price = 160,
                 ArrivalDate = new DateTime(2024, 11, 16),
                 DepartureDate = new DateTime(2024, 11, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -163,7 +177,8 @@ public static partial class SeedData
                 Price = 175,
                 ArrivalDate = new DateTime(2024, 12, 1),
                 DepartureDate = new DateTime(2024, 12, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -172,7 +187,8 @@ public static partial class SeedData
                 Price = 230,
                 ArrivalDate = new DateTime(2024, 12, 16),
                 DepartureDate = new DateTime(2024, 12, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -181,7 +197,8 @@ public static partial class SeedData
                 Price = 195,
                 ArrivalDate = new DateTime(2025, 1, 1),
                 DepartureDate = new DateTime(2025, 1, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -190,7 +207,8 @@ public static partial class SeedData
                 Price = 210,
                 ArrivalDate = new DateTime(2025, 1, 16),
                 DepartureDate = new DateTime(2025, 1, 30),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             },
             new HotelDeal(){
                 Id = Guid.NewGuid(),
@@ -199,7 +217,8 @@ public static partial class SeedData
                 Price = 220,
                 ArrivalDate = new DateTime(2025, 2, 1),
                 DepartureDate = new DateTime(2025, 2, 15),
-                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)]
+                HotelId = hotelIds[random.Next(0, hotelIds.Count - 1)],
+                Capacity = 20
             }
         );
 

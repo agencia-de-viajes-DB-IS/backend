@@ -8,6 +8,7 @@ public record UpdatePackageCommand(
     string Name, 
     string Description,
     decimal Price,
+    int Capacity,
     IEnumerable<int> FacilityIds,
     IEnumerable<Guid> ExtendedExcursionIds
 ) : IRequest<PackageResponse>;
