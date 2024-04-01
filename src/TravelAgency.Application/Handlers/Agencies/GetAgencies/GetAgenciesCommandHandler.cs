@@ -11,18 +11,22 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
     {
         var agencyRepo = _unitOfWork.GetRepository<Agency>();
         var agencyRelatedHotelDeal = _unitOfWork.GetRepository<AgencyRelatedHotelDeal>();       
-
         var agencyIncludes = new Expression<Func<Agency, object>>[]
         {
             agency => agency.Excursions!,
         };
-
+        var agencyFilter = new Expression<Func<Agency, bool>>[]
+        {
+            agency => request.NameFilter == "" || agency.Name == request.NameFilter,
+            agency => request.EmailFilter == "" || agency.Email == request.EmailFilter,
+            agency => request.FaxNumberFilter == default || agency.FaxNumber == request.FaxNumberFilter,
+            agency => request.AddressFilter == "" || agency.Address == request.AddressFilter
+        };
         var agencyHotelDealIncludes = new Expression<Func<AgencyRelatedHotelDeal, object>>[]
         {
             agencyHotelDeal => agencyHotelDeal.HotelDeal.Hotel!
         };
-
-        var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes))
+        var response = (await agencyRepo.FindAllAsync(includes: agencyIncludes, filters : agencyFilter))
             .Select(async agency => (
                 new GetAgencyResponse(
                     agency.Id,
