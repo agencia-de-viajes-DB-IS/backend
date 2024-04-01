@@ -22,7 +22,8 @@ public enum Permissions
     ReadAirlines,
     ReadTourists,
     ReadFacilities,
-
+    ReadPayments,
+    
     // Updates
 
     UpdatePackages,
