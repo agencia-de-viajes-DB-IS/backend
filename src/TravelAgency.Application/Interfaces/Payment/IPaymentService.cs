@@ -1,3 +1,4 @@
+using TravelAgency.Application.Handlers.Agencies.GetAgencies;
 using TravelAgency.Application.Responses;
 using TravelAgency.Domain.Common.Exceptions;
 
@@ -5,7 +6,8 @@ namespace TravelAgency.Application.Interfaces.Payment;
 
 public interface IPaymentService
 {
-    Task<PaymentResponse> CreatePayment(CreatePaymentRequest paymentRequest); 
+    Task<PaymentResponse> CreatePayment(CreatePaymentRequest paymentRequest, CancellationToken cancellationToken); 
+    Task<BaseResponse> HandleEvent(object stripeEvent, CancellationToken cancellationToken); 
 }
 
 public class PaymentResponse : BaseResponse
@@ -18,6 +20,7 @@ public class CreatePaymentRequest
 {
     public required IEnumerable<ProductData> Products;
     public string Currency { get; set; } = "usd";
+    public required string InternalPaymentId { get; set; }
     public required string SuccessUrl { get; set; }
     public required string CancelUrl { get; set; }
 }
