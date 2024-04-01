@@ -2,13 +2,14 @@
 
 POST  {{host}}/reservation/package
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4N2FjZTgzZS1lNjU3LTRjYTctYTk5ZS1hNGZmZTViNjc3YmUiLCJnaXZlbl9uYW1lIjoiU2hlcmxvY2siLCJmYW1pbHlfbmFtZSI6IkhvbG1lcyIsInJvbGUiOiJTdXBlciBBZG1pbiIsImFnZW5jeUlkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwiZW1haWwiOiJob2xtZXNAbWFpbC5uZXQiLCJQZXJtaXNzaW9ucyI6WyJXcml0ZVVzZXJzIiwiV3JpdGVFeGN1cnNpb25zIiwiV3JpdGVQYWNrYWdlcyIsIldyaXRlUm9sZXMiLCJXcml0ZVRvdXJpc3RzIiwiV3JpdGVGYWNpbGl0aWVzIiwiV3JpdGVQYWNrYWdlUmVzZXJ2YXRpb24iLCJXcml0ZUFnZW5jaWVzIiwiUmVhZEFnZW5jaWVzIiwiUmVhZEhvdGVscyIsIlJlYWRIb3RlbERlYWxzIiwiUmVhZFBhY2thZ2VzIiwiUmVhZEV4Y3Vyc2lvbnMiLCJSZWFkVXNlcnMiLCJSZWFkUm9sZXMiLCJSZWFkQWlybGluZXMiLCJSZWFkVG91cmlzdHMiLCJSZWFkRmFjaWxpdGllcyIsIlJlYWRQYWNrYWdlUmVzZXJ2YXRpb24iXSwianRpIjoiNzA4MGJhODItZDE0MC00MjcwLWI1YWItMDlhZWY5ODU0YTQyIiwiZXhwIjoxNzEyMDIyNTMyLCJpc3MiOiJUcmF2ZWxBZ2VuY3kiLCJhdWQiOiJUcmF2ZWxBZ2VuY3kifQ.nV1D5AKVQvJKsISmLn6CBiaOoOoRz4sfO9ak0loklOc
 
 {
-  "airlineId": "4f28605f-5148-4a58-8c9b-f1cf3bea7c67",
+  "airlineId": "1cc92b02-5f46-43bf-b636-84215bd6122b",
   "price": 300,
   "reservationDate": "2024-03-19T03:28:45.548Z",
-  "userId": "51041bd1-39c9-4a69-8ffb-8829b50b4c15",
-  "packageId": "21e0ec24-c229-4cbf-ac15-bafd170297d9",
+  "userId": "564d8e24-93c9-44a1-b6bd-41ae1d439b07",
+  "packageId": "14461e6c-ee6c-4b16-823b-c2c2f3c152da",
   "tourists": [
     {
       "id": "12345678911",

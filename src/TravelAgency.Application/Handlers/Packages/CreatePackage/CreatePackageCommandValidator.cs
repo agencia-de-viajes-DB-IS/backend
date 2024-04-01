@@ -21,7 +21,7 @@ public class CreatePackageCommandValidator : TravelAgencyAbstractValidator<Creat
             .WithMessage("Price must be greater than 0");
         RuleFor(x => x)
             .MustAsync(async (x, _) => await ValidateExcursions(x.ExtendedExcursionIds, x.ArrivalDate, x.DepartureDate))
-            .WithMessage("Excursions must belong to the same agency and their arrival and departure dates must be included in those of the package");
+            .WithMessage(@"Excursions: Must belong to the same agency, Their arrival and departure dates must be included in those of the package, A package must contain at least one extended-excursion");
     }
 
     private async Task<bool> ValidateExcursions(IEnumerable<Guid> extendedExcursionIds, DateTime arrivalDate, DateTime departureDate)
@@ -38,6 +38,6 @@ public class CreatePackageCommandValidator : TravelAgencyAbstractValidator<Creat
         var firstExcursion = excursions.FirstOrDefault();
         var agencyId = firstExcursion is null ? Guid.NewGuid() : firstExcursion.AgencyId;
 
-        return excursions.All(excursion => excursion.ArrivalDate >= arrivalDate && excursion.DepartureDate <= departureDate) && excursions.All(excursion => excursion.AgencyId == agencyId);
+        return excursions.All(excursion => excursion.ArrivalDate >= arrivalDate && excursion.DepartureDate <= departureDate) && excursions.All(excursion => excursion.AgencyId == agencyId) && excursions.Count() > 0;
     }
 }

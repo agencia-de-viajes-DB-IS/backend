@@ -8,9 +8,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4N2FjZTgzZ
   "name": "Zaza Adventures",
   "description": "Aventuras en la presa Zaza",
   "price": 100,
-  "arrivalDate": "2024-03-19T03:28:45.548Z",
-  "departureDate": "2024-03-29T03:28:45.548Z",
+  "arrivalDate": "2024-10-19T03:28:45.548Z",
+  "departureDate": "2024-12-29T03:28:45.548Z",
   "capacity": 10,
-  "facilityIds": [],
-  "extendedExcursionIds": []
+  "facilityIds": [1],
+  "extendedExcursionIds": ["03111c99-fae6-4975-b71a-16ac9ba79404"]
 }
