@@ -8,7 +8,7 @@ public class CreateHotelDealReservationEndpoint(ISender _mediator) : Endpoint<Cr
 {
     public override void Configure()
     {
-        Post("/reservation/hotelDeal");
+        Post("/reservation/HotelDeal");
         Permissions("WriteHotelDealReservation");
     }
     public override async Task HandleAsync(CreateHotelDealReservationCommand command, CancellationToken ct)
