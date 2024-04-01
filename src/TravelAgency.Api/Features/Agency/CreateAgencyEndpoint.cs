@@ -9,7 +9,8 @@ public class CreateAgencyEndpoint(ISender mediator) : Endpoint<CreateAgencyComma
     public override void Configure()
     {
         Post("/agencies");
-        Permissions(Domain.Enums.Permissions.WriteAgencies.ToString());    
+        AllowAnonymous();
+        //Permissions(Domain.Enums.Permissions.WriteAgencies.ToString());    
     }
 
     public override async Task HandleAsync(CreateAgencyCommand request, CancellationToken ct)

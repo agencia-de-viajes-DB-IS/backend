@@ -1,8 +1,8 @@
-POST http://localhost:5000/agencies/create
+POST http://localhost:5000/agencies/
 Content-Type: application/json
 
 {
-  "Name": "Viajando por el mundo",
+  "Name": "AA por el mundo",
   "Address": "CV % S y P",
   "FaxNumber": "324892",
   "Email": "viajando@gmail"

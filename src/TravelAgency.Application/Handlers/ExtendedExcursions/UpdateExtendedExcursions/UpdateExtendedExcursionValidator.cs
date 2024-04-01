@@ -1,12 +1,11 @@
-using System.Data;
 using FluentValidation;
 using TravelAgency.Application.Common;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Handlers.ExtendedExcursions.CreateExtendedExcursions;
+namespace TravelAgency.Application.Handlers.ExtendedExcursions.UpdateExtendedExcursions;
 
-public class CreateExtendedExcursionCommandValidator : TravelAgencyAbstractValidator<CreateExtendedExcursionCommand>
+public class UpdateExtendedExcursionValidator : TravelAgencyAbstractValidator<UpdateExtendedExcursionCommand>
 {
     public static bool AreDatesInChronologicalOrder(List<DateTime> dates)
     {
@@ -19,7 +18,7 @@ public class CreateExtendedExcursionCommandValidator : TravelAgencyAbstractValid
         }
         return true;
     }
-    public CreateExtendedExcursionCommandValidator(IUnitOfWork unitOfWork)
+    public UpdateExtendedExcursionValidator(IUnitOfWork unitOfWork)
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required")
@@ -32,12 +31,6 @@ public class CreateExtendedExcursionCommandValidator : TravelAgencyAbstractValid
         RuleFor(x => x.Price)
             .GreaterThan(0).WithMessage("Price must be a positive number");
 
-        RuleFor(x => x.AgencyId)
-            .NotEmpty().WithMessage("Agency ID is required");
-
-        RuleFor(x => x.AgencyId)
-            .MustAsync((id, token) => unitOfWork.GetRepository<Agency>().ExistsAsync(x => x.Id == id))
-            .WithMessage("Agency not found");
         RuleForEach(x => x.HotelDealsIDs)
             .MustAsync((id, token) => unitOfWork.GetRepository<HotelDeal>().ExistsAsync(x => x.Id == id))
             .WithMessage("Hotel Deal not found");

@@ -3,4 +3,4 @@
 GET {{host}}/excursions/
 
 ###
-GET {{host}}/excursions?IncludeExtended=false
+GET {{host}}/excursions?IncludeExtended=false?AgencyIdFilter=1eccd777-8a58-b109-f5fe-4e889a44128b
