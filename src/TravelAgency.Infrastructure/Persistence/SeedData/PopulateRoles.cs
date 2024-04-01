@@ -49,6 +49,7 @@ public static partial class SeedData
                         Permissions.WriteFacilities,
                         Permissions.WritePackageReservation,
                         Permissions.WriteAgencies,
+                        Permissions.WriteHotelDealReservation,
 
                         Permissions.ReadAgencies,
                         Permissions.ReadHotels,
@@ -61,6 +62,7 @@ public static partial class SeedData
                         Permissions.ReadTourists,
                         Permissions.ReadFacilities,
                         Permissions.ReadPackageReservation,
+                        Permissions.ReadHotelDealReservation,
                 }
             }
         );

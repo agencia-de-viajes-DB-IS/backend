@@ -11,6 +11,7 @@ public enum Permissions
     WriteFacilities,
     WritePackageReservation,
     WriteAgencies,
+    WriteHotelDealReservation, 
     // Reads
     ReadAgencies,
     ReadHotels,
@@ -22,5 +23,6 @@ public enum Permissions
     ReadAirlines,
     ReadTourists,
     ReadFacilities,
-    ReadPackageReservation    
+    ReadPackageReservation,
+    ReadHotelDealReservation    
 }
