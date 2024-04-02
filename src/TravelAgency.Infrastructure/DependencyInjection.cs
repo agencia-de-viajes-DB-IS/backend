@@ -12,6 +12,9 @@ using TravelAgency.Infrastructure.Persistence.Repositories;
 using TravelAgency.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Domain.Enums;
+using Stripe;
+using TravelAgency.Application.Interfaces.Payment;
+using TravelAgency.Infrastructure.Services;
 
 namespace TravelAgency.Infrastructure;
 
@@ -31,7 +34,8 @@ public static class DependencyInjection
                 options.UseMySQL(configuration.GetConnectionString("AeroSkullConnection")!);
         });
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        
+        StripeConfiguration.ApiKey = configuration["STRIPE_API_KEY"];
+        services.AddScoped<IPaymentService, PaymentService>();
         // services.AddRepositories();
         return services;
     }

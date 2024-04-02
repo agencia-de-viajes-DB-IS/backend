@@ -10,6 +10,7 @@ public class PaymentOperation
     public required string ExternalPaymentId { get; set; }
     public required string Description { get; set; }
     public required string ProductsInfoSerializedJson { get; set; }
+    public PaymentStatus Status { get; set; }
     public Currency Currency {get; set;}
     public PaymentType PaymentType {get; set;}
 }
