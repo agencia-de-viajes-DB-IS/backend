@@ -9,11 +9,9 @@ public class CreateExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : 
     public async Task<CreateExcursionReservationResponse> Handle(CreateExcursionReservationCommand request, CancellationToken cancellationToken)
     {
         var excursionReservationRepo = unitOfWork.GetRepository<ExcursionReservation>();
-
         var validator = new CreateExcursionReservationValidator(unitOfWork);
         await validator.ValidateAsync(request, cancellationToken);
-        var tourists = await unitOfWork.GetRepository<Tourist>().StoreRequestTourists(request.Tourists);
-
+        var tourists = await unitOfWork.GetRepository<Tourist>().FindAllAsync(filters: [x => request.TouristsGuids.Contains(x.Id) && x.Flag]);
         var reservation = new ExcursionReservation
         {
             Id = new Guid(),
@@ -22,11 +20,10 @@ public class CreateExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : 
             ReservationDate = request.ReservationDate,
             UserId = request.UserId,
             ExcursionId = request.ExcursionId,
-            Tourists = tourists
+            Tourists = tourists.ToList()
         };
         await excursionReservationRepo.InsertAsync(reservation);
         await unitOfWork.SaveAsync();
-
         return new CreateExcursionReservationResponse(reservation.Id);
 
 

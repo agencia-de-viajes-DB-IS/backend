@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System.Linq.Expressions;
 using FluentValidation;
 using TravelAgency.Application.Common;
@@ -8,7 +9,6 @@ namespace TravelAgency.Application.Handlers.ExcursionReservations.CreateExcursio
 
 public class CreateExcursionReservationValidator : TravelAgencyAbstractValidator<CreateExcursionReservationCommand>
 {
-
     public CreateExcursionReservationValidator(IUnitOfWork unitOfWork)
     {
         RuleFor(x => x.AirlineId)
@@ -26,8 +26,11 @@ public class CreateExcursionReservationValidator : TravelAgencyAbstractValidator
             .MustAsync(async (id, token) => await unitOfWork.GetRepository<Excursion>().ExistsAsync(e => e.Id == id))
             .WithMessage("Excursion with provided id doesn't exist");
 
+        RuleFor(x => x.TouristsGuids)
+            .Must(m => m.Any())
+            .WithMessage("Reservations with at least one tourist");
         // check date of excursion with respect date of request.
-        
+
         RuleFor(x => x.ReservationDate)
             .NotEmpty().WithMessage("ReservationDate is required")
             .MustAsync(async (x, requestDate, token) =>
@@ -40,8 +43,10 @@ public class CreateExcursionReservationValidator : TravelAgencyAbstractValidator
                 return requestDate.Date <= excursionDate;
             })
             .WithMessage("Reservation date must be before or equal to excursion date");
-
         RuleFor(x => x.Price)
             .GreaterThan(0).WithMessage("Price must be greater than 0");
+        RuleForEach(x => x.TouristsGuids)
+            .MustAsync(async (id, token) => await unitOfWork.GetRepository<Tourist>().ExistsAsync(e => e.Id == id && e.Flag))
+            .WithMessage("TOurist GUID is not found");
     }
 }

@@ -10,5 +10,5 @@ public class CreateExcursionReservationCommand : IRequest<CreateExcursionReserva
     public required DateTime ReservationDate { get; set; }
     public required Guid UserId { get; set; }
     public required Guid ExcursionId { get; set; }
-    public required IEnumerable<CreateTouristCommand> Tourists { get; set; }
+    public required IEnumerable<Guid> TouristsGuids { get; set; }
 }

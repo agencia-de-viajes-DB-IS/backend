@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace TravelAgency.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialA : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,6 +28,19 @@ namespace TravelAgency.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Agencies", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Airlines",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Airlines", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -70,7 +83,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DepartureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    DepartureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,17 +93,34 @@ namespace TravelAgency.Infrastructure.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Tourists",
+                name: "PaymentOperations",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    FirstName = table.Column<string>(type: "longtext", nullable: false),
-                    LastName = table.Column<string>(type: "longtext", nullable: false),
-                    Nationality = table.Column<string>(type: "longtext", nullable: false)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    InternalPaymentId = table.Column<string>(type: "longtext", nullable: false),
+                    ExternalPaymentId = table.Column<string>(type: "longtext", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false),
+                    ProductsInfoSerializedJson = table.Column<string>(type: "longtext", nullable: false),
+                    Currency = table.Column<int>(type: "int", nullable: false),
+                    PaymentType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tourists", x => x.Id);
+                    table.PrimaryKey("PK_PaymentOperations", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Permissions = table.Column<string>(type: "longtext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -102,8 +133,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     LastName = table.Column<string>(type: "longtext", nullable: false),
                     Email = table.Column<string>(type: "longtext", nullable: false),
                     Password = table.Column<string>(type: "longtext", nullable: false),
-                    Role_Name = table.Column<string>(type: "longtext", nullable: false),
-                    Role_Permissions = table.Column<string>(type: "longtext", nullable: false),
+                    RoleId = table.Column<Guid>(type: "char(36)", nullable: false),
                     AgencyId = table.Column<Guid>(type: "char(36)", nullable: true)
                 },
                 constraints: table =>
@@ -117,8 +147,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false),
                     Location = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     AgencyId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
@@ -144,6 +177,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DepartureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
                     HotelId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
@@ -188,15 +222,21 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Airline = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReservationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    PackageId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    PackageId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    AirlineId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PackageReservations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PackageReservations_Airlines_AirlineId",
+                        column: x => x.AirlineId,
+                        principalTable: "Airlines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PackageReservations_Packages_PackageId",
                         column: x => x.PackageId,
@@ -213,19 +253,49 @@ namespace TravelAgency.Infrastructure.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Tourists",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    CI = table.Column<string>(type: "longtext", nullable: false),
+                    FirstName = table.Column<string>(type: "longtext", nullable: false),
+                    LastName = table.Column<string>(type: "longtext", nullable: false),
+                    Nationality = table.Column<string>(type: "longtext", nullable: false),
+                    Flag = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tourists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tourists_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "ExcursionReservations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Airline = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReservationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    ExcursionId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    ExcursionId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    AirlineId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExcursionReservations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExcursionReservations_Airlines_AirlineId",
+                        column: x => x.AirlineId,
+                        principalTable: "Airlines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ExcursionReservations_Excursions_ExcursionId",
                         column: x => x.ExcursionId,
@@ -291,7 +361,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     PackageReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,7 +386,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     ExcursionReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -391,11 +461,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Airline = table.Column<string>(type: "longtext", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReservationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    AgencyRelatedHotelDealId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    AgencyRelatedHotelDealId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    AirlineId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -404,6 +474,12 @@ namespace TravelAgency.Infrastructure.Migrations
                         name: "FK_HotelDealReservations_AgencyRelatedHotelDeals_AgencyRelatedH~",
                         column: x => x.AgencyRelatedHotelDealId,
                         principalTable: "AgencyRelatedHotelDeals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HotelDealReservations_Airlines_AirlineId",
+                        column: x => x.AirlineId,
+                        principalTable: "Airlines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -420,7 +496,7 @@ namespace TravelAgency.Infrastructure.Migrations
                 columns: table => new
                 {
                     HotelDealReservationsId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TouristsId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    TouristsId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -450,6 +526,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "IX_AgencyRelatedHotelDeals_HotelDealId",
                 table: "AgencyRelatedHotelDeals",
                 column: "HotelDealId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExcursionReservations_AirlineId",
+                table: "ExcursionReservations",
+                column: "AirlineId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExcursionReservations_ExcursionId",
@@ -494,6 +575,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_HotelDealReservations_AirlineId",
+                table: "HotelDealReservations",
+                column: "AirlineId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HotelDealReservations_UserId",
                 table: "HotelDealReservations",
                 column: "UserId");
@@ -515,6 +601,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_PackageReservations_AirlineId",
+                table: "PackageReservations",
+                column: "AirlineId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PackageReservations_PackageId",
                 table: "PackageReservations",
                 column: "PackageId");
@@ -529,6 +620,11 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "IX_PackageReservationTourist_TouristsId",
                 table: "PackageReservationTourist",
                 column: "TouristsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tourists_UserId",
+                table: "Tourists",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -553,6 +649,12 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "PackageReservationTourist");
 
             migrationBuilder.DropTable(
+                name: "PaymentOperations");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
                 name: "ExcursionReservations");
 
             migrationBuilder.DropTable(
@@ -575,6 +677,9 @@ namespace TravelAgency.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AgencyRelatedHotelDeals");
+
+            migrationBuilder.DropTable(
+                name: "Airlines");
 
             migrationBuilder.DropTable(
                 name: "Packages");

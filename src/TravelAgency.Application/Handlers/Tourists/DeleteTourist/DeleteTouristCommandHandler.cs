@@ -16,17 +16,20 @@ public class DeleteTouristCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
 
         var touristFilter = new Expression<Func<Tourist, bool>>[]
         {
-            tourist => tourist.Id == request.Id
+            tourist => tourist.Id == request.TouristId
         };
 
-        if((await touristRepo.FindAsync(filters: touristFilter)) is null)
-            throw new TravelAgencyException("Tourist was not found", $"Tourist with Id {request.Id} was not found", 404);
+        var tourist = (await touristRepo.FindAsync(filters: touristFilter)) ?? throw new TravelAgencyException("Tourist was not found", $"Tourist with Id {request.TouristId} was not found", 404);
 
-        await touristRepo.DeleteAsync(request.Id);
+        if(tourist.Flag)
+        {
+            tourist.Flag = false;
+        }
+        await touristRepo.UpdateAsync(tourist);
         await _unitOfWork.SaveAsync();
 
-        var response = new DeleteTouristResponse(request.Id);
-
+        var response = new DeleteTouristResponse(request.TouristId);
+        
         return response;
     }
 }

@@ -3,5 +3,5 @@ using MediatR;
 namespace TravelAgency.Application.Handlers.Tourists.DeleteTourist;
 
 public record DeleteTouristCommand(
-    string Id
+    Guid TouristId
 ) : IRequest<DeleteTouristResponse>;

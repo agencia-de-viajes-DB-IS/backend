@@ -22,7 +22,9 @@ public static partial class SeedData
                     Permissions.ReadAgencies,
                     Permissions.ReadHotels,
                     Permissions.ReadHotelDeals,
-                    Permissions.ReadPackages
+                    Permissions.ReadPackages,
+                    Permissions.WriteTourists,
+                    Permissions.ReadTourists,
                 ]
             }
         );
@@ -40,7 +42,7 @@ public static partial class SeedData
             new Role()
             {
                 Name = "Super Admin",
-                Permissions = new List<Permissions>(){
+                Permissions = [
                         Permissions.WriteUsers,
                         Permissions.WriteExcursions,
                         Permissions.WritePackages,
@@ -61,10 +63,9 @@ public static partial class SeedData
                         Permissions.ReadTourists,
                         Permissions.ReadFacilities,
                         Permissions.ReadPackageReservation,
-                }
+                ]
             }
         );
-
         context.SaveChanges();
     }
 }

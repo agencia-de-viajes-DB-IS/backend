@@ -24,8 +24,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("ExcursionReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("TouristsId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("TouristsId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("ExcursionReservationsId", "TouristsId");
 
@@ -84,8 +84,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("HotelDealReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("TouristsId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("TouristsId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("HotelDealReservationsId", "TouristsId");
 
@@ -99,29 +99,14 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<Guid>("PackageReservationsId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("TouristsId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("TouristsId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("PackageReservationsId", "TouristsId");
 
                     b.HasIndex("TouristsId");
 
                     b.ToTable("PackageReservationTourist");
-                });
-
-            modelBuilder.Entity("TouristUser", b =>
-                {
-                    b.Property<string>("TouristsId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("TouristsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("TouristUser");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Agency", b =>
@@ -490,12 +475,20 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CI")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("Flag")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -505,7 +498,12 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tourists");
                 });
@@ -643,21 +641,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TouristUser", b =>
-                {
-                    b.HasOne("TravelAgency.Domain.Entities.Tourist", null)
-                        .WithMany()
-                        .HasForeignKey("TouristsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TravelAgency.Domain.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TravelAgency.Domain.Entities.AgencyRelatedHotelDeal", b =>
                 {
                     b.HasOne("TravelAgency.Domain.Entities.Agency", "Agency")
@@ -780,6 +763,17 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.User", "User")
+                        .WithMany("Tourists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
                 {
                     b.HasOne("TravelAgency.Domain.Entities.Excursion", null)
@@ -837,6 +831,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("HotelDealReservations");
 
                     b.Navigation("PackageReservations");
+
+                    b.Navigation("Tourists");
                 });
 #pragma warning restore 612, 618
         }

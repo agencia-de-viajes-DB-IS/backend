@@ -25,6 +25,6 @@ public class CreateExcursionCommandHandler(IUnitOfWork iunitOfWork) : IRequestHa
 
         await iunitOfWork.GetRepository<Excursion>().InsertAsync(excursion);
         await iunitOfWork.SaveAsync(); 
-        return new CreateExcursionResponse();;
+        return new CreateExcursionResponse();
     }
 }

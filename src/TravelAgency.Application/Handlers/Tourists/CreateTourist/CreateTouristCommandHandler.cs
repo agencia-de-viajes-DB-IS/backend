@@ -12,22 +12,15 @@ public class CreateTouristCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
     public async Task<TouristResponse> Handle(CreateTouristCommand request, CancellationToken cancellationToken)
     {
         // Validate request
-        var validator = new CreateTouristCommandValidator();
+        var validator = new CreateTouristCommandValidator(_unitOfWork);
         await validator.ValidateAsync(request, cancellationToken);
 
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
-
-        var touristFilter = new Expression<Func<Tourist, bool>>[]
-        {
-            tourist => tourist.Id == request.Id
-        };
-
-        if((await touristRepo.FindAsync(filters:touristFilter)) is not null)
-            throw new TravelAgencyException("Tourist's Id is already registered", $"Id {request.Id} is already registered", status: 400);
-
+        
         var tourist = new Tourist()
         {
-            Id = request.Id,
+            UserId = request.UserId,
+            CI = request.CI,
             FirstName = request.FirstName,
             LastName = request.LastName,
             Nationality = request.Nationality
@@ -37,12 +30,13 @@ public class CreateTouristCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         await _unitOfWork.SaveAsync();
 
         var response = new TouristResponse(
+            request.UserId,
             tourist.Id,
+            tourist.CI,
             tourist.FirstName,
             tourist.LastName,
             tourist.Nationality
         );
-
         return response;
     }
 }

@@ -9,6 +9,6 @@ public record CreatePackageReservationCommand(
     DateTime ReservationDate,
     Guid UserId,
     Guid PackageId,
-    IEnumerable<CreateTouristCommand> Tourists
+    IEnumerable<Guid> TouristsGuid
 ) : IRequest<CreatePackageReservationResponse>;
 

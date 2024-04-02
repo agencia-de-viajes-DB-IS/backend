@@ -1,15 +1,18 @@
 using FluentValidation;
 using TravelAgency.Application.Common;
-using TravelAgency.Application.Handlers.Tourists.CreateTourist;
 using TravelAgency.Application.Interfaces.Persistence;
 using TravelAgency.Domain.Entities;
 
-namespace TravelAgency.Application.Handlers.Tourists.CreateTourist;
+namespace TravelAgency.Application.Handlers.Tourists.UpdateTourist;
 
-public class CreateTouristCommandValidator : TravelAgencyAbstractValidator<CreateTouristCommand>
+
+public class UpdateTouristCommandValidator : TravelAgencyAbstractValidator<UpdateTouristCommand>
 {
-    public CreateTouristCommandValidator(IUnitOfWork unitOfWork)
+    private IUnitOfWork unitOfWork;
+
+    public UpdateTouristCommandValidator(IUnitOfWork unitOfWork)
     {
+        this.unitOfWork = unitOfWork;
         // Validation process
         RuleFor(x => x.CI)
             .NotEmpty().WithMessage("CI is required")
@@ -24,13 +27,9 @@ public class CreateTouristCommandValidator : TravelAgencyAbstractValidator<Creat
             .NotEmpty().WithMessage("Nationality is required")
             .MaximumLength(200).WithMessage("Nationality must not exceed 200 characters");
         RuleFor(x => x)
-            .MustAsync(async (mm, token) => {  
-                var flag = await unitOfWork.GetRepository<Tourist>().FindAllAsync(filters: 
-                [x => x.CI == mm.CI,
-                x => x.UserId == mm.UserId, 
-                x => x.Flag]
-                ); 
-                return !flag.Any(); })
-            .WithMessage("Tourist is there with that CI");
+            .MustAsync(async (mm, token) => {
+                return await unitOfWork.GetRepository<Tourist>().ExistsAsync(x => x.Id == mm.TouristId && x.Flag);
+            })
+            .WithMessage("No tourist to EDIT");
     }
 }

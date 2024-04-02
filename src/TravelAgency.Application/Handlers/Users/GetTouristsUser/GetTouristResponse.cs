@@ -2,7 +2,9 @@ namespace TravelAgency.Application.Handlers.Users.GetTouristsUser;
 
 public record GetTouristDto
 (
-    string Id,
+    Guid UserId,
+    Guid TouristID,
+    string CI,
     string FirstName,
     string LastName,
     string Nationality

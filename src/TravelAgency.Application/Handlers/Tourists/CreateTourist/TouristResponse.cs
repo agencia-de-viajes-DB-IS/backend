@@ -1,7 +1,9 @@
 namespace TravelAgency.Application.Handlers.Tourists.CreateTourist;
 
 public record TouristResponse(
-    string Id,
+    Guid UserId,
+    Guid TouristID,
+    string CI,
     string FirstName,
     string LastName,
     string Nationality
