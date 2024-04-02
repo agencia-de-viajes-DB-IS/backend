@@ -30,7 +30,8 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, H
                 HotelsDeals.Description, 
                 HotelsDeals.Price, 
                 HotelsDeals.ArrivalDate, 
-                HotelsDeals.DepartureDate
+                HotelsDeals.DepartureDate,
+                [.. HotelsDeals.AgencyRelatedHotelDeals!]
         ));
         return [..response];
     }

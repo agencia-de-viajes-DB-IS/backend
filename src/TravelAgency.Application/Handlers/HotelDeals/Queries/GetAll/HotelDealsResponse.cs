@@ -6,5 +6,6 @@ public record HotelsDealsResponse(
     string Description,
     decimal Price,
     DateTime ArrivalDate,
-    DateTime DepartureDate
+    DateTime DepartureDate,
+    Domain.Entities.AgencyRelatedHotelDeal[]? agencyRelatedHotelDeals
 );

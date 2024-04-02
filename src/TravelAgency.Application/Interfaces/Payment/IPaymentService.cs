@@ -1,6 +1,7 @@
 using TravelAgency.Application.Handlers.Agencies.GetAgencies;
 using TravelAgency.Application.Responses;
 using TravelAgency.Domain.Common.Exceptions;
+using TravelAgency.Domain.Enums;
 
 namespace TravelAgency.Application.Interfaces.Payment;
 
@@ -23,6 +24,7 @@ public class CreatePaymentRequest
     public required string InternalPaymentId { get; set; }
     public required string SuccessUrl { get; set; }
     public required string CancelUrl { get; set; }
+    public PaymentType paymentType { get; set; }
 }
 public class ProductData 
 {

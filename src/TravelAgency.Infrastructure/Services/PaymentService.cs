@@ -11,9 +11,13 @@ public class PaymentService(IUnitOfWork unitOfWork) : IPaymentService
 {
     public async Task<PaymentResponse> CreatePayment(CreatePaymentRequest request, CancellationToken cancellationToken)
     {
+
+        var paymentRepo = unitOfWork.GetRepository<PaymentOperation>(); 
         double totalPrice = 0;  
-        var metadata = new Dictionary<string, string>(){};
-        metadata.Add("InternalPaymentId",request.InternalPaymentId);  
+        var metadata = new Dictionary<string, string>
+        {
+            { "InternalPaymentId", request.InternalPaymentId }
+        };
 
         var options = new Stripe.Checkout.SessionCreateOptions
         {
@@ -46,6 +50,15 @@ public class PaymentService(IUnitOfWork unitOfWork) : IPaymentService
         Stripe.Checkout.Session checkoutSession;  
         try {
             checkoutSession = await service.CreateAsync(options,cancellationToken:cancellationToken);
+            await paymentRepo.InsertAsync( new PaymentOperation(){
+                Description = "Checkout payment",
+                ExternalPaymentId = checkoutSession.Id, 
+                InternalPaymentId = request.InternalPaymentId,
+                ProductsInfoSerializedJson = JsonConvert.SerializeObject(request.Products),
+                Status = PaymentStatus.Created,
+                PaymentType = request.paymentType
+            }); 
+            await unitOfWork.SaveAsync();
         } catch (Exception e){
             throw new TravelAgencyException("Error when stripe service tried to create a payment link",e.Message); 
         }
