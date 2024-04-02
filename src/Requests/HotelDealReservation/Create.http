@@ -1,0 +1,43 @@
+@host = http://localhost:5000
+
+
+# GET  {{host}}/airlines
+# Content-Type: application/json 
+
+# GET {{host}}/packages
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxM2JkZGM3NS1hYzlmLTQ4MTYtYTM3NC0xYzg4MzE4NTA5YTQiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6IkN1c3RvbWVyIiwiYWdlbmN5SWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJlbWFpbCI6ImRvZUpvaG5AbXMubmV0IiwiUGVybWlzc2lvbnMiOlsiUmVhZEV4Y3Vyc2lvbnMiLCJSZWFkUGFja2FnZXMiLCJSZWFkQWdlbmNpZXMiLCJSZWFkSG90ZWxzIiwiUmVhZEhvdGVsRGVhbHMiLCJSZWFkUGFja2FnZXMiLCJXcml0ZVRvdXJpc3RzIiwiUmVhZFRvdXJpc3RzIl0sImp0aSI6IjdkNmY3MTc1LWQzYWUtNDRhMC04OGIwLTQ0NmRmMzM2MTAxYSIsImV4cCI6MTcxMjA0MTUwOSwiaXNzIjoiVHJhdmVsQWdlbmN5IiwiYXVkIjoiVHJhdmVsQWdlbmN5In0.rIQ7f8LJZsTy93xXsfF9pNfS_wvA5CRn8iidCxEFl_U
+
+# POST  {{host}}/tourists/
+# Content-Type: application/json
+# bAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxM2JkZGM3NS1hYzlmLTQ4MTYtYTM3NC0xYzg4MzE4NTA5YTQiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6IkN1c3RvbWVyIiwiYWdlbmN5SWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJlbWFpbCI6ImRvZUpvaG5AbXMubmV0IiwiUGVybWlzc2lvbnMiOlsiUmVhZEV4Y3Vyc2lvbnMiLCJSZWFkUGFja2FnZXMiLCJSZWFkQWdlbmNpZXMiLCJSZWFkSG90ZWxzIiwiUmVhZEhvdGVsRGVhbHMiLCJSZWFkUGFja2FnZXMiLCJXcml0ZVRvdXJpc3RzIiwiUmVhZFRvdXJpc3RzIl0sImp0aSI6IjdkNmY3MTc1LWQzYWUtNDRhMC04OGIwLTQ0NmRmMzM2MTAxYSIsImV4cCI6MTcxMjA0MTUwOSwiaXNzIjoiVHJhdmVsQWdlbmN5IiwiYXVkIjoiVHJhdmVsQWdlbmN5In0.rIQ7f8LJZsTy93xXsfF9pNfS_wvA5CRn8iidCxEFl_U
+
+# {
+#   "userId" : "13bddc75-ac9f-4816-a374-1c88318509a4",
+#   "CI": "02111460409" ,
+#   "firstName": "Ke",
+#   "lastName": "Adams",
+#   "nationality": "Ireland"
+# }
+
+@host = http://localhost:5000
+
+# GET {{host}}/hotelDeals/
+
+
+
+POST  {{host}}/webhooks/stripe
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxM2JkZGM3NS1hYzlmLTQ4MTYtYTM3NC0xYzg4MzE4NTA5YTQiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6IkN1c3RvbWVyIiwiYWdlbmN5SWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJlbWFpbCI6ImRvZUpvaG5AbXMubmV0IiwiUGVybWlzc2lvbnMiOlsiUmVhZEV4Y3Vyc2lvbnMiLCJSZWFkUGFja2FnZXMiLCJSZWFkQWdlbmNpZXMiLCJSZWFkSG90ZWxzIiwiUmVhZEhvdGVsRGVhbHMiLCJSZWFkUGFja2FnZXMiLCJXcml0ZVRvdXJpc3RzIiwiUmVhZFRvdXJpc3RzIl0sImp0aSI6IjdkNmY3MTc1LWQzYWUtNDRhMC04OGIwLTQ0NmRmMzM2MTAxYSIsImV4cCI6MTcxMjA0MTUwOSwiaXNzIjoiVHJhdmVsQWdlbmN5IiwiYXVkIjoiVHJhdmVsQWdlbmN5In0.rIQ7f8LJZsTy93xXsfF9pNfS_wvA5CRn8iidCxEFl_U
+
+{
+  "AirlineId": "bbccb1da-14fa-47c4-aa8d-7858d6721633",
+  "Price": 300,
+  "ReservationDate": "2024-04-19T03:28:45.548Z",
+  "UserId": "fd469c55-4dd8-4064-b71d-d2bd6075d2f9",
+  "packageId": "b32215ea-d78c-49b2-925e-ba4ce6c05c7e",
+  "TouristsGuid": [
+      "ab063e90-aaa7-4994-9563-cd464130a15e"
+  ],
+  "AgencyRelatedHotelDealId": "64b1a6c3-01be-4a36-b773-3e5281ca6d10"
+}
+

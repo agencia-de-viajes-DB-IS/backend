@@ -1,10 +1,12 @@
 using MediatR;
+using TravelAgency.Application.Interfaces.Payment;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.HotelDealReservations.Commands.Create
 {
-    public class CreateHotelDealReservationCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<CreateHotelDealReservationCommand, CreateHotelDealReservationResponse>
+    public class CreateHotelDealReservationCommandHandler(IUnitOfWork _unitOfWork, IPaymentService paymentService) : IRequestHandler<CreateHotelDealReservationCommand, CreateHotelDealReservationResponse>
     {
         public async Task<CreateHotelDealReservationResponse> Handle(CreateHotelDealReservationCommand request, CancellationToken cancellationToken)
         {
@@ -25,7 +27,19 @@ namespace TravelAgency.Application.Handlers.HotelDealReservations.Commands.Creat
             await HotelDealReservationRepo.InsertAsync(reservation);
             await _unitOfWork.SaveAsync();
 
-            var response = new CreateHotelDealReservationResponse(reservation.Id);
+            var paymentResponse =  await paymentService.CreatePayment(new CreatePaymentRequest(){
+                CancelUrl = " ", 
+                SuccessUrl = " ",
+                Products = [ new ProductData(){
+                    Price = (double)request.Price,
+                    Quantity = tourists.Count()
+                }],
+                InternalPaymentId = "Problema " //TODO: como deducir esto?,  
+            }, cancellationToken);
+            if(!paymentResponse.Success)
+                throw new TravelAgencyException("Error when trying to create a payment","",500);
+            
+            var response = new CreateHotelDealReservationResponse(reservation.Id, paymentResponse.PaymentUrl);
             return response;
         }
     }

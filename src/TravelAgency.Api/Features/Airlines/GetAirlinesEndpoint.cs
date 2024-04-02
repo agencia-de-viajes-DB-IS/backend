@@ -9,8 +9,8 @@ public class GetAirlinesEndpoint(ISender mediator) : EndpointWithoutRequest<Airl
     public override void Configure()
     {
         Get("/airlines");
-        // AllowAnonymous();
-        Permissions("ReadAirlines");
+        AllowAnonymous();
+        // Permissions("ReadAirlines");
     }
 
     public override async Task HandleAsync(CancellationToken ct)

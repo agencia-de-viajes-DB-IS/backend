@@ -1,0 +1,23 @@
+@host = http://localhost:5000
+
+POST  {{host}}/payments/
+Content-Type: application/json
+
+{
+    "paymentRequest": {
+        "Products" : [
+            {
+                "name": "SomeName",
+                "quantity": 1,
+                "price": 10,
+                "description": "some desc",
+                "images": []
+            }
+        ],
+        "currency":"usd", 
+        "internalPaymentId": "q78312732",
+        "successUrl":"http://localhost:5000",
+        "cancelUrl": "http://localhost:5000", 
+        "paymentType": 1
+    }
+}

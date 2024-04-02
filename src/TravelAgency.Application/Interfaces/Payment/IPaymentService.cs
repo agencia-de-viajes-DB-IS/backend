@@ -19,7 +19,7 @@ public class PaymentResponse : BaseResponse
 
 public class CreatePaymentRequest
 {
-    public required IEnumerable<ProductData> Products;
+    public required List<ProductData> Products { get; set; }
     public string Currency { get; set; } = "usd";
     public required string InternalPaymentId { get; set; }
     public required string SuccessUrl { get; set; }
