@@ -21,6 +21,9 @@ public class CreatePackageReservationCommandValidator : TravelAgencyAbstractVali
             .MustAsync(async (x, _) => await ValidateAvailableCapacity(x));
         RuleFor(x => x)
             .MustAsync(async (x, _) => await ValidateReservationDate(x));
+        RuleForEach(x => x.TouristsGuid)
+                .MustAsync(async (id, token) => await unitOfWork.GetRepository<Tourist>().ExistsAsync(e => e.Id == id && e.Flag))
+                .WithMessage("TOurist GUID is not found");
     }
 
     private async Task<bool> ValidateAvailableCapacity(CreatePackageReservationCommand request)
@@ -29,8 +32,7 @@ public class CreatePackageReservationCommandValidator : TravelAgencyAbstractVali
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
 
         var availableCapacity = await packageRepo.AvailableCapacity(packageReservationRepo, request.PackageId);
-
-        if(availableCapacity < request.Tourists.Count())
+        if (availableCapacity < request.TouristsGuid.Count())
             throw new TravelAgencyException("Insufficient capacity", $"Available capacity {availableCapacity}", status: 400);
 
         return true;
@@ -41,7 +43,7 @@ public class CreatePackageReservationCommandValidator : TravelAgencyAbstractVali
 
         var package = await packageRepo.FindAsync(filters: [package => package.Code == request.PackageId]) ?? throw new TravelAgencyException("Package not found", status: 404);
 
-        if(request.ReservationDate >= package.ArrivalDate)
+        if (request.ReservationDate >= package.ArrivalDate)
             throw new TravelAgencyException("Reservation-date must be smaller than package's arrival-date", status: 400);
 
         return true;
