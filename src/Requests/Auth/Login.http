@@ -10,6 +10,17 @@ Content-Type: application/json
 }
 
 ###
+
+# Marketing login
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "shel@ms.netss",
+    "password": "shelpass"
+}
+
+###
 POST {{host}}/auth/login
 Content-Type: application/json
 

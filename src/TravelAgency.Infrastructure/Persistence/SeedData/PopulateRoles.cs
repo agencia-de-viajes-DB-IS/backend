@@ -33,7 +33,14 @@ public static partial class SeedData
             {
                 Name = "Marketing Agent",
                 Permissions = [
-                    Permissions.WriteUsers
+                    Permissions.WriteUsers,
+                    Permissions.WriteExcursions,
+                    Permissions.WritePackages,
+                    Permissions.WriteRoles,
+                    Permissions.WriteTourists,
+                    Permissions.WriteFacilities,
+                    Permissions.WritePackageReservation,
+                    Permissions.WriteAgencies
                 ]
             }
         );
