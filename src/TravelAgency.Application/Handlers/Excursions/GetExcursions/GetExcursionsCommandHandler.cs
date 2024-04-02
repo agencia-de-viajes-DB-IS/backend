@@ -23,6 +23,8 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
             excursion => request.AgencyIdFilter == default || excursion.AgencyId == request.AgencyIdFilter,
             excursion => request.NameFilter == "" || excursion.Name == request.NameFilter,
             excursion => request.LocationFilter == "" || excursion.Location == request.LocationFilter,
+            excursion => excursion.Capacity >= request.CapacityFilter,
+            excursion => excursion.ArrivalDate >= DateTime.Now
         };
 
         if (!request.IncludeExtended)
@@ -37,6 +39,7 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
                                         excursion.Name,
                                         excursion.Name,
                                         excursion.Location,
+                                        excursion.Capacity,
                                         excursion.Price,
                                         excursion.ArrivalDate,
                                         new ExcursionAgencyResponse(

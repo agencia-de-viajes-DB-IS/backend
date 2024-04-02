@@ -14,6 +14,7 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
 
         var packageFilters = new Expression<Func<Package, bool>>[]
         {
+            package => package.ArrivalDate > DateTime.Now,
             package => request.PriceFilter == default || package.Price == request.PriceFilter,
             package => request.ArrivalDateFilter == default || package.ArrivalDate == request.ArrivalDateFilter,
             package => request.DepartureDateFilter == default || package.DepartureDate == request.DepartureDateFilter

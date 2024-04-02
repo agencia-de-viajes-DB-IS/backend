@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+DELETE  {{host}}/users/
+Content-Type: application/json
+
+{
+    "UserId" : "7d1b156e-c7c7-4833-a878-affb89f3d725"
+}

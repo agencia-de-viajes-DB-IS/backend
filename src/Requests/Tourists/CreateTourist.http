@@ -6,7 +6,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxM2JkZGM3N
 
 {
   "userId" : "13bddc75-ac9f-4816-a374-1c88318509a4",
-  "CI": "02111460409" ,
+  "CI": "02111460200" ,
   "firstName": "Ke",
   "lastName": "Adams",
   "nationality": "Ireland"
@@ -17,11 +17,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxM2JkZGM3N
 
 POST  {{host}}/tourists/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzODE2NjEzYS02M2RkLTQ1MWItYjg3ZS02ZDc2MWY2NTcwZTQiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6IkN1c3RvbWVyIiwiUGVybWlzc2lvbnMiOlsiUmVhZEV4Y3Vyc2lvbnMiLCJSZWFkUGFja2FnZXMiLCJSZWFkQWdlbmNpZXMiLCJSZWFkSG90ZWxzIiwiUmVhZEhvdGVsRGVhbHMiLCJSZWFkUGFja2FnZXMiLCJXcml0ZVRvdXJpc3RzIl0sImp0aSI6ImZjMTFhNWE1LTNmZGItNGQ5NS04NzMyLWRlODY2ZGM3YjA5MSIsImV4cCI6MTcxMjAxNzgzNSwiaXNzIjoiVHJhdmVsQWdlbmN5IiwiYXVkIjoiVHJhdmVsQWdlbmN5In0.QeZ-HwY-hRgbqtLTZLoi9NlTd6PXP5mHy_bCQ3Cljj8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMmZlNzNiNS01M2Y0LTQ3NzMtOTk3YS00YWQwYmYwYWRjZTEiLCJnaXZlbl9uYW1lIjoiTmF0YXNoYSIsImZhbWlseV9uYW1lIjoiQXRraW5zIiwicm9sZSI6IkN1c3RvbWVyIiwiYWdlbmN5SWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJlbWFpbCI6ImF0a2luc05hdEBtcy5uZXQiLCJQZXJtaXNzaW9ucyI6WyJSZWFkRXhjdXJzaW9ucyIsIlJlYWRQYWNrYWdlcyIsIlJlYWRBZ2VuY2llcyIsIlJlYWRIb3RlbHMiLCJSZWFkSG90ZWxEZWFscyIsIlJlYWRQYWNrYWdlcyIsIldyaXRlVG91cmlzdHMiLCJSZWFkVG91cmlzdHMiXSwianRpIjoiNmExZmU1N2EtMDI2My00ZTBiLWFiZTktZmI3NWMxNWJlZjEzIiwiZXhwIjoxNzEyMDQ2ODkyLCJpc3MiOiJUcmF2ZWxBZ2VuY3kiLCJhdWQiOiJUcmF2ZWxBZ2VuY3kifQ.lPGANoObukv1YhPIPlCRmjjwlN-FHtZAy43VqZQmNXo
 
 {
-  "id": "1110987654321",
-  "firstName": "Rachel",
+  "UserId": "cf6c33cd-500e-49d8-9792-fbe5a914560b",
+  "CI" : "0100120012",
+  "firstName": "Chandler",
   "lastName": "Green",
-  "nationality": "Canada"
+  "nationality": "Cuba"
 }

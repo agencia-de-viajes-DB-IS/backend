@@ -1,0 +1,11 @@
+@host = http://localhost:5000
+
+PUT {{host}}/users/
+Content-Type: application/json
+
+{
+    "UserId" : "fb8d031a-76c7-4e9b-91a4-df3d2f335ff3",
+    "FirstName" : "B", 
+    "LastName" : "Gonzalez Brito ",
+    "Email" : "a@com"   
+}

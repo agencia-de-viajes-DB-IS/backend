@@ -10,9 +10,11 @@ public class GetExcursionResponse : BaseResponse
     public string Location { get; set; }
     public decimal Price { get; set; }
     public DateTime ArrivalDate { get; set; }
+
+    public int Capacity { get; set; }
     public ExcursionAgencyResponse Agency { get; set; }
 
-    public GetExcursionResponse(Guid id, string name, string description, string location, decimal price, DateTime arrivalDate, ExcursionAgencyResponse agency)
+    public GetExcursionResponse(Guid id, string name, string description, string location, int capacity,  decimal price, DateTime arrivalDate, ExcursionAgencyResponse agency)
     {
         Id = id;
         Name = name;
@@ -21,6 +23,7 @@ public class GetExcursionResponse : BaseResponse
         Price = price;
         ArrivalDate = arrivalDate;
         Agency = agency;
+        Capacity = capacity;
     }
 }
 
