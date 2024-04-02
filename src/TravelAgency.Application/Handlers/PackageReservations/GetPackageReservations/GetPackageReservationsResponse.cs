@@ -10,6 +10,7 @@ public record GetPackageReservationsResponse(
     PackageResponseOnReservation Package,
     AirlineResponse Airline,
     DateTime ReservationDate,
+    decimal Price,
     TouristResponse[] Tourists
 );
 

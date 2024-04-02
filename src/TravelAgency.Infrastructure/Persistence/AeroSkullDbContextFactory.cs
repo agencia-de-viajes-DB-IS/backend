@@ -8,7 +8,7 @@ public class AeroSkullContextFactory : IDesignTimeDbContextFactory<AeroSkullDbCo
     public AeroSkullDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<AeroSkullDbContext>();
-        optionsBuilder.UseMySQL("Server=localhost;User ID=root;Password=limaCuba;Port=3306;Database=Aero_Skull");
+        optionsBuilder.UseMySQL("Server=localhost;User ID=root;Password=your_password;Port=3306;Database=Aero_Skull");
 
         return new AeroSkullDbContext(optionsBuilder.Options);
     }

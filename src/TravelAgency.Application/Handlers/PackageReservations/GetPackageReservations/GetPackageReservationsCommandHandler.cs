@@ -52,6 +52,7 @@ public class GetPackageReservationsCommandHandler(IUnitOfWork _unitOfWork) : IRe
                     packageReservation.Airline.Name
                 ),
                 packageReservation.ReservationDate,
+                packageReservation.Price,
                 packageReservation.Tourists.Select(tourist => new TouristResponse(
                     packageReservation.UserId,
                     tourist.Id,

@@ -1,5 +1,6 @@
 using MediatR;
 using TravelAgency.Application.Interfaces.Persistence;
+using TravelAgency.Domain.Common.Exceptions;
 using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
@@ -7,6 +8,9 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
 {
     public async Task<CreatePackageReservationResponse> Handle(CreatePackageReservationCommand request, CancellationToken cancellationToken)
     {
+        var validator = new CreatePackageReservationCommandValidator(_unitOfWork);
+        await validator.ValidateAsync(request, cancellationToken);
+        
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
