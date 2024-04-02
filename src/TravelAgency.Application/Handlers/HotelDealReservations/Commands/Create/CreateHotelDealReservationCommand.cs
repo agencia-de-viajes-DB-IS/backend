@@ -8,7 +8,7 @@ public record CreateHotelDealReservationCommand(
     DateTime ReservationDate,
     Guid UserId,
     Guid PackageId,
-    IEnumerable<CreateTouristCommand> Tourists,
+    IEnumerable<Guid> TouristsGuid, 
     Guid AgencyRelatedHotelDealId 
 ) : IRequest<CreateHotelDealReservationResponse>{}
 

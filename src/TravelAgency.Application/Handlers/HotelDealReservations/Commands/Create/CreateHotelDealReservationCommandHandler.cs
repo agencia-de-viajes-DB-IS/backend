@@ -11,7 +11,7 @@ namespace TravelAgency.Application.Handlers.HotelDealReservations.Commands.Creat
             var HotelDealReservationRepo = _unitOfWork.GetRepository<HotelDealReservation>();
             var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
-            var tourists = await touristRepo.StoreRequestTourists(request.Tourists);
+            var tourists = await _unitOfWork.GetRepository<Tourist>().FindAllAsync(filters: [x => request.TouristsGuid.Contains(x.Id) && x.Flag]);
 
             var reservation = new HotelDealReservation()
             {
@@ -20,7 +20,7 @@ namespace TravelAgency.Application.Handlers.HotelDealReservations.Commands.Creat
                 ReservationDate = request.ReservationDate,
                 UserId = request.UserId,
                 AgencyRelatedHotelDealId = request.AgencyRelatedHotelDealId,
-                Tourists = tourists
+                Tourists = tourists.ToArray()
             };
             await HotelDealReservationRepo.InsertAsync(reservation);
             await _unitOfWork.SaveAsync();

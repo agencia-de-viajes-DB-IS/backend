@@ -47,7 +47,9 @@ namespace TravelAgency.Application.Handlers.HotelDealReservations.Queries.GetAll
                     ),
                     HotelDealReservation.ReservationDate,
                     HotelDealReservation.Tourists.Select(tourist => new TouristResponse(
+                        tourist.UserId,
                         tourist.Id,
+                        tourist.CI,
                         tourist.FirstName,
                         tourist.LastName,
                         tourist.Nationality
