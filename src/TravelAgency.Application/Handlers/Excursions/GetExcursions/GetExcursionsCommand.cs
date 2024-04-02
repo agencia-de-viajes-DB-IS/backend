@@ -9,6 +9,7 @@ public record GetExcursionsCommand : IRequest<GetExcursionResponse[]>
     public string NameFilter { get; set; } = "";
     public string LocationFilter { get; set; } = "";
     public decimal PriceFilter { get; set; } = default;
+    public int CapacityFilter { get; set; } = 0;
     public DateTime ArrivalDateFilter { get; set; } = default;
     public bool IncludeExtended { get; set; }
 }
