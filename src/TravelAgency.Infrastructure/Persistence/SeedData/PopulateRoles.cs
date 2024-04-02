@@ -63,6 +63,7 @@ public static partial class SeedData
                         Permissions.ReadTourists,
                         Permissions.ReadFacilities,
                         Permissions.ReadPackageReservation,
+                        Permissions.ReadStatistics
                 ]
             }
         );
