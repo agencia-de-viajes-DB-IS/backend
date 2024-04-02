@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
 using MediatR;
 using TravelAgency.Application.Handlers.Airlines.GetAirlines;
-using TravelAgency.Application.Handlers.PackageReservations.CreatePackageReservation;
 using TravelAgency.Application.Handlers.Tourists.CreateTourist;
 using TravelAgency.Application.Handlers.Users.GetUsers;
 using TravelAgency.Application.Interfaces.Persistence;
@@ -17,12 +16,13 @@ public class GetPackageReservationsCommandHandler(IUnitOfWork _unitOfWork) : IRe
 
         var packageReservationFilters = new Expression<Func<PackageReservation, bool>>[]
         {
+            packageReservation => packageReservation.Package.ArrivalDate > DateTime.UtcNow,
             packageReservation => request.UserIdFilter == default || packageReservation.UserId == request.UserIdFilter,
             packageReservation => request.PackageIdFilter == default || packageReservation.PackageId == request.PackageIdFilter,
             packageReservation => request.AirlineIdFilter == default || packageReservation.AirlineId == request.AirlineIdFilter,
             packageReservation => request.ReservationDateFilter == default || packageReservation.ReservationDate == request.ReservationDateFilter,
         };
-        
+
         var packageReservationIncludes = new Expression<Func<PackageReservation, object>>[]
         {
             packageReservation => packageReservation.User,
