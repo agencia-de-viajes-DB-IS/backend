@@ -10,8 +10,7 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
-        var tourists = await touristRepo.StoreRequestTourists(request.Tourists);
-
+        var tourists = await _unitOfWork.GetRepository<Tourist>().FindAllAsync(filters: [x => request.TouristsGuid.Contains(x.Id) && x.Flag]);
         var reservation = new PackageReservation()
         {
             AirlineId = request.AirlineId,
@@ -19,7 +18,7 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
             ReservationDate = request.ReservationDate,
             UserId = request.UserId,
             PackageId = request.PackageId,
-            Tourists = tourists
+            Tourists = tourists.ToList()
         };
         await packageReservationRepo.InsertAsync(reservation);
         await _unitOfWork.SaveAsync();
