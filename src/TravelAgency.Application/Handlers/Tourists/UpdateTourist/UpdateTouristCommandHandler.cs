@@ -22,7 +22,7 @@ public class UpdateTouristCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
             tourist => tourist.Id == request.TouristId
         };
 
-        var tourist = await touristRepo.FindAsync(filters: touristFilter);
+        var tourist = await touristRepo.FindAsync(includes: [x => x.User], filters: touristFilter);
 
         var reservationsRepo = unitOfWork.GetRepository<ExcursionReservation>();
 
@@ -63,7 +63,7 @@ public class UpdateTouristCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
             await touristRepo.UpdateAsync(tourist);
             var tourist2 = new Tourist()
             {
-                UserId = tourist.Id,
+                UserId = tourist.User.Id,
                 CI = request.CI,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
