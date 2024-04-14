@@ -1,0 +1,17 @@
+@host = http://localhost:5000
+
+POST  {{host}}/packages/
+Content-Type: application/json
+
+{
+  "name": "Zaza Adventures",
+  "description": "Aventuras en la presa Zaza",
+  "price": 100,
+  "arrivalDate": "2024-10-19T03:28:45.548Z",
+  "departureDate": "2024-12-29T03:28:45.548Z",
+  "capacity": 10,
+  "facilityIds": [1],
+  "extendedExcursionIds": [
+    "03111c99-fae6-4975-b71a-16ac9ba79404",
+    "12137315-6523-4a54-8941-ffc1bbf3f5d1"]
+}
