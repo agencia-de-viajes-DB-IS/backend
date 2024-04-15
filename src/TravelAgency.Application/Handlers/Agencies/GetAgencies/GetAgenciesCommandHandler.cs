@@ -27,19 +27,34 @@ public class GetAgenciesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
             agencyHotelDeal => agencyHotelDeal.HotelDeal.Hotel!
         };
 
-        var agencies = await agencyRepo.FindAllAsync(includes: agencyIncludes, filters: agencyFilter);
-        var response= agencies.Select(agency =>
+        var agencies = (await agencyRepo.FindAllAsync(includes: agencyIncludes, filters: agencyFilter)).ToArray();
+
+        var response = agencies
+            .Select(async agency => (
+                new GetAgencyResponse(
+                    agency.Id,
+                    agency.Name,
+                    agency.Address,
+                    agency.FaxNumber,
+                    agency.Email,
+                    agency.Excursions!.Select(x => new AgencyExcursionResponse(
+                        x.Location,
+                        x.Price,
+                        x.ArrivalDate)).ToArray(),
+                    (await agencyRelatedHotelDeal.FindAllAsync(agencyHotelDealIncludes, filters: [x => x.AgencyId == agency.Id]))
+                    .Select(
+                        x => new AgencyHotelDealResponse(
+                            x.HotelDeal.Hotel.Name,
+                            x.HotelDeal.Description,
+                            x.HotelDeal.Price,
+                            x.HotelDeal.ArrivalDate,
+                            x.HotelDeal.DepartureDate)).ToArray())));
+        List<GetAgencyResponse> results = [];
+        foreach (var task in response)
         {
-            var result = new GetAgencyResponse(
-                agency.Id,
-                agency.Name,
-                agency.Address,
-                agency.FaxNumber,
-                agency.Email
-            );
-            return result;
-        });
-        // Wait for all tasks to complete and then convert the results to an array
-        return response.ToArray();
+            task.Wait(cancellationToken);
+            results.Add(task.Result);
+        }
+        return [.. results];
     }
 }
