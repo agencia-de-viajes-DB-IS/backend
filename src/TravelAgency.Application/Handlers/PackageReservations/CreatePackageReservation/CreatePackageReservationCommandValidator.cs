@@ -12,7 +12,6 @@ public class CreatePackageReservationCommandValidator : TravelAgencyAbstractVali
     public CreatePackageReservationCommandValidator(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-
         // Validation process
         RuleFor(x => x.Price)
             .GreaterThan(0)

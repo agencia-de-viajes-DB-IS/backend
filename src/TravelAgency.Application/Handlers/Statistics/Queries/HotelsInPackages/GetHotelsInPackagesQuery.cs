@@ -1,4 +1,4 @@
-namespace TravelAgency.Application.Handlers.Hotels.Queries.HotelsInPackages;
+namespace TravelAgency.Application.Handlers.Statistics.Queries.HotelsInPackages;
 
 using MediatR;
 using TravelAgency.Application.Handlers.Hotels.Queries.GetAll;

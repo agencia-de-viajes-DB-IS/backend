@@ -1,15 +1,15 @@
 using FastEndpoints;
 using MediatR;
 using TravelAgency.Application.Handlers.Hotels.Queries.GetAll;
-using TravelAgency.Application.Handlers.Hotels.Queries.HotelsInPackages;
+using TravelAgency.Application.Handlers.Statistics.Queries.HotelsInPackages;
 
-namespace TravelAgency.Api.Features.HotelInPackages;
+namespace TravelAgency.Api.Features.Statistics;
 
 public class GetHotelsInPackages(ISender _mediator) : Endpoint<GetHotelsInPackagesCommand, GetHotelsResponse[]>
 {
     public override void Configure()
     {
-        Get("/HotelsInPackages");
+        Get("/statistics/HotelsInPackages");
         // TODO: auth
         AllowAnonymous();
     }

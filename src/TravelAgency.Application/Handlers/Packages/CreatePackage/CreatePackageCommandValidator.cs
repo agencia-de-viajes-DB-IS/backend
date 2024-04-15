@@ -1,3 +1,4 @@
+using System.Data;
 using System.Linq.Expressions;
 using FluentValidation;
 using TravelAgency.Application.Common;
@@ -13,6 +14,9 @@ public class CreatePackageCommandValidator : TravelAgencyAbstractValidator<Creat
         _unitOfWork = unitOfWork;
 
         // Validation process
+        RuleFor(x => x.ExtendedExcursionIds)
+            .Must(z => z.Any())
+            .WithMessage("At least one extendend excursion");
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Description is required")
             .MaximumLength(200).WithMessage("Description must not exceed 200 characters");
