@@ -14,16 +14,8 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
         var packageReservationRepo = _unitOfWork.GetRepository<PackageReservation>();
         var touristRepo = _unitOfWork.GetRepository<Tourist>();
 
-        var tourists = new List<Tourist>();
-        foreach (var id in request.TouristsGuid)
-        {
-            var tt = (await _unitOfWork.GetRepository<Tourist>().FindAsync(filters: [x => x.Id == id, x => x.Flag == true]));
+        var tourists = await _unitOfWork.GetRepository<Tourist>().FindAllAsync(filters: [x => request.TouristsGuid.Contains(x.Id) && x.Flag]);
 
-            if(tt is not null)
-            {
-                tourists.Add(tt);
-            }
-        }
         var reservation = new PackageReservation()
         {
             AirlineId = request.AirlineId,
@@ -31,7 +23,7 @@ public class CreatePackageReservationCommandHandler(IUnitOfWork _unitOfWork) : I
             ReservationDate = request.ReservationDate,
             UserId = request.UserId,
             PackageId = request.PackageId,
-            Tourists = tourists
+            Tourists = tourists.ToArray()
         };
         await packageReservationRepo.InsertAsync(reservation);
         await _unitOfWork.SaveAsync();
