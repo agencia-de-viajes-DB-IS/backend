@@ -23,18 +23,23 @@ public class GetTouristUserCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
             user => user.Id == request.UserId
         };
 
-        var user = await unitOfWork.GetRepository<User>().FindAsync( userIncludes, userFilter);
-
-        GetTouristDto[] tourists = user!.Tourists!.Where(t => t.Flag).Select(t => new GetTouristDto
-        (
-            user.Id,
-            t.Id,
-            t.CI,
-            t.FirstName,
-            t.LastName,
-            t.Nationality
-        )).ToArray();
-        
-        return tourists;
+        var user = await unitOfWork.GetRepository<User>().FindAsync(userIncludes, userFilter);
+        if (user != null)
+        {
+            GetTouristDto[] tourists = user!.Tourists!.Where(t => t.Flag).Select(t => new GetTouristDto
+            (
+                user.Id,
+                t.Id,
+                t.CI,
+                t.FirstName,
+                t.LastName,
+                t.Nationality
+            )).ToArray();
+            return tourists;
+        }
+        else
+        {
+            return [];
+        }
     }
 }
