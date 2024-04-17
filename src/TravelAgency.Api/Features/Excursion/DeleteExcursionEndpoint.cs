@@ -9,7 +9,7 @@ public class DeleteExcursionEndpoint(ISender mediator) : Endpoint<DeleteExcursio
     public override void Configure()
     {
         Delete("/excursions");
-        Permissions(Domain.Enums.Permissions.WriteExcursions.ToString());
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(DeleteExcursionCommand request, CancellationToken ct)
