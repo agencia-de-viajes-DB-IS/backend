@@ -9,7 +9,8 @@ public class UpdateExcursionsEndpoint(ISender mediator) : Endpoint<UpdateExcursi
     public override void Configure()
     {
         Put("/excursions");
-        Permissions(Domain.Enums.Permissions.WriteExcursions.ToString());
+        AllowAnonymous();
+        //Permissions(Domain.Enums.Permissions.WriteExcursions.ToString());
     }
     
     public override async Task HandleAsync(UpdateExcursionCommand request, CancellationToken ct)
