@@ -23,15 +23,12 @@ public class CreateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
 
         var HotelDealRepo = _unitOfWork.GetRepository<HotelDeal>();
 
-        var s = request;  
         var HotelDeal = new HotelDeal()
         {
             Name = request.Name,
             ArrivalDate = request.ArrivalDate,
             DepartureDate = request.DepartureDate,
             Description = request.Description ?? "No description",
-            AgencyRelatedHotelDeals = request.AgencyRelatedHotelDeals,
-            ExtendedExcursions = request.ExtendedExcursions,
             HotelId = request.HotelId,
             Price = request.Price,
             Capacity = request.Capacity

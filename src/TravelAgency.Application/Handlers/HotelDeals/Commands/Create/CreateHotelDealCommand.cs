@@ -6,8 +6,6 @@ namespace TravelAgency.Application.Handlers.HotelDeals.Commands.Create;
 public record CreateHotelDealCommand(
     DateTime ArrivalDate,
     DateTime DepartureDate,
-    ICollection<AgencyRelatedHotelDeal> AgencyRelatedHotelDeals,
-    ICollection<ExtendedExcursion>? ExtendedExcursions,
     Guid HotelId,
     decimal Price,
     string? Description,
