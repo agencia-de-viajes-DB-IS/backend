@@ -20,8 +20,7 @@ public class UpdateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
             hotelDeal => hotelDeal.Id == request.Id
         ])).FirstOrDefault() ?? throw new TravelAgencyException("hotelDeal was not found", $"hotelDeal with Id {request.Id} was not found", 404);
 
-        hotelDeal.ArrivalDate = request.ArrivalDate ?? hotelDeal.ArrivalDate;
-        hotelDeal.DepartureDate = request.DepartureDate ?? hotelDeal.DepartureDate;
+        hotelDeal.Name = request.Name ?? hotelDeal.Name;
         hotelDeal.Description = request.Description ?? hotelDeal.Description;
         hotelDeal.HotelId = request.HotelId ?? hotelDeal.HotelId;
         hotelDeal.Price = request.Price ?? hotelDeal.Price;

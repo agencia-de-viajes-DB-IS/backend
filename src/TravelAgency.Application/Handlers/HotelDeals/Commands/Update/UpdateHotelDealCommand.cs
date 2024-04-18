@@ -4,11 +4,11 @@ using TravelAgency.Domain.Entities;
 namespace TravelAgency.Application.Handlers.HotelDeals.Commands.Update;
 
 public record UpdateHotelDealCommand(
-    Guid Id, 
-    DateTime? ArrivalDate,
-    DateTime? DepartureDate,
-    Guid? HotelId,
-    decimal? Price,
+    Guid Id,
+    string Name,
     string? Description,
-    int Capacity
-) : IRequest<UpdateHotelDealResponse>{}
+    decimal? Price,
+    int Capacity,
+    Guid? HotelId
+) : IRequest<UpdateHotelDealResponse>
+{ }
