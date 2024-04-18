@@ -5,6 +5,7 @@ public record HotelsDealsResponse(
     string Name,
     string Description,
     decimal Price,
+    int Capacity,
     DateTime ArrivalDate,
     DateTime DepartureDate,
     Domain.Entities.AgencyRelatedHotelDeal[]? agencyRelatedHotelDeals

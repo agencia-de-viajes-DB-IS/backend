@@ -28,7 +28,8 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, H
                 HotelsDeals.HotelId,
                 HotelsDeals.Name, 
                 HotelsDeals.Description, 
-                HotelsDeals.Price, 
+                HotelsDeals.Price,
+                HotelsDeals.Capacity,
                 HotelsDeals.ArrivalDate, 
                 HotelsDeals.DepartureDate,
                 [.. HotelsDeals.AgencyRelatedHotelDeals!]
