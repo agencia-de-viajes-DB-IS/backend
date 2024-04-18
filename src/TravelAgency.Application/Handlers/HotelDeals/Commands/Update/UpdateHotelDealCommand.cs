@@ -7,8 +7,6 @@ public record UpdateHotelDealCommand(
     Guid Id, 
     DateTime? ArrivalDate,
     DateTime? DepartureDate,
-    ICollection<AgencyRelatedHotelDeal>? AgencyRelatedHotelDeals,
-    ICollection<ExtendedExcursion>? ExtendedExcursions,
     Guid? HotelId,
     decimal? Price,
     string? Description,

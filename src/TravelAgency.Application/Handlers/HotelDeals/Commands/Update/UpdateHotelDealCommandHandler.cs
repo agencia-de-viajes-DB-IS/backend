@@ -23,8 +23,6 @@ public class UpdateHotelDealCommandHandler(IUnitOfWork _unitOfWork) : IRequestHa
         hotelDeal.ArrivalDate = request.ArrivalDate ?? hotelDeal.ArrivalDate;
         hotelDeal.DepartureDate = request.DepartureDate ?? hotelDeal.DepartureDate;
         hotelDeal.Description = request.Description ?? hotelDeal.Description;
-        hotelDeal.AgencyRelatedHotelDeals = request.AgencyRelatedHotelDeals ?? hotelDeal.AgencyRelatedHotelDeals;
-        hotelDeal.ExtendedExcursions = request.ExtendedExcursions ?? hotelDeal.ExtendedExcursions;
         hotelDeal.HotelId = request.HotelId ?? hotelDeal.HotelId;
         hotelDeal.Price = request.Price ?? hotelDeal.Price;
         hotelDeal.Capacity = request.Capacity;
