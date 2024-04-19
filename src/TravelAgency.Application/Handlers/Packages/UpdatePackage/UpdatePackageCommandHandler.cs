@@ -67,6 +67,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             }).ToArray(),
             extendedExcursions.Select(excursion => new ExtendedExcursionResponse(
                 excursion.Id,
+                excursion.Name,
                 excursion.Location,
                 excursion.Price,
                 excursion.ArrivalDate,

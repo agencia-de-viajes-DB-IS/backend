@@ -42,6 +42,7 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 }).ToArray(),
                 package.ExtendedExcursions!.Select(excursion => new ExtendedExcursionResponse(
                     excursion.Id,
+                    excursion.Name,
                     excursion.Location,
                     excursion.Price,
                     excursion.ArrivalDate,

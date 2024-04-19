@@ -16,6 +16,7 @@ public record PackageResponse(
 
 public record ExtendedExcursionResponse(
     Guid Id,
+    string Name,
     string Location,
     decimal Price,
     DateTime ArrivalDate,
