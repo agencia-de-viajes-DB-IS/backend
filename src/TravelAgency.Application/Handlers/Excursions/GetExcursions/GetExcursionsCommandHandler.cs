@@ -43,6 +43,7 @@ public class GetExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequestHandl
                                         excursion.Price,
                                         excursion.ArrivalDate,
                                         new ExcursionAgencyResponse(
+                                            excursion.Agency.Id,
                                             excursion.Agency.Name,
                                             excursion.Agency.Address,
                                             excursion.Agency.FaxNumber,

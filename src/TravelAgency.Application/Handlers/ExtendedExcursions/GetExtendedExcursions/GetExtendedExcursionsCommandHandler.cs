@@ -37,6 +37,7 @@ public class GetExtendedExcursionsCommandHandler(IUnitOfWork unitOfWork) : IRequ
                                         excursion.Price,
                                         excursion.ArrivalDate,
                                         new ExcursionAgencyResponse(
+                                            excursion.Agency.Id,
                                             excursion.Agency.Name,
                                             excursion.Agency.Address,
                                             excursion.Agency.FaxNumber,
