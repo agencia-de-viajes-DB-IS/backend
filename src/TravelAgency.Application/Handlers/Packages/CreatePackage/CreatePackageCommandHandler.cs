@@ -53,6 +53,7 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             package.Name,
             package.Description,
             package.Price,
+            package.Capacity,
             package.ArrivalDate,
             package.DepartureDate,
             facilities.Select(facility => new FacilityResponse()
