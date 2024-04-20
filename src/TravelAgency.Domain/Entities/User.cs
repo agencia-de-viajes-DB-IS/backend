@@ -9,8 +9,10 @@ public class User
     public required string Email { get; set; }
     public required string Password { get; set; }
     public required Guid RoleId  { get; set; }
+    public Role Role {get;set;}
     // Tracker for Marketing Agents
     public Guid? AgencyId { get; set; }
+    public Agency? Agency { get; set; }
     // Relational Properties
     public ICollection<Tourist>? Tourists { get; set; }
     public ICollection<PackageReservation>? PackageReservations { get; set; }
