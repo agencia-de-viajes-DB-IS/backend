@@ -8,7 +8,7 @@ public class GetReservationsStatsEndpoint(ISender _mediator) : EndpointWithoutRe
 {
     public override void Configure()
     {
-        Get("/ReservationStats");
+        Get("/statistics/ReservationStats");
         // TODO: auth
         AllowAnonymous();
     }
