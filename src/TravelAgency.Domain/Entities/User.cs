@@ -9,7 +9,7 @@ public class User
     public required string Email { get; set; }
     public required string Password { get; set; }
     public required Guid RoleId  { get; set; }
-    public Role Role {get;set;}
+    public Role Role { get; set; } = null!;
     // Tracker for Marketing Agents
     public Guid? AgencyId { get; set; }
     public Agency? Agency { get; set; }

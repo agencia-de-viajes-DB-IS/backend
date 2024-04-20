@@ -28,7 +28,7 @@ public class GetExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : IRe
             excR => request.ReservationDate == default || excR.ReservationDate >= request.ReservationDate
         };
 
-        var response = (await excReservationRepo.FindAllAsync(includes: [], filters: filters))
+        var response = (await excReservationRepo.FindAllAsync(includes: includes, filters: filters))
             .Select(excReservation => new GetExcursionRerservationResponse(
                 excReservation.Id,
                 new UserResponse(
