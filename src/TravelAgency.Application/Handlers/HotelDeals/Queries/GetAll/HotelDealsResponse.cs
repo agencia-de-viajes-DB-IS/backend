@@ -8,10 +8,10 @@ public record HotelsDealsResponse(
     int Capacity,
     DateTime ArrivalDate,
     DateTime DepartureDate,
-    AgencyRelatedHotelDealDto agencyRelatedHotelDeals
+    HotelDealAgencyResponse[] Agencies
 );
 
-public record AgencyRelatedHotelDealDto(
+public record HotelDealAgencyResponse(
     Guid Id, 
     string Name
 );
