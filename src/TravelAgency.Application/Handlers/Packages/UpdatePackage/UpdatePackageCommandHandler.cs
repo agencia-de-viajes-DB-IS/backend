@@ -30,24 +30,40 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             excursion => request.ExtendedExcursionIds.Contains(excursion.Id)
         };
 
+        var excursionInclude = new Expression<Func<ExtendedExcursion, object>>[]
+        {
+            excursion => excursion.Packages!
+        };  
+
         var packageFilter = new Expression<Func<Package, bool>>[]
         {
             package => package.Code == request.Code
         };
+        
+        var packageInclude = new Expression<Func<Package, object>>[]
+        {
+            package => package.ExtendedExcursions!
+        };
 
-        var package = (await packageRepo.FindAllAsync(filters: packageFilter)).FirstOrDefault() ?? 
+        var package = (await packageRepo.FindAllAsync(filters: packageFilter, includes: packageInclude)).FirstOrDefault() ?? 
             throw new TravelAgencyException(message: "Package was not found", details: $"Package with id {request.Code} was not found", 404);
 
         var facilities = (await facilityRepo.FindAllAsync(filters: facilityFilter)).ToList();
-        var extendedExcursions = (await extendedExcursionRepo.FindAllAsync(filters: excursionFilter)).ToList();
+        var extendedExcursions = (await extendedExcursionRepo.FindAllAsync(filters: excursionFilter, includes: excursionInclude)).ToList();
 
         package.Name = request.Name;
         package.Description = request.Description;
         package.Price = request.Price;
         package.Capacity = request.Capacity;
         package.Facilities = facilities;
-        package.ExtendedExcursions = extendedExcursions;
 
+        foreach(var excursion in package.ExtendedExcursions!)
+        {
+            excursion.Packages = excursion.Packages!.Where(package => package.Code != request.Code).ToList();
+            await extendedExcursionRepo.UpdateAsync(excursion);
+        }
+
+        package.ExtendedExcursions = extendedExcursions;
         await packageRepo.UpdateAsync(package);
 
         await _unitOfWork.SaveAsync();
