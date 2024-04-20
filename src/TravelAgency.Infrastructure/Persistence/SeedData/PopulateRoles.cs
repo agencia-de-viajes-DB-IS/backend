@@ -40,7 +40,8 @@ public static partial class SeedData
                     Permissions.WriteTourists,
                     Permissions.WriteFacilities,
                     Permissions.WritePackageReservation,
-                    Permissions.WriteAgencies
+                    Permissions.WriteAgencies,
+                    Permissions.ReadFacilities
                 ]
             }
         );

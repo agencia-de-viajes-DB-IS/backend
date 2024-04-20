@@ -28,6 +28,7 @@ public class GetExcursionResponse : BaseResponse
 }
 
 public record ExcursionAgencyResponse(
+    Guid Id,
     string Name,
     string Address,
     int FaxNumber,
