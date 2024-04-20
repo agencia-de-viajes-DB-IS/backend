@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.HotelDeals.Queries.GetAll;
 
 namespace TravelAgency.Api.Features.HotelDeals;
 
-public class GetHotelsDealsEndpoint(ISender _mediator) : EndpointWithoutRequest<IEnumerable<HotelsDealsResponse>>
+public class GetHotelsDealsEndpoint(ISender _mediator) : Endpoint<GetHotelsDealsQuery,IEnumerable<HotelsDealsResponse>>
 {
     public override void Configure()
     {
@@ -12,10 +12,9 @@ public class GetHotelsDealsEndpoint(ISender _mediator) : EndpointWithoutRequest<
         Get("/hotelDeals");
         AllowAnonymous();
     }
-    public override async Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(GetHotelsDealsQuery input, CancellationToken ct)
     {
-        var query = new GetHotelsDealsQuery();
-        var response = await _mediator.Send(query, ct);
+        var response = await _mediator.Send(input, ct);
         await SendOkAsync(response, ct);
     }
 }

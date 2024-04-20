@@ -16,23 +16,32 @@ public class GetHotelsDealsQueryHandler : IRequestHandler<GetHotelsDealsQuery, H
 
     public async Task<HotelsDealsResponse[]> Handle(GetHotelsDealsQuery request, CancellationToken cancellationToken)
     {
-        var hotelsDealsRepo = unitOfWork.GetRepository<HotelDeal>();
-        var hotelsDealsIncludes = new Expression<Func<HotelDeal, object>>[]
+        var AgencyRelatedHotelDeals = unitOfWork.GetRepository<AgencyRelatedHotelDeal>();
+        var agencyRelatedHotelDealsIncludes = new Expression<Func<AgencyRelatedHotelDeal, object>>[]
         {
-            HotelsDeals => HotelsDeals.ExtendedExcursions!,
-            HotelsDeals => HotelsDeals.AgencyRelatedHotelDeals!,
+            HotelsDeals => HotelsDeals.HotelDeal,
+            HotelsDeals => HotelsDeals.Agency,
         };
-        var response = (await hotelsDealsRepo.FindAllAsync(includes: hotelsDealsIncludes))
+
+        var agencyRelatedHotelDealsFilters = new Expression<Func<AgencyRelatedHotelDeal, bool>>[]
+        {
+            agencyRelatedHotelDeals => request.AgencyIdFilter == null || agencyRelatedHotelDeals.AgencyId == request.AgencyIdFilter,
+        };
+
+        var response = (await AgencyRelatedHotelDeals.FindAllAsync(includes: agencyRelatedHotelDealsIncludes, filters: agencyRelatedHotelDealsFilters))
             .Select(HotelsDeals => new HotelsDealsResponse(
                 HotelsDeals.Id,
-                HotelsDeals.HotelId,
-                HotelsDeals.Name, 
-                HotelsDeals.Description, 
-                HotelsDeals.Price,
-                HotelsDeals.Capacity,
-                HotelsDeals.ArrivalDate, 
-                HotelsDeals.DepartureDate,
-                [.. HotelsDeals.AgencyRelatedHotelDeals!]
+                HotelsDeals.HotelDeal.HotelId,
+                HotelsDeals.HotelDeal.Name, 
+                HotelsDeals.HotelDeal.Description, 
+                HotelsDeals.HotelDeal.Price,
+                HotelsDeals.HotelDeal.Capacity,
+                HotelsDeals.HotelDeal.ArrivalDate, 
+                HotelsDeals.HotelDeal.DepartureDate,
+                new AgencyRelatedHotelDealDto(
+                    HotelsDeals.AgencyId,
+                    HotelsDeals.Agency.Name
+                )
         ));
         return [..response];
     }
