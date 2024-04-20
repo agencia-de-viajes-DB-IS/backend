@@ -1,0 +1,15 @@
+@host = http://localhost:5000
+
+POST {{host}}/reservation/excursion
+Content-Type: application/json
+
+{
+  "airlineId": "6d6e6a7c-5633-4b81-ac0b-2825f5b93f32",
+  "price": 10,
+  "reservationDate": "2024-04-22T21:52:35.970Z",
+  "userId": "b0b2ba30-5c73-4efc-8218-b38aba434400",
+  "excursionId": "08deaa29-fe53-4deb-9185-169ad391f265",
+  "touristsGuids": [
+    "1c3272f3-e4c7-4731-84ec-fe210f93a725"
+  ]
+}

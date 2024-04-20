@@ -12,7 +12,7 @@ public class GetExcursionReservationCommand : IRequest<GetExcursionRerservationR
     public Guid AirlineIdFilter { get; set; } = default;
     public decimal PriceFilter { get; set; } = default;
     public Guid ExcursionIdFilter { get; set; } = default;
-    public required DateTime ReservationDate { get; set; } = default;
+    public DateTime ReservationDate { get; set; } = default;
 }
 
 public record GetExcursionRerservationResponse

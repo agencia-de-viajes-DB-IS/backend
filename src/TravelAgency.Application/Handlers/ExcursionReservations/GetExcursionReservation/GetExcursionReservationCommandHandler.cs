@@ -17,7 +17,9 @@ public class GetExcursionReservationCommandHandler(IUnitOfWork unitOfWork) : IRe
 
         var includes = new Expression<Func<ExcursionReservation, object>>[] {
             excR => excR.User,
-            excR => excR.Excursion
+            excR => excR.Excursion,
+            excR => excR.Airline,
+            excR => excR.Tourists
         };
 
         var filters = new Expression<Func<ExcursionReservation, bool>>[] {
