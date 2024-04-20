@@ -32,6 +32,7 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 package.Name,
                 package.Description,
                 package.Price,
+                package.Capacity,
                 package.ArrivalDate,
                 package.DepartureDate,
                 package.Facilities!.Select(facility => new FacilityResponse()

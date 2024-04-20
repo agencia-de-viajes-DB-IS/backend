@@ -8,6 +8,7 @@ public record PackageResponse(
     string Name,
     string Description,
     decimal Price,
+    int Capacity,
     DateTime ArrivalDate,
     DateTime DepartureDate,
     FacilityResponse[] Facilities,

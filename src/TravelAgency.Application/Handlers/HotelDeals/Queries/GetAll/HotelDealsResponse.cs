@@ -8,5 +8,10 @@ public record HotelsDealsResponse(
     int Capacity,
     DateTime ArrivalDate,
     DateTime DepartureDate,
-    Domain.Entities.AgencyRelatedHotelDeal[]? agencyRelatedHotelDeals
+    AgencyRelatedHotelDealDto agencyRelatedHotelDeals
+);
+
+public record AgencyRelatedHotelDealDto(
+    Guid Id, 
+    string Name
 );
