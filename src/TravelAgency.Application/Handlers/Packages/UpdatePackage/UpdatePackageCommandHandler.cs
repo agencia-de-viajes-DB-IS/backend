@@ -63,6 +63,8 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             await extendedExcursionRepo.UpdateAsync(excursion);
         }
 
+        await _unitOfWork.SaveAsync();
+        
         package.ExtendedExcursions = extendedExcursions;
         await packageRepo.UpdateAsync(package);
 
