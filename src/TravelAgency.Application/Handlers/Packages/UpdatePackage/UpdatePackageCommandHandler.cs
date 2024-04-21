@@ -33,19 +33,20 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         var excursionInclude = new Expression<Func<ExtendedExcursion, object>>[]
         {
             excursion => excursion.Packages!
-        };  
+        };
 
         var packageFilter = new Expression<Func<Package, bool>>[]
         {
             package => package.Code == request.Code
         };
-        
-        var packageInclude = new Expression<Func<Package, object>>[]
+
+        var packageIncludes = new Expression<Func<Package, object>>[]
         {
-            package => package.ExtendedExcursions!
+            package => package.ExtendedExcursions!,
+            package => package.Facilities!
         };
 
-        var package = (await packageRepo.FindAllAsync(filters: packageFilter, includes: packageInclude)).FirstOrDefault() ?? 
+        var package = (await packageRepo.FindAllAsync(filters: packageFilter, includes: packageIncludes)).FirstOrDefault() ??
             throw new TravelAgencyException(message: "Package was not found", details: $"Package with id {request.Code} was not found", 404);
 
         var facilities = (await facilityRepo.FindAllAsync(filters: facilityFilter)).ToList();
@@ -55,17 +56,23 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
         package.Description = request.Description;
         package.Price = request.Price;
         package.Capacity = request.Capacity;
-        package.Facilities = facilities;
 
-        foreach(var excursion in package.ExtendedExcursions!)
+        foreach (var excursion in package.ExtendedExcursions!)
         {
             excursion.Packages = excursion.Packages!.Where(package => package.Code != request.Code).ToList();
             await extendedExcursionRepo.UpdateAsync(excursion);
         }
 
+        foreach (var facility in package.Facilities!)
+        {
+            facility.Packages = facility.Packages!.Where(package => package.Code != request.Code).ToList();
+            await facilityRepo.UpdateAsync(facility);
+        }
+
         await _unitOfWork.SaveAsync();
-        
+
         package.ExtendedExcursions = extendedExcursions;
+        package.Facilities = facilities;
         await packageRepo.UpdateAsync(package);
 
         await _unitOfWork.SaveAsync();
@@ -93,7 +100,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
                 excursion.DepartureDate
             )).ToArray()
         );
- 
+
         return response;
     }
 }
