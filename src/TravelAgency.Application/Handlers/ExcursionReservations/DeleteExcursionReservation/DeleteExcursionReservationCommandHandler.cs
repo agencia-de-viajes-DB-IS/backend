@@ -14,7 +14,7 @@ public class DeleteExcursionReservationCommandHandler(IUnitOfWork _unitOfWork) :
 
         var excursionReservationFilters = new Expression<Func<ExcursionReservation, bool>>[] {
             exc => exc.Id == request.Id,
-            exc => exc.ReservationDate > DateTime.UtcNow
+            exc => exc.Excursion.ArrivalDate > DateTime.UtcNow
         };
 
         var  excursionReservationInclude = new Expression<Func<ExcursionReservation, object>>[] {
