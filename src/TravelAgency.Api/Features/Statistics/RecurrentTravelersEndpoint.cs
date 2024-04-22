@@ -3,7 +3,7 @@ using MediatR;
 using TravelAgency.Application.Handlers.Statistics.Queries.RecurrentTravelers;
 
 namespace TravelAgency.Api.Features.Statistics;
-public class RecurrentTravelers(ISender _mediator) : Endpoint<RecurrentTravelersQuery, RecurrentTravelersResponse>
+public class RecurrentTravelers(ISender _mediator) : Endpoint<RecurrentTravelersQuery, RecurrentTravelersResponse[]>
 {
     public override void Configure()
     {
