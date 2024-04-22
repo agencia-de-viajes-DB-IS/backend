@@ -2,14 +2,16 @@
 
 POST {{host}}/reservation/excursion
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjN2E5ZTllYi1kYzgyLTQ2MTctYWY4OS00NTliNGM5ODEwY2IiLCJnaXZlbl9uYW1lIjoiU2hlcmxvY2siLCJmYW1pbHlfbmFtZSI6IkhvbG1lcyIsInJvbGUiOiJTdXBlciBBZG1pbiIsImFnZW5jeUlkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwiZW1haWwiOiJob2xtZXNAbWFpbC5uZXQiLCJQZXJtaXNzaW9ucyI6WyJXcml0ZVVzZXJzIiwiV3JpdGVFeGN1cnNpb25zIiwiV3JpdGVQYWNrYWdlcyIsIldyaXRlUm9sZXMiLCJXcml0ZVRvdXJpc3RzIiwiV3JpdGVGYWNpbGl0aWVzIiwiV3JpdGVQYWNrYWdlUmVzZXJ2YXRpb24iLCJXcml0ZUFnZW5jaWVzIiwiV3JpdGVIb3RlbERlYWxSZXNlcnZhdGlvbiIsIlJlYWRBZ2VuY2llcyIsIlJlYWRIb3RlbHMiLCJSZWFkSG90ZWxEZWFscyIsIlJlYWRQYWNrYWdlcyIsIlJlYWRFeGN1cnNpb25zIiwiUmVhZFVzZXJzIiwiUmVhZFJvbGVzIiwiUmVhZEFpcmxpbmVzIiwiUmVhZFRvdXJpc3RzIiwiUmVhZEZhY2lsaXRpZXMiLCJSZWFkUGFja2FnZVJlc2VydmF0aW9uIiwiUmVhZEhvdGVsRGVhbFJlc2VydmF0aW9uIiwiUmVhZFN0YXRpc3RpY3MiXSwianRpIjoiZmRjZGZjNDUtNmVmZi00MTg3LTlhZmYtMTk1YjU0MzQ0MDQ2IiwiZXhwIjoxNzEzNzcyOTMwLCJpc3MiOiJUcmF2ZWxBZ2VuY3kiLCJhdWQiOiJUcmF2ZWxBZ2VuY3kifQ.TlQoicLPFcvTHK0CqeCHiA6-XhXCCaySRzQ8cAaEMPk
 
 {
-  "airlineId": "6d6e6a7c-5633-4b81-ac0b-2825f5b93f32",
+  "airlineId": "3a78ace0-b9ba-4e3a-9871-639e92e56940",
   "price": 10,
   "reservationDate": "2024-04-22T21:52:35.970Z",
-  "userId": "b0b2ba30-5c73-4efc-8218-b38aba434400",
-  "excursionId": "08deaa29-fe53-4deb-9185-169ad391f265",
+  "userId": "8836d4c1-2c89-45bf-8721-807dcd16b532",
+  "excursionId": "27d01218-9360-d63c-d432-1393e10ced52",
   "touristsGuids": [
-    "1c3272f3-e4c7-4731-84ec-fe210f93a725"
+    "03263bb5-7bd9-41ab-a4e1-d1c782e219ce",
+    "dfdb4782-dc9c-485e-bf19-d0c40fb56876"
   ]
 }

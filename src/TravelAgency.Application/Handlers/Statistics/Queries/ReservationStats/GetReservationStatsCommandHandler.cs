@@ -27,7 +27,7 @@ public class GetReservationStatsCommandHandler(IUnitOfWork unitOfWork) : IReques
                 value.TotalAmount += pk.Price;
             }
         }
-        var excursionReservation = (await _unitOfWork.GetRepository<ExcursionReservation>().FindAllAsync()).ToArray();
+        var excursionReservation = (await _unitOfWork.GetRepository<ExcursionReservation>().FindAllAsync(includes: [reservation => reservation.Excursion])).ToArray();
         foreach (var ex in excursionReservation)
         {
             var agId = ex.Excursion.AgencyId;
