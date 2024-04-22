@@ -6,11 +6,12 @@ using TravelAgency.Domain.Entities;
 
 namespace TravelAgency.Application.Handlers.Packages.GetPackages;
 
-public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, PackageResponse[]>
+public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandler<GetPackagesCommand, GetPackageResponse[]>
 {
-    public async Task<PackageResponse[]> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
+    public async Task<GetPackageResponse[]> Handle(GetPackagesCommand request, CancellationToken cancellationToken)
     {
         var packageRepo = _unitOfWork.GetRepository<Package>();
+        var agencyRepo = _unitOfWork.GetRepository<Agency>();
 
         var packageFilters = new Expression<Func<Package, bool>>[]
         {
@@ -26,13 +27,14 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
             package => package.ExtendedExcursions!
         };
 
-        var response = (await packageRepo.FindAllAsync(includes: packageIncludes, filters: packageFilters))
-            .Select(package => new PackageResponse(
+        var tasks = (await packageRepo.FindAllAsync(includes: packageIncludes, filters: packageFilters))
+            .Select(async package => new GetPackageResponse(
                 package.Code.ToString(),
                 package.Name,
                 package.Description,
                 package.Price,
                 package.Capacity,
+                (package.ExtendedExcursions!.Count == 0) ? new PackageAgencyResponse(default, "") : await GetPackageAgency(package, agencyRepo),
                 package.ArrivalDate,
                 package.DepartureDate,
                 package.Facilities!.Select(facility => new FacilityResponse()
@@ -51,6 +53,22 @@ public class GetPackagesCommandHandler(IUnitOfWork _unitOfWork) : IRequestHandle
                 )).ToArray()
             )).ToArray();
 
-        return response;
+        var response = new List<GetPackageResponse>();
+
+        foreach(var task in tasks) {
+            task.Wait();
+            response.Add(task.Result);
+        }
+
+        return response.ToArray();
+    }
+
+    private static async Task<PackageAgencyResponse> GetPackageAgency(Package package, IGenericRepository<Agency> agencyRepo)
+    {
+        var excursion = package.ExtendedExcursions!.First();
+
+        var agency = await agencyRepo.FindAsync(filters: [a => a.Id == excursion.AgencyId]);
+
+        return  (agency is null) ? new PackageAgencyResponse(default, "") : new PackageAgencyResponse(agency.Id, agency.Name);
     }
 }
