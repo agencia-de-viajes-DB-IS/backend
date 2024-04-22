@@ -20,7 +20,7 @@ public class RecurrentTravelersQueryHandler(IUnitOfWork unitOfWork) : IRequestHa
             x => x.PackageReservations.Count > 0 || x.HotelDealReservations.Count > 0 || x.ExcursionReservations.Count > 0 
         ]);
 
-        return tourists.GroupBy(x => x.Id).Select(x => new RecurrentTravelersResponse(
+        return tourists.GroupBy(x => x.CI).Select(x => new RecurrentTravelersResponse(
             x.First().CI,
             x.First().FirstName,
             x.First().LastName,
