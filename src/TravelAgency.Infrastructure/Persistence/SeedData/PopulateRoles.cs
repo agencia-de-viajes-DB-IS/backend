@@ -25,6 +25,10 @@ public static partial class SeedData
                     Permissions.ReadPackages,
                     Permissions.WriteTourists,
                     Permissions.ReadTourists,
+                    Permissions.WritePackageReservation,
+                    Permissions.WriteHotelDealReservation,
+                    Permissions.ReadPackageReservation,
+                    Permissions.ReadHotelDealReservation
                 ]
             }
         );
