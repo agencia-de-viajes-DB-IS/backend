@@ -4,7 +4,7 @@ using TravelAgency.Application.Handlers.Packages.GetPackages;
 
 namespace TravelAgency.Api.Features.Package;
 
-public class GetPackagesEndpoint(ISender _mediator) : Endpoint<GetPackagesCommand, PackageResponse[]>
+public class GetPackagesEndpoint(ISender _mediator) : Endpoint<GetPackagesCommand, GetPackageResponse[]>
 {
     public override void Configure()
     {

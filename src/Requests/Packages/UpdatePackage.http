@@ -10,6 +10,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjN2E5ZTllY
   "description": "Trabajo",
   "price": 250,
   "capacity": 7,
-  "facilityIds": [1, 2],
+  "facilityIds": [1],
   "extendedExcursionIds": ["02fc7e61-d56b-4d2e-920b-4d32cef97584"]
 }
