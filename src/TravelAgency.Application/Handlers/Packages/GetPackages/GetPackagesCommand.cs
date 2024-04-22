@@ -6,4 +6,4 @@ public record GetPackagesCommand(
     decimal? PriceFilter,
     DateTime? ArrivalDateFilter,
     DateTime? DepartureDateFilter
-) : IRequest<GetPackageResponse[]>;
+) : IRequest<PackageResponse[]>;

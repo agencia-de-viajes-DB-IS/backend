@@ -10,6 +10,7 @@ public record PackageResponse(
     string Description,
     decimal Price,
     int Capacity,
+    Guid AgencyId,
     DateTime ArrivalDate,
     DateTime DepartureDate,
     FacilityResponse[] Facilities,

@@ -54,6 +54,7 @@ public class CreatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
             package.Description,
             package.Price,
             package.Capacity,
+            (package.ExtendedExcursions!.Count == 0) ? default : package.ExtendedExcursions!.First().AgencyId,
             package.ArrivalDate,
             package.DepartureDate,
             facilities.Select(facility => new FacilityResponse()
