@@ -13,7 +13,7 @@ public class UpdatePackageCommandHandler(IUnitOfWork _unitOfWork) : IRequestHand
     public async Task<PackageResponse> Handle(UpdatePackageCommand request, CancellationToken cancellationToken)
     {
         // Validate request
-        var validator = new UpdatePackageCommandValidator();
+        var validator = new UpdatePackageCommandValidator(_unitOfWork);
         await validator.ValidateAsync(request, cancellationToken);
 
         var facilityRepo = _unitOfWork.GetRepository<Facility>();

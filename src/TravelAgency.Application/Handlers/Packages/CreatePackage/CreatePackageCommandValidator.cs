@@ -16,7 +16,7 @@ public class CreatePackageCommandValidator : TravelAgencyAbstractValidator<Creat
         // Validation process
         RuleFor(x => x.ExtendedExcursionIds)
             .Must(z => z.Any())
-            .WithMessage("At least one extendend excursion");
+            .WithMessage("At least one extended excursion");
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Description is required")
             .MaximumLength(200).WithMessage("Description must not exceed 200 characters");
